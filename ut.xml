@@ -1,0 +1,4 @@
+<ut kgdir="kg">
+  <test cmd="poetry run python uigen.py definitions/definition-form.xml" out="output/form1.jsp" />
+  <test cmd="poetry run python uigen.py definitions/definition-table.xml" out="output/table1.jsp" />
+</ut>

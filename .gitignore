@@ -1,0 +1,8 @@
+
+dist/
+
+output/
+
+.DS_Store
+
+*.pyc
