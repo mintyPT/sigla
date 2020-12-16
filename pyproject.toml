@@ -8,7 +8,6 @@ authors = ["mg santos <mauro.goncalo@gmail.com>"]
 python = "^3.8"
 Jinja2 = "^2.11.2"
 click = "^7.1.2"
-arrow = "^0.17.0"
 pydash = "^4.9.1"
 
 [tool.poetry.dev-dependencies]
