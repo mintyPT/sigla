@@ -1,0 +1,11 @@
+
+
+def seed_{{name | lower}}(**kwargs):
+    {% for child in children -%}
+    {{ child.name }} = generate_{{ child.element }}({{ child.attributes | without("name") | as_kwargs }})
+    {% endfor %}
+    return dict({% for child in children %}
+        {{ child.name }}={{ child.name }}, {% endfor %}
+        **kwargs
+    )
+
