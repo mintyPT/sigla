@@ -1,21 +1,11 @@
 <root>
-    <file name="form1.html" title="Edit Name">
+    <file name="output/form1.html" title="Edit Name">
         <t-edit_form bean="NameBean">
             <t-row>
                 <t-edit name="first" field="first"/>
                 <t-edit name="middle" field="middle"/>
             </t-row>
             <t-edit name="last" field="last"/>
-        </t-edit_form>
-    </file>
-
-    <file name="form2.html" title="wedfg Name">
-        <t-edit_form bean="NameBean">
-            <t-row>
-                <t-edit name="111" field="222"/>
-                <t-edit name="333" field="444"/>
-            </t-row>
-            <t-edit name="555" field="666"/>
         </t-edit_form>
     </file>
 </root>

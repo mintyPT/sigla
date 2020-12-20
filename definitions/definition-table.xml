@@ -1,4 +1,4 @@
-<file name="table1.html" title="Edit Name">
+<file name="output/table1.html" title="Edit Name">
   <t-table_page bean="NameBean">
     <t-column title="First" name="first" field="first" />
     <t-column title="Middle" name="middle" field="middle" />

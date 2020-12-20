@@ -8,8 +8,11 @@ class SiglaFile:
         self.content = content
         self.path = path
 
-    def save(self, save_path):
-        path = os.path.join(os.getcwd(), save_path, self.path)
+    def save(self, save_path=None):
+        if save_path:
+            path = os.path.join(os.getcwd(), save_path, self.path)
+        else:
+            path = os.path.join(os.getcwd(), self.path)
 
         ensure_parent_dir(path)
 

@@ -1,0 +1,232 @@
+2020-12-21 00:34:12,100 [INFO] |> Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+2020-12-21 00:34:12,319 [INFO] |> Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+2020-12-21 00:35:52,105 [INFO] |> Saving to output/form1.html
+2020-12-21 00:35:52,122 [INFO] |> Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+2020-12-21 00:35:52,322 [INFO] |> Saving to output/table1.html
+2020-12-21 00:35:52,338 [INFO] |> Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+[INFO] |> Saving to output/form1.html
+[INFO] |> Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+[INFO] |> Saving to output/table1.html
+[INFO] |> Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] |> Saving to output/form1.html
+[INFO] |> Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+[INFO] |> Saving to output/table1.html
+[INFO] |> Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] |> Saving to output/form1.html
+[INFO] [Snapshot] Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+[INFO] |> Saving to output/table1.html
+[INFO] [Snapshot] Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Render] Saving to output/form1.html
+[INFO] [Snapshot] Saving <output/form1.html> to .sigla/snapshots/output/form1.html
+[INFO] [Render] Saving to output/table1.html
+[INFO] [Snapshot] Saving <output/table1.html> to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Render] Saving to output/form1.html
+[INFO] [Snapshot] Saving output/form1.html to .sigla/snapshots/output/form1.html
+[INFO] [Render] Saving to output/table1.html
+[INFO] [Snapshot] Saving output/table1.html to .sigla/snapshots/output/table1.html
+[[Snapshot] Reading tests from ut.xml
+[[Render] Saving to output/form1.html
+[[Snapshot] Saving output/form1.html to .sigla/snapshots/output/form1.html
+[[Render] Saving to output/table1.html
+[[Snapshot] Saving output/table1.html to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Render] Saving to output/form1.html
+[INFO] [Snapshot] Saving output/form1.html to .sigla/snapshots/output/form1.html
+[INFO] [Render] Saving to output/table1.html
+[INFO] [Snapshot] Saving output/table1.html to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Saving snapshot output/form1.html to .sigla/snapshots/output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Saving snapshot output/table1.html to .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] Failure: Known good comparison failed
+
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] 
+
+Tests failed:
+
+
+[INFO]   sigla render definitions/definition-form.xml
+
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] Failure: Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] Tests failed:
+[INFO]   sigla render definitions/definition-form.xml
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] 🚩 Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] Tests failed:
+[INFO]   sigla render definitions/definition-form.xml
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] 🚩 Tests failed:
+[INFO]   sigla render definitions/definition-form.xml
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] Reading tests from ut.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[ERROR] [Snapshot] ⚠️ Known good comparison failed
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Saving snapshot output/form1.html to .sigla/snapshots/output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Saving snapshot output/table1.html to .sigla/snapshots/output/table1.html
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] command sigla render definitions/definition-form.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Snapshot] Checking output/form1.html against .sigla/snapshots/output/form1.html
+[INFO] [Snapshot] command sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] Checking output/table1.html against .sigla/snapshots/output/table1.html
+[INFO] [Snapshot] No test failures
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] No test failures
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] No test failures
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Snapshot] 🚩 Tests failed:
+[INFO] [Snapshot]     - sigla render definitions/definition-table.xml
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
+[INFO] [Render] Saving generated file to output/form1.html
+[INFO] [Render] Saving generated file to output/table1.html
