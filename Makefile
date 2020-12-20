@@ -12,5 +12,10 @@ test:
 	poetry run pytest
 
 main-render:
-	poetry run python src/sigla/main.py render $(file)
+	poetry run python src/sigla/cli.py render $(file)
 
+flake8:
+	poetry run flake8
+
+black:
+	poetry run black .

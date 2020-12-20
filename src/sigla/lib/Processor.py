@@ -3,15 +3,16 @@ from pathlib import Path
 
 from sigla.lib.Node import Node
 from sigla.lib.SiglaFile import SiglaFile
-from sigla.lib.TemplateContext import TemplateContext
-from sigla.lib.template_renderers.njk import render_njk
-from sigla.lib.utils import cast_array, ensure_parent_dir
+from sigla.lib.template.TemplateContext import TemplateContext
+from sigla.lib.template.engines.njk import njk
+from sigla.lib.helpers.files import ensure_parent_dir
+from sigla.lib.helpers.misc import cast_array
+
 
 def default_njk_template(dumped_context):
-    return f'''
+    return f"""
 
 Available vars: {dumped_context}
-
 
 Handle children:
 
@@ -22,13 +23,12 @@ Handle children:
 {{% endfor %}}
 
 
-'''
-
+"""
 
 
 class Processor:
     ctx = None
-    templates_directory = './.sigla/templates'
+    templates_directory = "./.sigla/templates"
 
     def __init__(self, ctx=None):
         if ctx is None:
@@ -42,7 +42,7 @@ class Processor:
 
         self.ctx.push_context(node)
 
-        text = ''
+        text = ""
         for child in node:
             text += self.process_node(child)
 
@@ -65,12 +65,12 @@ class Processor:
 
     def process_nodes_to_str(self, node):
         nodes = map(self.process_node, cast_array(node))
-        return ''.join(nodes)
+        return "".join(nodes)
 
     def render_template(self, name, node):
         create_missing_templates = True
 
-        name = name.replace('-', '/')
+        name = name.replace("-", "/")
 
         context = self.ctx.push_context(node)
         template_full_path = f"{self.templates_directory}/{name}.njk"
@@ -80,15 +80,15 @@ class Processor:
         my_file = Path(template_full_path)
         if not my_file.exists() and create_missing_templates:
             ensure_parent_dir(template_full_path)
-            with open(template_full_path, 'w') as h:
+            with open(template_full_path, "w") as h:
                 h.write(default_njk_template(dumped_context_keys))
 
-        result = render_njk(
+        result = njk(
             template_full_path,
             **context,
             children=node.children,
             render=self.process_nodes_to_str,
-            context=dumped_context
+            context=dumped_context,
         )
 
         self.ctx.pop_context()

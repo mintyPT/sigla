@@ -1,6 +1,6 @@
 import os
 
-from sigla.lib.utils import ensure_parent_dir
+from sigla.lib.helpers.files import ensure_parent_dir
 
 
 class SiglaFile:
@@ -13,5 +13,5 @@ class SiglaFile:
 
         ensure_parent_dir(path)
 
-        with open(path, 'w') as h:
+        with open(path, "w") as h:
             h.write(self.content)

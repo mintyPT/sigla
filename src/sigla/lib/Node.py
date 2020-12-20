@@ -24,28 +24,32 @@ class Node(object):
         children = []
         for k, v in node.attrib.items():
 
-            if k.endswith('-int'):
-                attributes[k.replace('-int', '')] = int(v)
+            if k.endswith("-int"):
+                attributes[k.replace("-int", "")] = int(v)
             else:
                 attributes[k] = v
         for child in node:
             children.append(cls.from_xml(child))
 
         meta = {
-            'tag': node.tag.split('-')[-1],
-            'otag': node.tag  # otag => original tag
+            "tag": node.tag.split("-")[-1],
+            "otag": node.tag,  # otag => original tag
         }
 
         return cls(children=children, attributes=attributes, meta=meta)
 
     def prettyprint(self, depth=0):
-        sep = ' ' * depth * 4
+        sep = " " * depth * 4
         if len(self.children) > 0:
-            child = "\n" + \
-                    "\n".join(map(lambda x: x.prettyprint(depth=depth + 1), self.children)) + \
-                    f"\n{sep}"
+            child = (
+                "\n"
+                + "\n".join(
+                    map(lambda x: x.prettyprint(depth=depth + 1), self.children)
+                )
+                + f"\n{sep}"
+            )
         else:
-            child = ''
+            child = ""
         return f"""{sep}<{self.tag} {repr(self.attributes)}>{child}</{self.tag}>"""
 
     def __getattribute__(self, name):

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sigla"
-version = "0.0.2"
+version = "0.0.4"
 description = ""
 authors = ["mg santos <mauro.goncalo@gmail.com>"]
 
@@ -9,6 +9,8 @@ python = "^3.8"
 Jinja2 = "^2.11.2"
 click = "^7.1.2"
 pydash = "^4.9.1"
+black = {version = "^20.8b1", allow-prereleases = true}
+flake8 = "^3.8.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -18,5 +20,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-greet = "sigla.ui.location:cli"
-sigla = "sigla.main:cli"
+sigla = "sigla.cli:cli"
