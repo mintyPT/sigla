@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sigla/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" afterDir="false" />
-    </list>
+    <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +51,7 @@
       <workItem from="1608103926922" duration="658000" />
       <workItem from="1608153233524" duration="8898000" />
       <workItem from="1608243453038" duration="1137000" />
-      <workItem from="1608501973029" duration="1798000" />
+      <workItem from="1608501973029" duration="2021000" />
     </task>
     <servers />
   </component>
