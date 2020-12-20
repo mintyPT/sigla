@@ -6,10 +6,10 @@ def as_kwargs_filter(obj):
     kwargs = []
     for k, v in obj.items():
         if type(v) == int:
-            kwargs.append(f'{k}={v}')
+            kwargs.append(f"{k}={v}")
         else:
             kwargs.append(f'{k}="{v}"')
-    return ', '.join(kwargs)
+    return ", ".join(kwargs)
 
 
 def map_get_filter(arr, key):
@@ -24,17 +24,19 @@ def without_filter(obj, *args):
     return result
 
 
-def render_njk(template_full_path, **kwargs):
-    with open(template_full_path, 'r') as h:
-        file_loader = FileSystemLoader('.')
+def njk(template_full_path, **kwargs):
+    with open(template_full_path, "r") as h:
+        file_loader = FileSystemLoader(".")
         env = Environment(loader=file_loader)
-        env.filters['without'] = without_filter
-        env.filters['as_kwargs'] = as_kwargs_filter
-        env.filters['map_get'] = map_get_filter
+        env.filters["without"] = without_filter
+        env.filters["as_kwargs"] = as_kwargs_filter
+        env.filters["map_get"] = map_get_filter
 
-        env.filters['get_nested'] = lambda arr, field: map(lambda el: _.get(el, field), arr)
+        env.filters["get_nested"] = lambda arr, field: map(
+            lambda el: _.get(el, field), arr
+        )
 
-        env.filters['flatten'] = _.flatten
+        env.filters["flatten"] = _.flatten
 
         # template = Template(h.read())
         template = env.get_template(template_full_path)

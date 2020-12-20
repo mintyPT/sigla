@@ -1,3 +1,6 @@
+__version__ = "0.0.8"
+
+
 from sigla.lib.Node import Node
 from sigla.lib.Processor import Processor
 from sigla.lib.helpers.misc import cast_array
