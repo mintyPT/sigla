@@ -1,9 +1,9 @@
 from xml.etree import ElementTree as ET
 
 from sigla.lib.Nodes.Node import Node
-from sigla.lib.Nodes.NodeFile import FileNode
-from sigla.lib.Nodes.NodeRoot import RootNode
-from sigla.lib.Nodes.NodeTemplate import TemplateNode
+from sigla.lib.Nodes.NodeFile import NodeFile
+from sigla.lib.Nodes.NodeRoot import NodeRoot
+from sigla.lib.Nodes.NodeTemplate import NodeTemplate
 
 
 def from_xml(node: ET.Element):
@@ -15,8 +15,8 @@ def from_xml(node: ET.Element):
         children.append(from_xml(child))
 
     if node.tag == 'file':
-        return FileNode(children=children, attributes=attributes, meta=meta)
+        return NodeFile(children=children, attributes=attributes, meta=meta)
     elif node.tag == 'root':
-        return RootNode(children=children, attributes=attributes, meta=meta)
+        return NodeRoot(children=children, attributes=attributes, meta=meta)
     else:
-        return TemplateNode(children=children, attributes=attributes, meta=meta)
+        return NodeTemplate(children=children, attributes=attributes, meta=meta)

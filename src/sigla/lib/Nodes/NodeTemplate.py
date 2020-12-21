@@ -60,7 +60,7 @@ class NodeTemplateLoader:
         return cls(name)
 
 
-class TemplateNode(Node):
+class NodeTemplate(Node):
 
     def process_nodes_to_str(self, ctx=None):
         if ctx is None:

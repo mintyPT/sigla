@@ -5,7 +5,7 @@ from sigla.lib.helpers.files import ensure_parent_dir
 from sigla.lib.helpers.Context import Context
 
 
-class FileNode(Node):
+class NodeFile(Node):
     def process(self, ctx=None):
         if ctx is None:
             ctx = Context()

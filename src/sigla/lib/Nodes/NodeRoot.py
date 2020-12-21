@@ -2,7 +2,7 @@ from sigla.lib.Nodes.Node import Node
 from sigla.lib.helpers.Context import Context
 
 
-class RootNode(Node):
+class NodeRoot(Node):
     def process(self, ctx=None):
         if ctx is None:
             ctx = Context()
