@@ -5,7 +5,6 @@ from pathlib import Path
 from sigla.lib.helpers.files import ensure_parent_dir
 from sigla.lib.helpers.loaders import load_template
 
-
 from sigla.lib.Node import Node
 from sigla.lib.helpers.misc import cast_array
 
@@ -27,7 +26,6 @@ Handle children:
 {{% endfor %}}
 
 """
-
 
 
 class NodeTemplateLoader:
@@ -64,7 +62,7 @@ class NodeTemplateLoader:
 
 class TemplateNode(Node):
 
-    def process_nodes_to_str(self, ctx):
+    def process_nodes_to_str(self, ctx=None):
         if ctx is None:
             ctx = Context()
 
@@ -74,7 +72,7 @@ class TemplateNode(Node):
 
         return wrapped
 
-    def process(self, ctx):
+    def process(self, ctx=None):
         if ctx is None:
             ctx = Context()
 
