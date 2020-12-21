@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 from sigla.lib.Node import Node
@@ -27,9 +28,32 @@ Handle children:
 """
 
 
+class TemplateLoader:
+    templates_directory = "./.sigla/templates"
+    create_missing_templates = True
+
+    def __init__(self, name):
+        self.name = name
+        self.path = Path(os.path.join(self.templates_directory, self.name))
+
+    def ensure(self, default_value):
+        """ Ensure the file really exists """
+
+        if not self.create_missing_templates:
+            return
+
+        ensure_parent_dir(self.path)
+        if self.path.exists():
+            return
+        with open(self.path, "w") as h:
+            h.write(default_value)
+
+    def load(self):
+        return load_template(self.path)
+
+
 class Processor:
     ctx = None
-    templates_directory = "./.sigla/templates"
 
     def __init__(self, ctx=None):
         if ctx is None:
@@ -69,30 +93,25 @@ class Processor:
         return "".join(nodes)
 
     def render_template(self, name, node):
-        create_missing_templates = True
 
         name = name.replace("-", "/")
 
         context = self.ctx.push_context(node)
-        template_full_path = f"{self.templates_directory}/{name}.njk"
-        dumped_context = json.dumps(context)
-        dumped_context_keys = json.dumps(list(context.keys()) + ["children"])
 
-        my_file = Path(template_full_path)
-        if not my_file.exists() and create_missing_templates:
-            ensure_parent_dir(template_full_path)
+        context_json = json.dumps(context)
+        default_template_content = default_njk_template(json.dumps(list(context.keys()) + ["children"]))
 
-            with open(template_full_path, "w") as h:
-                h.write(default_njk_template(dumped_context_keys))
-
-        template, metadata = load_template(template_full_path)
+        # load template
+        loader = TemplateLoader(f"{name}.njk")
+        loader.ensure(default_template_content)
+        template, metadata = loader.load()
 
         result = njk(
             template,
             **context,
             children=node.children,
             render=self.process_nodes_to_str,
-            context=dumped_context,
+            context=context_json,
         )
 
         self.ctx.pop_context()

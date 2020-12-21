@@ -7,8 +7,9 @@ from sigla.lib.helpers.misc import cast_array
 
 
 def process_node(root):
-    processor = Processor()
     node = Node.from_xml(root)
+
+    processor = Processor()
     result = processor.process_node(node)
     result = cast_array(result)
     return result

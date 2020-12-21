@@ -4,13 +4,9 @@
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +75,7 @@
       <workItem from="1608153233524" duration="8898000" />
       <workItem from="1608243453038" duration="1137000" />
       <workItem from="1608501973029" duration="6504000" />
-      <workItem from="1608587949131" duration="1533000" />
+      <workItem from="1608587949131" duration="2855000" />
     </task>
     <servers />
   </component>
