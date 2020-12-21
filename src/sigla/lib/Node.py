@@ -65,3 +65,6 @@ class Node(object):
 
     def __iter__(self):
         return iter(self.children)
+
+    def get_template_name(self):
+        return self.otag

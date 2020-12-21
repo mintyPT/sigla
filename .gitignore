@@ -6,3 +6,5 @@ output/
 .DS_Store
 
 *.pyc
+
+debug.log

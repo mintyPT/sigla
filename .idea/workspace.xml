@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +73,7 @@
       <workItem from="1608153233524" duration="8898000" />
       <workItem from="1608243453038" duration="1137000" />
       <workItem from="1608501973029" duration="6504000" />
-      <workItem from="1608587949131" duration="2855000" />
+      <workItem from="1608587949131" duration="3357000" />
     </task>
     <servers />
   </component>
@@ -112,11 +110,11 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="864" y="484" key="com.intellij.ide.util.TipDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608128077394" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608507319288">
+    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608591601384">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608074740311" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608507319288" />
+    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608591601384" />
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog" timestamp="1608073042387">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>

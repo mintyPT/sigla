@@ -51,16 +51,24 @@ class TemplateLoader:
     def load(self):
         return load_template(self.path)
 
+    @classmethod
+    def from_node(cls, node: Node):
+        name = node.get_template_name()
+        name = name.replace("-", "/")
+        name = f"{name}.njk"
+
+        return cls(name)
+
 
 class Processor:
-    ctx = None
+    ctx: TemplateContext = None
 
     def __init__(self, ctx=None):
         if ctx is None:
             ctx = TemplateContext()
         self.ctx = ctx
 
-    def process_file(self, node):
+    def process_file(self, node: Node):
 
         if not node.name:
             raise Exception(f"# No name attached to the file element.")
@@ -86,15 +94,13 @@ class Processor:
 
         else:
             # render a template
-            return self.render_template(node.otag, node)
+            return self.render_template(node)
 
     def process_nodes_to_str(self, node):
         nodes = map(self.process_node, cast_array(node))
         return "".join(nodes)
 
-    def render_template(self, name, node):
-
-        name = name.replace("-", "/")
+    def render_template(self, node):
 
         context = self.ctx.push_context(node)
 
@@ -102,7 +108,7 @@ class Processor:
         default_template_content = default_njk_template(json.dumps(list(context.keys()) + ["children"]))
 
         # load template
-        loader = TemplateLoader(f"{name}.njk")
+        loader = TemplateLoader.from_node(node)
         loader.ensure(default_template_content)
         template, metadata = loader.load()
 
