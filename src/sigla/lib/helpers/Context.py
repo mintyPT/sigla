@@ -1,5 +1,5 @@
 from typing import List, Dict
-from sigla.lib.Node import Node
+from sigla.lib.Nodes.Node import Node
 
 
 class Context:

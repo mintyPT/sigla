@@ -1,9 +1,9 @@
 from xml.etree import ElementTree as ET
 
-from sigla.lib.Node import Node
-from sigla.lib.NodeFile import FileNode
-from sigla.lib.NodeRoot import RootNode
-from sigla.lib.NodeTemplate import TemplateNode
+from sigla.lib.Nodes.Node import Node
+from sigla.lib.Nodes.NodeFile import FileNode
+from sigla.lib.Nodes.NodeRoot import RootNode
+from sigla.lib.Nodes.NodeTemplate import TemplateNode
 
 
 def from_xml(node: ET.Element):

@@ -5,7 +5,7 @@ from pathlib import Path
 from sigla.lib.helpers.files import ensure_parent_dir
 from sigla.lib.helpers.loaders import load_template
 
-from sigla.lib.Node import Node
+from sigla.lib.Nodes.Node import Node
 from sigla.lib.helpers.misc import cast_array
 
 from sigla.lib.helpers.Context import Context

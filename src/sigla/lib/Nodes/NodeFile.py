@@ -1,6 +1,6 @@
 import os
 
-from sigla.lib.Node import Node
+from sigla.lib.Nodes.Node import Node
 from sigla.lib.helpers.files import ensure_parent_dir
 from sigla.lib.helpers.Context import Context
 

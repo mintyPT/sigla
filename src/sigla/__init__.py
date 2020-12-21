@@ -1,7 +1,7 @@
 __version__ = "0.0.11"
 
 
-from sigla.lib.Node import Node
+from sigla.lib.Nodes.Node import Node
 from sigla.lib import from_xml
 from sigla.lib.helpers.misc import cast_array
 
