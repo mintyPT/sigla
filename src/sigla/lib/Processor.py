@@ -3,6 +3,7 @@ from pathlib import Path
 
 from sigla.lib.Node import Node
 from sigla.lib.SiglaFile import SiglaFile
+from sigla.lib.helpers.loaders import load_template
 from sigla.lib.template.TemplateContext import TemplateContext
 from sigla.lib.template.engines.njk import njk
 from sigla.lib.helpers.files import ensure_parent_dir
@@ -80,11 +81,14 @@ class Processor:
         my_file = Path(template_full_path)
         if not my_file.exists() and create_missing_templates:
             ensure_parent_dir(template_full_path)
+
             with open(template_full_path, "w") as h:
                 h.write(default_njk_template(dumped_context_keys))
 
+        template, metadata = load_template(template_full_path)
+
         result = njk(
-            template_full_path,
+            template,
             **context,
             children=node.children,
             render=self.process_nodes_to_str,

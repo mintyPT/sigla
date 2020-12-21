@@ -7,6 +7,7 @@ publish:
 	git add src/sigla/__init__.py pyproject.toml
 	git commit -m "build: bump version before publish"
 	poetry publish --build
+	git push
 
 show:
 	poetry show -v

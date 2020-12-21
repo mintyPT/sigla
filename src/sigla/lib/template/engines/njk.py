@@ -24,21 +24,18 @@ def without_filter(obj, *args):
     return result
 
 
-def njk(template_full_path, **kwargs):
-    with open(template_full_path, "r") as h:
-        file_loader = FileSystemLoader(".")
-        env = Environment(loader=file_loader)
-        env.filters["without"] = without_filter
-        env.filters["as_kwargs"] = as_kwargs_filter
-        env.filters["map_get"] = map_get_filter
+def njk(template: str, **kwargs):
+    env = Environment()
+    env.filters["without"] = without_filter
+    env.filters["as_kwargs"] = as_kwargs_filter
+    env.filters["map_get"] = map_get_filter
 
-        env.filters["get_nested"] = lambda arr, field: map(
-            lambda el: _.get(el, field), arr
-        )
+    env.filters["get_nested"] = lambda arr, field: map(
+        lambda el: _.get(el, field), arr
+    )
 
-        env.filters["flatten"] = _.flatten
+    env.filters["flatten"] = _.flatten
 
-        # template = Template(h.read())
-        template = env.get_template(template_full_path)
+    template = env.from_string(template)
 
-        return template.render(**kwargs)
+    return template.render(**kwargs)

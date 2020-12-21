@@ -3,14 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,7 +78,8 @@
       <workItem from="1608103926922" duration="658000" />
       <workItem from="1608153233524" duration="8898000" />
       <workItem from="1608243453038" duration="1137000" />
-      <workItem from="1608501973029" duration="6068000" />
+      <workItem from="1608501973029" duration="6504000" />
+      <workItem from="1608587949131" duration="1533000" />
     </task>
     <servers />
   </component>
@@ -71,6 +91,10 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="890" y="461" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2048.1257@0.23.2048.1257" timestamp="1608072843468" />
+    <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog" timestamp="1608589396872">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608589396872" />
     <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608508170160">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
