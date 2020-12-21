@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +72,7 @@
       <workItem from="1608153233524" duration="8898000" />
       <workItem from="1608243453038" duration="1137000" />
       <workItem from="1608501973029" duration="6504000" />
-      <workItem from="1608587949131" duration="3357000" />
+      <workItem from="1608587949131" duration="3610000" />
     </task>
     <servers />
   </component>
@@ -89,10 +88,10 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608589396872" />
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608508170160">
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608591960773">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608508170160" />
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608591960773" />
     <state x="1221" y="413" key="FileChooserDialogImpl" timestamp="1608054352360">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
