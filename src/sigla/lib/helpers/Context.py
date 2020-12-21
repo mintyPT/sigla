@@ -2,7 +2,7 @@ from typing import List, Dict
 from sigla.lib.Node import Node
 
 
-class TemplateContext:
+class Context:
     node_stack: List[Node] = []
     context_stack: List[Dict] = []
 

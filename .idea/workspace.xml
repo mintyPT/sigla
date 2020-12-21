@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sigla/lib/NodeFile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sigla/lib/NodeRoot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sigla/lib/NodeTemplate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/NodeTemplateLoader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Processor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/SiglaFile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/TemplateContext.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/Context.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +58,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/sigla/lib/helpers" />
       <recent name="$PROJECT_DIR$/src/sigla/lib/template" />
       <recent name="$PROJECT_DIR$/.sigla/templates/t" />
       <recent name="$PROJECT_DIR$/.sigla/templates" />
@@ -84,14 +95,22 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="890" y="461" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2048.1257@0.23.2048.1257" timestamp="1608072843468" />
+    <state x="2019" y="179" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1608594390150">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="2019" y="179" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608594390150" />
+    <state x="1995" y="485" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1608593926516">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="1995" y="485" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608593926516" />
     <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog" timestamp="1608589396872">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608589396872" />
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608591960773">
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608594482283">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608591960773" />
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608594482283" />
     <state x="1221" y="413" key="FileChooserDialogImpl" timestamp="1608054352360">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
@@ -109,11 +128,11 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="864" y="484" key="com.intellij.ide.util.TipDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608128077394" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608591601384">
+    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608594543392">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608074740311" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608591601384" />
+    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608594543392" />
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog" timestamp="1608073042387">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>

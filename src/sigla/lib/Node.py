@@ -1,6 +1,3 @@
-from xml.etree import ElementTree as ET
-
-
 class Node(object):
     attributes = {}
     meta = {}
@@ -19,38 +16,22 @@ class Node(object):
         self.children = children
 
     @classmethod
-    def from_xml(cls, node: ET.Element):
-        attributes = {}
-        children = []
-        for k, v in node.attrib.items():
-
-            if k.endswith("-int"):
-                attributes[k.replace("-int", "")] = int(v)
-            else:
-                attributes[k] = v
-        for child in node:
-            children.append(cls.from_xml(child))
-
+    def meta_from_node(cls, node):
         meta = {
             "tag": node.tag.split("-")[-1],
             "otag": node.tag,  # otag => original tag
         }
+        return meta
 
-        return cls(children=children, attributes=attributes, meta=meta)
-
-    def prettyprint(self, depth=0):
-        sep = " " * depth * 4
-        if len(self.children) > 0:
-            child = (
-                "\n"
-                + "\n".join(
-                    map(lambda x: x.prettyprint(depth=depth + 1), self.children)
-                )
-                + f"\n{sep}"
-            )
-        else:
-            child = ""
-        return f"""{sep}<{self.tag} {repr(self.attributes)}>{child}</{self.tag}>"""
+    @classmethod
+    def attributes_from_node(cls, node):
+        attributes = {}
+        for k, v in node.attrib.items():
+            if k.endswith("-int"):
+                attributes[k.replace("-int", "")] = int(v)
+            else:
+                attributes[k] = v
+        return attributes
 
     def __getattribute__(self, name):
         try:
