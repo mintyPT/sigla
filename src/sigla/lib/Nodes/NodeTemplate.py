@@ -1,15 +1,20 @@
 import json
 import os
 from pathlib import Path
+import frontmatter
 
 from sigla.lib.helpers.files import ensure_parent_dir
-from sigla.lib.helpers.loaders import load_template
 
 from sigla.lib.Nodes.Node import Node
 from sigla.lib.helpers.misc import cast_array
-
 from sigla.lib.helpers.Context import Context
-from sigla.lib.template.engines.njk import njk
+from sigla.lib.Nodes.template.engines.njk import njk
+
+
+def load_template(filepath):
+    with open(filepath, "r") as h:
+        metadata, template = frontmatter.parse(h.read())
+        return template, metadata
 
 
 def default_njk_template(dumped_context):

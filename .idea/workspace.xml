@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/SnapshotCli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/SnapshotCli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,11 +119,11 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="864" y="484" key="com.intellij.ide.util.TipDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608128077394" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608594925209">
+    <state x="1392" y="457" width="1148" height="550" key="find.popup" timestamp="1608595557673">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608074740311" />
-    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608594925209" />
+    <state x="1392" y="457" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608595557673" />
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog" timestamp="1608073042387">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
