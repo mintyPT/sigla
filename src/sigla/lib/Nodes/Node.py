@@ -1,4 +1,5 @@
-from typing import Dict, Union
+from typing import Dict, Union, List
+import pydash as _
 
 from src.sigla.lib.helpers.Context import Context
 
@@ -6,9 +7,20 @@ from src.sigla.lib.helpers.Context import Context
 class Node(object):
     attributes: Dict[str, Union[str, int]] = {}
     meta: Dict[str, Union[str, int]] = {}
-    children = []
+    children: List["Node"] = []
+    kind = "node"
 
-    def __init__(self, children=None, attributes=None, meta=None):
+    def is_(self, what):
+        return self.kind == what
+
+    def flatten(self):
+        return _.flatten(
+            [self, *list(map(lambda e: e.flatten(), self.children))]
+        )
+
+    def __init__(
+        self, children: List["Node"] = None, attributes=None, meta=None
+    ):
         if children is None:
             children = []
         if attributes is None:

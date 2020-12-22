@@ -35,6 +35,9 @@ def njk(template: str, **kwargs):
     )
 
     env.filters["flatten"] = _.flatten
+    env.filters["get"] = _.get
+    env.filters["map"] = _.map_
+    env.filters["uniq"] = _.uniq
 
     template_obj = env.from_string(template)
 

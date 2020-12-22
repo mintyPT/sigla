@@ -1,15 +1,17 @@
 <root>
-    <seed-seeds name="all together">
-        <seed-seed name="User">
-            <seed-string name="username"></seed-string>
-            <seed-int name="age" min-int="18" max-int="99"></seed-int>
-            <seed-int name="money" min-int="0" max-int="1000"></seed-int>
-        </seed-seed>
+    <file name="output/seed.txt">
+        <seed-seeds name="all together">
+            <seed-seed name="User">
+                <seed-string name="username"></seed-string>
+                <seed-int name="age" min-int="18" max-int="99"></seed-int>
+                <seed-int name="money" min-int="0" max-int="1000"></seed-int>
+            </seed-seed>
 
-        <seed-seed name="NotUser">
-            <seed-string name="username"></seed-string>
-            <seed-int name="age" min-int="18" max-int="99"></seed-int>
-            <seed-int name="money" min-int="0" max-int="1000"></seed-int>
-        </seed-seed>
-    </seed-seeds>
+            <seed-seed name="NotUser">
+                <seed-string name="username"></seed-string>
+                <seed-int name="age" min-int="18" max-int="99"></seed-int>
+                <seed-int name="money" min-int="0" max-int="1000"></seed-int>
+            </seed-seed>
+        </seed-seeds>
+    </file>
 </root>

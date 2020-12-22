@@ -3,6 +3,8 @@ from src.sigla.lib.helpers.Context import Context
 
 
 class NodeRoot(Node):
+    kind = "root"
+
     def process(self, ctx=None):
         if ctx is None:
             ctx = Context()

@@ -2,7 +2,7 @@ import frontmatter
 import json
 import os
 from pathlib import Path
-
+import pydash as _
 from src.sigla.lib.Nodes.Node import Node
 from src.sigla.lib.Nodes.template.engines.njk import njk
 from src.sigla.lib.helpers.Context import Context
@@ -64,6 +64,22 @@ class NodeTemplateLoader:
 
 
 class NodeTemplate(Node):
+    loader: NodeTemplateLoader
+    template: str
+    metadata = None
+    kind = "template"
+
+    def __init__(self, children=None, attributes=None, meta=None):
+        super().__init__(children, attributes, meta)
+
+        self.loader = NodeTemplateLoader.from_node(self)
+        try:
+            template, metadata = self.loader.load()
+            self.template = template
+            self.metadata = metadata
+        except FileNotFoundError:
+            pass
+
     def sub_process(self, ctx=None):
         if ctx is None:
             ctx = Context()
@@ -83,19 +99,33 @@ class NodeTemplate(Node):
 
         context = ctx.push_context(self)
 
-        default_template = default_njk_template(
-            json.dumps(list(context.keys()) + ["children"])
+        template = self.template
+        if not template:
+            default_template = default_njk_template(
+                json.dumps(list(context.keys()) + ["children"])
+            )
+
+            # load template
+            self.loader.ensure(default_template)
+            template, metadata = self.loader.load()
+
+        flat_children = _.flatten(
+            list(map(lambda x: x.flatten(), self.children))
         )
 
-        # load template
-        loader = NodeTemplateLoader.from_node(self)
-        loader.ensure(default_template)
-        template, metadata = loader.load()
+        all_meta = (
+            _.chain(flat_children)
+            .filter_(lambda x: type(x) == NodeTemplate)
+            .map_("metadata")
+            .filter_()
+            .value()
+        )
 
         result = njk(
             template,
             **context,
             children=self.children,
+            meta=all_meta,
             render=self.sub_process(ctx),
             context=json.dumps(context),
         )

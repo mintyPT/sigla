@@ -6,6 +6,8 @@ from src.sigla.lib.helpers.Context import Context
 
 
 class NodeFile(Node):
+    kind = "file"
+
     def process(self, ctx=None):
         if ctx is None:
             ctx = Context()
