@@ -1,9 +1,12 @@
-from typing import List, Dict
-from sigla.lib.Nodes.Node import Node
+from typing import List, Dict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from src.sigla.lib.Nodes.Node import Node
 
 
 class Context:
-    node_stack: List[Node] = []
+
+    node_stack: List["Node"] = []
     context_stack: List[Dict] = []
 
     def get_context(self):
@@ -15,7 +18,7 @@ class Context:
                 result[k] = v
         return result
 
-    def push_context(self, node: Node):
+    def push_context(self, node: "Node"):
         self.node_stack.append(node)
         self.context_stack.append(node.attributes)
         return self.get_context()

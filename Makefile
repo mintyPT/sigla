@@ -16,13 +16,16 @@ test:
 	poetry run pytest
 
 main-render:
-	poetry run python src/sigla/cli.py render $(file)
+	poetry run sigla render $(file)
 
 version:
-	poetry run python src/sigla/cli.py version
+	poetry run sigla version
 
 flake8:
 	poetry run flake8 --exclude dist
 
 black:
 	poetry run black . -l 79
+
+mypy:
+	poetry run mypy src

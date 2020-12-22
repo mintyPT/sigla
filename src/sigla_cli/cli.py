@@ -1,7 +1,7 @@
 import click
 from sigla import __version__
-from sigla.lib.SnapshotCli import SnapshotCli
 from sigla.main import run
+from sigla.lib.SnapshotCli import SnapshotCli
 
 import logging
 

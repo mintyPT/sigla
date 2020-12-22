@@ -1,5 +1,5 @@
-from sigla.lib.Nodes.Node import Node
-from sigla.lib.helpers.Context import Context
+from src.sigla.lib.Nodes.Node import Node
+from src.sigla.lib.helpers.Context import Context
 
 
 class NodeRoot(Node):

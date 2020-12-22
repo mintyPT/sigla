@@ -1,6 +1,11 @@
+from typing import Dict, Union
+
+from src.sigla.lib.helpers.Context import Context
+
+
 class Node(object):
-    attributes = {}
-    meta = {}
+    attributes: Dict[str, Union[str, int]] = {}
+    meta: Dict[str, Union[str, int]] = {}
     children = []
 
     def __init__(self, children=None, attributes=None, meta=None):
@@ -49,3 +54,6 @@ class Node(object):
 
     def get_template_name(self):
         return self.otag
+
+    def process(self, ctx: Context = None):
+        raise NotImplementedError("Implement this method")

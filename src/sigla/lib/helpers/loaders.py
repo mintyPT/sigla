@@ -7,4 +7,3 @@ def load_xml(filename):
 
 def load_string(str):
     return ET.fromstring(str).getroot()
-

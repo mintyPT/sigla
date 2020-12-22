@@ -1,14 +1,12 @@
+import frontmatter
 import json
 import os
 from pathlib import Path
-import frontmatter
 
-from sigla.lib.helpers.files import ensure_parent_dir
-
-from sigla.lib.Nodes.Node import Node
-from sigla.lib.helpers.misc import cast_array
-from sigla.lib.helpers.Context import Context
-from sigla.lib.Nodes.template.engines.njk import njk
+from src.sigla.lib.Nodes.Node import Node
+from src.sigla.lib.Nodes.template.engines.njk import njk
+from src.sigla.lib.helpers.Context import Context
+from src.sigla.lib.helpers.files import ensure_parent_dir
 
 
 def load_template(filepath):
@@ -66,13 +64,16 @@ class NodeTemplateLoader:
 
 
 class NodeTemplate(Node):
-    def process_nodes_to_str(self, ctx=None):
+    def sub_process(self, ctx=None):
         if ctx is None:
             ctx = Context()
 
-        def wrapped(node):
-            nodes = map(lambda e: e.process(ctx), cast_array(node))
-            return "".join(nodes)
+        def wrapped(node: Node):
+            if type(node) == list:
+                nodes = map(lambda e: e.process(ctx), node)
+                return "".join(nodes)
+            else:
+                return node.process(ctx)
 
         return wrapped
 
@@ -95,8 +96,8 @@ class NodeTemplate(Node):
             template,
             **context,
             children=self.children,
-            render=self.process_nodes_to_str(ctx),
-            context=(json.dumps(context)),
+            render=self.sub_process(ctx),
+            context=json.dumps(context),
         )
 
         ctx.pop_context()

@@ -36,6 +36,6 @@ def njk(template: str, **kwargs):
 
     env.filters["flatten"] = _.flatten
 
-    template = env.from_string(template)
+    template_obj = env.from_string(template)
 
-    return template.render(**kwargs)
+    return template_obj.render(**kwargs)

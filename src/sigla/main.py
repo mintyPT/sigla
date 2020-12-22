@@ -1,5 +1,5 @@
-from sigla import process_node
-from sigla.lib.helpers.loaders import load_xml, load_string
+from src.sigla import process_node
+from src.sigla.lib.helpers.loaders import load_xml, load_string
 
 
 def run(file=None, content=None):
