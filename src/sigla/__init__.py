@@ -1,6 +1,6 @@
-__version__ = "0.0.16"
+__version__ = "0.0.17"
 
-from src.sigla.lib import from_xml
+from sigla.lib import from_xml
 
 
 def process_node(root):
