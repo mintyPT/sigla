@@ -29,3 +29,5 @@ black:
 
 mypy:
 	poetry run mypy src
+
+check: black flake8 mypy

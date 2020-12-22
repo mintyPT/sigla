@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sigla_cli/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla_cli/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/Node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/template/engines/njk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/SnapshotCli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla_cli/SnapshotCli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/Context.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/Context.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/misc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla_cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla_cli/cli.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

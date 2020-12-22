@@ -1,9 +1,9 @@
 import click
-from sigla import __version__
-from sigla.main import run
-from sigla.lib.SnapshotCli import SnapshotCli
-
 import logging
+
+from src.sigla import __version__
+from src.sigla.main import run
+from src.sigla_cli.SnapshotCli import SnapshotCli
 
 logging.basicConfig(
     level=logging.INFO,
