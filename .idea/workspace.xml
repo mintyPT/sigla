@@ -3,9 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/NodeRoot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/NodeTemplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/SnapshotCli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/SnapshotCli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/lib/template/engines/njk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sigla/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/sigla/lib/Nodes" />
       <recent name="$PROJECT_DIR$/src/sigla/lib/helpers" />
       <recent name="$PROJECT_DIR$/src/sigla/lib/template" />
       <recent name="$PROJECT_DIR$/.sigla/templates/t" />
       <recent name="$PROJECT_DIR$/.sigla/templates" />
-      <recent name="$PROJECT_DIR$/.sigla/templates/component" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -129,10 +138,10 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1608508598049">
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1608595282299">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608270629959" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608508598049" />
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608595282299" />
   </component>
 </project>

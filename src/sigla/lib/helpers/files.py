@@ -6,6 +6,4 @@ def ensure_dir(path):
 
 
 def ensure_parent_dir(path):
-    Path(path) \
-        .parent \
-        .mkdir(parents=True, exist_ok=True)
+    Path(path).parent.mkdir(parents=True, exist_ok=True)

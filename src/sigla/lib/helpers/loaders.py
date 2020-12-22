@@ -1,6 +1,7 @@
 import frontmatter
 from xml.etree import ElementTree as ET
 
+
 def load_xml(filename):
     return ET.parse(filename).getroot()
 
@@ -10,6 +11,6 @@ def load_string(str):
 
 
 def load_template(filepath):
-    with open(filepath, 'r') as h:
+    with open(filepath, "r") as h:
         metadata, template = frontmatter.parse(h.read())
         return template, metadata

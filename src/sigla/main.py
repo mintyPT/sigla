@@ -1,5 +1,3 @@
-import logging
-
 from sigla import process_node
 from sigla.lib.helpers.loaders import load_xml, load_string
 

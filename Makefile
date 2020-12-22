@@ -22,7 +22,7 @@ version:
 	poetry run python src/sigla/cli.py version
 
 flake8:
-	poetry run flake8
+	poetry run flake8 --exclude dist
 
 black:
-	poetry run black .
+	poetry run black . -l 79

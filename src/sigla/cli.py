@@ -1,7 +1,6 @@
 import click
 from sigla import __version__
-from sigla.lib.SnapshotCli import SnapshotCli, SNAPSHOTS_DIRECTORY
-from sigla.lib.helpers.files import ensure_dir
+from sigla.lib.SnapshotCli import SnapshotCli
 from sigla.main import run
 
 import logging
@@ -12,7 +11,7 @@ logging.basicConfig(
     handlers=[
         logging.FileHandler("debug.log"),
         # logging.StreamHandler()
-    ]
+    ],
 )
 
 

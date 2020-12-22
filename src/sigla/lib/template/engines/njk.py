@@ -1,5 +1,5 @@
 import pydash as _
-from jinja2 import FileSystemLoader, Environment
+from jinja2 import Environment
 
 
 def as_kwargs_filter(obj):

@@ -14,9 +14,11 @@ def from_xml(node: ET.Element):
     for child in node:
         children.append(from_xml(child))
 
-    if node.tag == 'file':
+    if node.tag == "file":
         return NodeFile(children=children, attributes=attributes, meta=meta)
-    elif node.tag == 'root':
+    elif node.tag == "root":
         return NodeRoot(children=children, attributes=attributes, meta=meta)
     else:
-        return NodeTemplate(children=children, attributes=attributes, meta=meta)
+        return NodeTemplate(
+            children=children, attributes=attributes, meta=meta
+        )

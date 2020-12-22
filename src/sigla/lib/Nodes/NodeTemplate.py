@@ -61,7 +61,6 @@ class NodeTemplateLoader:
 
 
 class NodeTemplate(Node):
-
     def process_nodes_to_str(self, ctx=None):
         if ctx is None:
             ctx = Context()
@@ -78,7 +77,9 @@ class NodeTemplate(Node):
 
         context = ctx.push_context(self)
 
-        default_template = default_njk_template(json.dumps(list(context.keys()) + ["children"]))
+        default_template = default_njk_template(
+            json.dumps(list(context.keys()) + ["children"])
+        )
 
         # load template
         loader = NodeTemplateLoader.from_node(self)

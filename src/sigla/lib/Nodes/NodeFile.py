@@ -11,7 +11,7 @@ class NodeFile(Node):
             ctx = Context()
 
         if not self.name:
-            raise Exception(f"# No name attached to the file element.")
+            raise Exception("# No name attached to the file element.")
 
         ctx.push_context(self)
 
