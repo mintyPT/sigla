@@ -1,0 +1,4 @@
+"{{ name }}": { {% for child in children %}
+    {{ render(child) | indent(8) }},
+{%- endfor %}
+}

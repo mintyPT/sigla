@@ -1,0 +1,7 @@
+"list": call_wrapper("{{ urlprefix }}/{{name}}", method="GET"),
+"create": call_wrapper("{{ urlprefix }}/{{name}}", method="POST"),
+"read": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="GET"),
+"update": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
+"update_p": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
+"delete": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="DELETE")
+

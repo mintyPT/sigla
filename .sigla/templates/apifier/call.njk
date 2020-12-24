@@ -1,0 +1,1 @@
+"{{name}}": call_wrapper("/{{name}}", {{ ctx | without("name") | as_kwargs() }})

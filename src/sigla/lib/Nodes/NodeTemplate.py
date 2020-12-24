@@ -82,7 +82,10 @@ class NodeTemplate(Node):
         except FileNotFoundError:
             pass
 
-    def sub_process(self, ctx=None, ):
+    def sub_process(
+        self,
+        ctx=None,
+    ):
         if ctx is None:
             ctx = Context()
 
@@ -117,10 +120,10 @@ class NodeTemplate(Node):
 
         all_meta = (
             _.chain(flat_children)
-                .filter_(lambda x: type(x) == NodeTemplate)
-                .map_("metadata")
-                .filter_()
-                .value()
+            .filter_(lambda x: type(x) == NodeTemplate)
+            .map_("metadata")
+            .filter_()
+            .value()
         )
 
         result = njk(

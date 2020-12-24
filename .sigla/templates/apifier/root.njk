@@ -1,0 +1,17 @@
+
+def call_wrapper(url: str, method: str = "GET"):
+    def call(query, body, params):
+        print('call api')
+        print('- url:', url)
+        print('- method:', method)
+        print('- query:', query)
+        print('- body:', body)
+        print('- params:', params)
+    return call
+
+
+apifier = {
+{% for child in children %}
+    {{ render(child) | indent(8) }},
+{% endfor %}
+}
