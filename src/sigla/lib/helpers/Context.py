@@ -1,7 +1,7 @@
 from typing import List, Dict, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from src.sigla.lib.Nodes.Node import Node
+    from sigla.lib.Nodes.Node import Node
 
 
 class Context:

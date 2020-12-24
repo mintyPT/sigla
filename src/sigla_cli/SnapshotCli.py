@@ -1,8 +1,8 @@
 import os
 from shutil import copyfile
 
-from src.sigla.lib.helpers.files import ensure_parent_dir, ensure_dir
-from src.sigla.lib.helpers.loaders import load_xml
+from sigla.lib.helpers.files import ensure_parent_dir, ensure_dirs
+from sigla.lib.helpers.loaders import load_xml
 
 SNAPSHOTS_DIRECTORY = ".sigla/snapshots"
 
@@ -13,7 +13,7 @@ class SnapshotCli:
         self.doc = load_xml(file)
 
         print(f":: Ensure {SNAPSHOTS_DIRECTORY} exists")
-        ensure_dir(SNAPSHOTS_DIRECTORY)
+        ensure_dirs(SNAPSHOTS_DIRECTORY)
 
         print(":: Reading tests")
         self.tests = []

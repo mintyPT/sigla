@@ -1,18 +1,25 @@
+import os
+from os.path import join
+from pathlib import Path
+
 import click
 import logging
 
-from src.sigla import __version__
-from src.sigla.main import run
-from src.sigla_cli.SnapshotCli import SnapshotCli
+from sigla import __version__
+from sigla.lib.helpers.files import ensure_dirs, ensure_parent_dir
+from sigla.main import run
+from sigla_cli.Config import Config
+from sigla_cli.SnapshotCli import SnapshotCli
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("debug.log"),
-        # logging.StreamHandler()
-    ],
-)
+
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format="[%(levelname)s] %(message)s",
+#     handlers=[
+#         logging.FileHandler("debug.log"),
+#         # logging.StreamHandler()
+#     ],
+# )
 
 
 # @click.option("--debug/--no-debug", default=False)
@@ -22,11 +29,53 @@ def cli():
     pass
 
 
+config = Config()
+
+
+@cli.command()
+def init():
+    config.save()
+
+    ensure_dirs(
+        config.sigma_path,
+        config.templates_path,
+        config.snapshots_path,
+        config.definitions_path
+    )
+
+
+@cli.command()
+@click.argument("name", type=click.types.STRING)
+def new_definition(name):
+    p = Path(join(config.definitions_path, name + '.xml'))
+    ensure_parent_dir(p)
+    name = name.replace('/', '-')
+
+    if p.exists():
+        raise Exception("This definition already exists")
+
+    # if file exists throw error
+    with open(p, 'w') as h:
+        h.write(f"""<root>
+    <{name}>
+    </{name}>
+</root>""")
+
+
+@cli.command()
+@click.argument("name", type=click.types.STRING)
+def run_definition(name):
+    p = Path(join(config.definitions_path, name + '.xml'))
+    if not p.exists():
+        raise Exception("This definition does not exists")
+    run(file=p)
+
+
 @cli.command()  # @cli, not @click!
 @click.argument("files", nargs=-1, type=click.Path(exists=True))
 def render(files):
     for file in files:
-        run(file)
+        run(file=file)
 
 
 @cli.command()
@@ -43,7 +92,6 @@ def snapshot(files):
     """
     Makes snapshots
     """
-
     for file in files:
         snap = SnapshotCli(file)
         snap.make_snapshots()

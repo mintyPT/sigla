@@ -1,12 +1,14 @@
+from typing import Optional
+
 import frontmatter
 import json
 import os
 from pathlib import Path
 import pydash as _
-from src.sigla.lib.Nodes.Node import Node
-from src.sigla.lib.Nodes.template.engines.njk import njk
-from src.sigla.lib.helpers.Context import Context
-from src.sigla.lib.helpers.files import ensure_parent_dir
+from sigla.lib.Nodes.Node import Node
+from sigla.lib.Nodes.template.engines.njk import njk
+from sigla.lib.helpers.Context import Context
+from sigla.lib.helpers.files import ensure_parent_dir
 
 
 def load_template(filepath):
@@ -65,7 +67,7 @@ class NodeTemplateLoader:
 
 class NodeTemplate(Node):
     loader: NodeTemplateLoader
-    template: str
+    template: Optional[str] = None
     metadata = None
     kind = "template"
 
@@ -80,14 +82,14 @@ class NodeTemplate(Node):
         except FileNotFoundError:
             pass
 
-    def sub_process(self, ctx=None):
+    def sub_process(self, ctx=None, ):
         if ctx is None:
             ctx = Context()
 
-        def wrapped(node: Node):
+        def wrapped(node: Node, sep="\n"):
             if type(node) == list:
                 nodes = map(lambda e: e.process(ctx), node)
-                return "".join(nodes)
+                return sep.join(nodes)
             else:
                 return node.process(ctx)
 
@@ -115,19 +117,19 @@ class NodeTemplate(Node):
 
         all_meta = (
             _.chain(flat_children)
-            .filter_(lambda x: type(x) == NodeTemplate)
-            .map_("metadata")
-            .filter_()
-            .value()
+                .filter_(lambda x: type(x) == NodeTemplate)
+                .map_("metadata")
+                .filter_()
+                .value()
         )
 
         result = njk(
             template,
             **context,
+            ctx=context,
             children=self.children,
             meta=all_meta,
             render=self.sub_process(ctx),
-            context=json.dumps(context),
         )
 
         ctx.pop_context()

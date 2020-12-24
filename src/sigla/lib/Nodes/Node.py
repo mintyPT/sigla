@@ -1,7 +1,7 @@
 from typing import Dict, Union, List
 import pydash as _
 
-from src.sigla.lib.helpers.Context import Context
+from sigla.lib.helpers.Context import Context
 
 
 class Node(object):

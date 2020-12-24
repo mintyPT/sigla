@@ -1,5 +1,5 @@
 <root>
-    <file name="output/seed.txt">
+    <file name="output/seed.xml">
         <seed-seeds name="all together">
             <seed-seed name="User">
                 <seed-string name="username"></seed-string>

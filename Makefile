@@ -5,9 +5,9 @@ publish:
 	poetry version patch
 	read -p "Update the version on src/sigla/__init__.py before continuying... [ENTER]"
 	git add src/sigla/__init__.py pyproject.toml
-	git commit -m "build: bump version before publish"
-	poetry publish --build
+	git commit -m "build: publish - $(poetry version)"
 	git push
+	poetry publish --build
 
 show:
 	poetry show -v
@@ -28,6 +28,6 @@ black:
 	poetry run black . -l 79
 
 mypy:
-	poetry run mypy src
+	poetry run mypy -p src.sigla
 
 check: black flake8 mypy
