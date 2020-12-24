@@ -1,4 +1,4 @@
-__version__ = "0.0.24"
+__version__ = "0.0.26"
 
 from sigla.lib import from_xml
 
