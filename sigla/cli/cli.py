@@ -9,7 +9,7 @@ from sigla import __version__
 from sigla.lib.helpers.files import ensure_dirs, ensure_parent_dir
 from sigla.main import run
 from sigla.lib.Config import Config
-from sigla.sigla_cli.SnapshotCli import SnapshotCli
+from sigla.cli.SnapshotCli import SnapshotCli
 
 
 # logging.basicConfig(

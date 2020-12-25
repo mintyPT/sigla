@@ -4,26 +4,11 @@
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/Node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/template/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/template/engines/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/Nodes/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/Context.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/Context.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla_cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/lib/helpers/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/loaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla_cli/SnapshotCli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla_cli/SnapshotCli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla_cli/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sigla_cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla_cli/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla_cli/SnapshotCli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/SnapshotCli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla_cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla_cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/cli.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +59,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sigla" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/sigla/lib" />
       <recent name="$PROJECT_DIR$/.sigla/definitions" />
       <recent name="$PROJECT_DIR$/.sigla/templates" />
-      <recent name="$PROJECT_DIR$/src/sigla-cli" />
     </key>
   </component>
   <component name="RunManager">
@@ -137,7 +122,7 @@
       <workItem from="1608674654537" duration="6627000" />
       <workItem from="1608766397851" duration="6865000" />
       <workItem from="1608799694063" duration="2441000" />
-      <workItem from="1608832995614" duration="2151000" />
+      <workItem from="1608832995614" duration="2409000" />
     </task>
     <servers />
   </component>
@@ -198,19 +183,19 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="824" y="575" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.2048.1257@0.23.2048.1257" timestamp="1608860538819" />
-    <state x="829" y="408" width="683" height="486" key="find.popup" timestamp="1608860597918">
+    <state x="829" y="408" width="683" height="486" key="find.popup" timestamp="1608860933151">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
-    <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608860597918" />
+    <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608860933151" />
     <state x="1392" y="458" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608803023316" />
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog" timestamp="1608073042387">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
-    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup" timestamp="1608833043806">
+    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup" timestamp="1608861087018">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
-    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608833043806" />
+    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1608861087018" />
     <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608770123057" />
   </component>
 </project>

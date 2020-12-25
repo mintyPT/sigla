@@ -3,8 +3,8 @@ install:
 
 publish:
 	poetry version patch
-	read -p "Update the version on src/sigla/__init__.py before continuying... [ENTER]"
-	git add src/sigla/__init__.py pyproject.toml
+	read -p "Update the version on sigla/__init__.py before continuying... [ENTER]"
+	git add sigla/__init__.py pyproject.toml
 	git commit -m "build: publish - $(poetry version)"
 	git push
 	poetry publish --build
