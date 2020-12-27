@@ -6,6 +6,4 @@ class NodeRoot(Node):
     kind = "root"
 
     def process(self, ctx=None):
-        if ctx is None:
-            ctx = Context()
         return list(map(lambda e: e.process(ctx), self.children))

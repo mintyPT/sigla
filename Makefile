@@ -7,7 +7,7 @@ publish:
 	git add sigla/__init__.py pyproject.toml
 	git commit -m "build: publish - $(poetry version)"
 	git push
-	poetry publish --build
+	poetry publish --build --username minty
 
 show:
 	poetry show -v

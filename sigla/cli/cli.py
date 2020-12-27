@@ -11,7 +11,6 @@ from sigla.main import run
 from sigla.lib.Config import Config
 from sigla.cli.SnapshotCli import SnapshotCli
 
-
 # logging.basicConfig(
 #     level=logging.INFO,
 #     format="[%(levelname)s] %(message)s",
@@ -21,6 +20,8 @@ from sigla.cli.SnapshotCli import SnapshotCli
 #     ],
 # )
 
+config = Config()
+
 
 # @click.option("--debug/--no-debug", default=False)
 # click.echo('Debug mode is %s' % ('on' if debug else 'off'))
@@ -29,19 +30,15 @@ def cli():
     pass
 
 
-config = Config()
-
-
 @cli.command()
 def init():
-    config.save()
-
     ensure_dirs(
         config.sigma_path,
         config.templates_path,
         config.snapshots_path,
         config.definitions_path,
     )
+    config.save()
 
 
 @cli.command()
