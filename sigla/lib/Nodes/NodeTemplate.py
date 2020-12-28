@@ -97,17 +97,23 @@ class NodeTemplate(Node):
             return None
 
         child: NodeTemplate
-        metadata = _.filter_([
-            child.get_metadata(ctx)
-            for child in children
-            if type(child) == NodeTemplate
-        ], lambda x: x is not None)
+        metadata_ = []
+        for child in children:
+            if child.get_metadata:
+                ctx.push_context(child)
+                metadata_.append(child.get_metadata(ctx))
+                ctx.pop_context()
 
+        #
+        metadata = _.filter_(metadata_, lambda x: x is not None)
         if len(metadata) > 0:
             return metadata
 
     def get_self_metadata(self, ctx):
-        fm_raw, __, handler = fm_split(self.get_raw_template())
+        template = self.get_raw_template()
+        if not template:
+            return
+        fm_raw, __, handler = fm_split(template)
         metadata = fm_parse_fm(self.render(fm_raw, ctx), handler) if fm_raw and handler else None
         return metadata
 
@@ -121,10 +127,6 @@ class NodeTemplate(Node):
             return [metadata]
         else:
             return [metadata, children_metadata]
-
-    #
-    # shit
-    #
 
     def ensure_template(self, default_value):
         """ Ensure the file really exists """
@@ -147,22 +149,20 @@ class NodeTemplate(Node):
                 return h.read()
         except FileNotFoundError:
             pass
-        return ''
-
-    def sub_process(self, ctx=None):
-        def wrapped(node: Node, sep="\n"):
-            if type(node) == list:
-                nodes = map(lambda e: e.process(ctx), node)
-                return sep.join(nodes)
-            else:
-                return node.process(ctx)
-
-        return wrapped
 
     def render(self, template, ctx, **kwargs):
 
         if ctx is None:
             ctx = Context()
+
+        def f(e):
+            return e.process(ctx)
+
+        def wrapped(node: Node, sep="\n"):
+            if type(node) == list:
+                nodes = map(f, node)
+                return sep.join(nodes)
+            return f(node)
 
         context = ctx.get_context()
 
@@ -171,7 +171,7 @@ class NodeTemplate(Node):
             **context,
             ctx=context,
             children=self.children,
-            render=self.sub_process(ctx),
+            render=wrapped,
             **kwargs,
         )
 
@@ -183,14 +183,14 @@ class NodeTemplate(Node):
             ctx = Context()
         ctx.push_context(self)
 
+        self.ensure_template(get_default_template_content(ctx.get_context()))
+
         fm_raw, body_raw, handler = fm_split(self.get_raw_template())
 
         metadata = self.get_children_metadata(ctx)
 
         #
-        self.ensure_template(get_default_template_content(ctx.get_context()))
         res = self.render(body_raw, ctx, meta=metadata)
-
         ctx.pop_context()
 
         return res

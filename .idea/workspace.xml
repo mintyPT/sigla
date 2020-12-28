@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.sigla/definitions/sandbox.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/block.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/apifier/block.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/root.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/apifier/root.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,11 +47,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.sigla/definitions" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.sigla/definitions" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -123,7 +119,7 @@
       <workItem from="1608674654537" duration="6627000" />
       <workItem from="1608766397851" duration="6865000" />
       <workItem from="1608799694063" duration="2441000" />
-      <workItem from="1608832995614" duration="16205000" />
+      <workItem from="1608832995614" duration="17611000" />
     </task>
     <servers />
   </component>
@@ -194,10 +190,10 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
-    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup" timestamp="1609108935795">
+    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup" timestamp="1609112769263">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
-    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609108935795" />
+    <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609112769263" />
     <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608770123057" />
   </component>
   <component name="XDebuggerManager">
