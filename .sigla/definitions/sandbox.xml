@@ -3,6 +3,7 @@
         <sandbox-root name="cenas">
             <sandbox-in name="mauro"/>
             <sandbox-in name="igor"/>
+            <sandbox-in2 name="igor"/>
         </sandbox-root>
         <!--        <apifier-root>-->
         <!--            <apifier-block name="auth">-->

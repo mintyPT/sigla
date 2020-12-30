@@ -1,13 +1,13 @@
 import pretty_errors  # noqa F401
-from os.path import join
-from pathlib import Path
-
-import click
 
 # import logging
-
+import click
+import types
+from os.path import join
+from pathlib import Path
+import importlib.machinery
 from sigla import __version__
-from sigla.lib.helpers.files import ensure_dirs, ensure_parent_dir
+from sigla.lib.helpers.files import ensure_dirs, ensure_parent_dir, ensure_file
 from sigla.main import run
 from sigla.lib.Config import Config
 from sigla.cli.SnapshotCli import SnapshotCli
@@ -38,6 +38,22 @@ def init():
         config.templates_path,
         config.snapshots_path,
         config.definitions_path,
+    )
+    ensure_file(
+        config.filters_path,
+        """\
+\"\"\"
+Export filters to use on the templates using the `FILTERS` variable
+\"\"\"
+import json
+
+
+def dump(var):
+    return json.dumps(var, indent=4)
+
+
+FILTERS = {"dump": dump}
+""",
     )
     config.save()
 
@@ -71,19 +87,18 @@ def run_definition(name):
     if not p.exists():
         raise Exception("This definition does not exists")
 
-    print()
-
-    import types
-    import importlib.machinery
-
     filters = {}
-    loader = importlib.machinery.SourceFileLoader(
-        "filters", config.filters_path
-    )
-    filters_module = types.ModuleType(loader.name)
-    loader.exec_module(filters_module)
-    if "FILTERS" in dir(filters_module):
-        filters = filters_module.FILTERS
+
+    try:
+        loader = importlib.machinery.SourceFileLoader(
+            "filters", config.filters_path
+        )
+        filters_module = types.ModuleType(loader.name)
+        loader.exec_module(filters_module)
+        if "FILTERS" in dir(filters_module):
+            filters = filters_module.FILTERS
+    except FileNotFoundError:
+        pass
 
     run(file=p, filters=filters)
 

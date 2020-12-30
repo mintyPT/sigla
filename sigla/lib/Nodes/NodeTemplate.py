@@ -11,7 +11,7 @@ from yaml.parser import ParserError
 from sigla.lib.Nodes.Node import Node
 from sigla.lib.Nodes.template.engines.njk import njk
 from sigla.lib.helpers.Context import Context
-from sigla.lib.helpers.files import ensure_parent_dir
+from sigla.lib.helpers.files import ensure_parent_dir, ensure_file
 
 
 #
@@ -68,15 +68,19 @@ There should be an error on the following yaml (frontmatter)
 def get_default_template_content(context):
     def default_njk_template(dumped_context):
         return f"""
-    Available vars: {dumped_context}
-    
-    Handle children:
-    
-    {{{{ render(children) }}}}
-    
-    {{% for child in children %}}
-        {{{{ render(child) }}}}
-    {{% endfor %}}
+---
+some_var: some_value
+---
+
+Available vars: {dumped_context}
+
+Handle children:
+
+{{{{ render(children) }}}}
+
+{{% for child in children %}}
+    {{{{ render(child) }}}}
+{{% endfor %}}
     
     """
 
@@ -159,7 +163,7 @@ class NodeTemplate(Node):
         else:
             return [metadata, children_metadata]
 
-    def ensure_template(self, default_value):
+    def ensure_template(self, content):
         """ Ensure the file really exists """
 
         if self.get_raw_template() is not None:
@@ -168,11 +172,9 @@ class NodeTemplate(Node):
         if not self.create_missing_templates:
             return
 
-        ensure_parent_dir(self.template_path)
-        if self.template_path.exists():
-            return
-        with open(self.template_path, "w") as h:
-            h.write(default_value)
+        filepath = self.template_path
+        ensure_parent_dir(filepath)
+        ensure_file(filepath, content)
 
     def get_raw_template(self):
         try:

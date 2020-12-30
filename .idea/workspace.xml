@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.sigla/filters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/sandbox/in.njk" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/sandbox/in.njk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/definitions/sandbox.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/definitions/sandbox.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/filters.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeRoot.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeRoot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/helpers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +123,7 @@
       <workItem from="1608674654537" duration="6627000" />
       <workItem from="1608766397851" duration="6865000" />
       <workItem from="1608799694063" duration="2441000" />
-      <workItem from="1608832995614" duration="23574000" />
+      <workItem from="1608832995614" duration="24360000" />
     </task>
     <servers />
   </component>
@@ -160,10 +155,10 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608589396872" />
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1608768417281">
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1609292548965">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608768417281" />
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292548965" />
     <state x="1221" y="413" key="FileChooserDialogImpl" timestamp="1608054352360">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
@@ -190,19 +185,20 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="824" y="575" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.2048.1257@0.23.2048.1257" timestamp="1609031739962" />
-    <state x="1392" y="458" width="1148" height="550" key="find.popup" timestamp="1609292091199">
+    <state x="1392" y="458" width="1148" height="550" key="find.popup" timestamp="1609292870115">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609118057938" />
-    <state x="1392" y="458" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292091199" />
-    <state x="933" y="289" key="refactoring.ChangeSignatureDialog" timestamp="1608073042387">
-      <screen x="0" y="23" width="2048" height="1257" />
+    <state x="1392" y="458" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292870115" />
+    <state x="1567" y="323" key="refactoring.ChangeSignatureDialog" timestamp="1609292495881">
+      <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609291294493">
+    <state x="1567" y="323" key="refactoring.ChangeSignatureDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292495881" />
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609292706908">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609115084421" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609291294493" />
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292706908" />
   </component>
 </project>
