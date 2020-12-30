@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sigla"
-version = "0.0.35"
+version = "0.0.36"
 description = ""
 authors = ["mg santos <mauro.goncalo@gmail.com>"]
 
