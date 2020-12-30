@@ -9,6 +9,9 @@ publish:
 	git push
 	poetry publish --build --username minty
 
+upload:
+	poetry publish --username minty
+
 show:
 	poetry show -v
 

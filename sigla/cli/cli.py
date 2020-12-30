@@ -1,3 +1,4 @@
+import pretty_errors
 from os.path import join
 from pathlib import Path
 

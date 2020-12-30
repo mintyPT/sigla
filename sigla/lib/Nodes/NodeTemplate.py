@@ -112,9 +112,9 @@ class NodeTemplate(Node):
     def get_self_metadata(self, ctx):
         template = self.get_raw_template()
         if not template:
-            return
+            return {}
         fm_raw, __, handler = fm_split(template)
-        metadata = fm_parse_fm(self.render(fm_raw, ctx), handler) if fm_raw and handler else None
+        metadata = fm_parse_fm(self.render(fm_raw, ctx), handler) if fm_raw and handler else {}
         return metadata
 
     def get_metadata(self, ctx):
@@ -155,15 +155,6 @@ class NodeTemplate(Node):
         if ctx is None:
             ctx = Context()
 
-        def f(e):
-            return e.process(ctx)
-
-        def wrapped(node: Node, sep="\n"):
-            if type(node) == list:
-                nodes = map(f, node)
-                return sep.join(nodes)
-            return f(node)
-
         context = ctx.get_context()
 
         result = njk(
@@ -171,7 +162,6 @@ class NodeTemplate(Node):
             **context,
             ctx=context,
             children=self.children,
-            render=wrapped,
             **kwargs,
         )
 
@@ -188,9 +178,25 @@ class NodeTemplate(Node):
         fm_raw, body_raw, handler = fm_split(self.get_raw_template())
 
         metadata = self.get_children_metadata(ctx)
+        self_metadata = self.get_self_metadata(ctx)
+
+        def f(e):
+            return e.process(ctx)
+
+        def wrapped(node: Node, sep="\n"):
+            if type(node) == list:
+                nodes = map(f, node)
+                return sep.join(nodes)
+            return f(node)
 
         #
-        res = self.render(body_raw, ctx, meta=metadata)
+        res = self.render(
+            body_raw,
+            ctx,
+            meta=metadata,
+            render=wrapped,
+            **self_metadata
+        )
         ctx.pop_context()
 
         return res
