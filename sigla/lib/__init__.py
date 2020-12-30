@@ -6,13 +6,16 @@ from sigla.lib.Nodes.NodeRoot import NodeRoot
 from sigla.lib.Nodes.NodeTemplate import NodeTemplate
 
 
-def from_xml(node: ET.Element):
+def from_xml(node: ET.Element, filters=None):
+    if filters is None:
+        filters = {}
+
     attributes = Node.attributes_from_node(node)
     meta = Node.meta_from_node(node)
 
     children = []
     for child in node:
-        children.append(from_xml(child))
+        children.append(from_xml(child, filters=filters))
 
     if node.tag == "file":
         return NodeFile(children=children, attributes=attributes, meta=meta)
@@ -20,5 +23,8 @@ def from_xml(node: ET.Element):
         return NodeRoot(children=children, attributes=attributes, meta=meta)
     else:
         return NodeTemplate(
-            children=children, attributes=attributes, meta=meta
+            children=children,
+            attributes=attributes,
+            meta=meta,
+            filters=filters,
         )

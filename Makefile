@@ -3,9 +3,11 @@ install:
 
 publish:
 	poetry version patch
+	poetry version | cut -d" " -f2
+	version=$(shell poetry version | cut -d" " -f2)
 	read -p "Update the version on sigla/__init__.py before continuying... [ENTER]"
 	git add sigla/__init__.py pyproject.toml
-	git commit -m "build: publish - $(poetry version)"
+	git commit -m "build & publish: $(version)"
 	git push
 	poetry publish --build --username minty
 

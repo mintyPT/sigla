@@ -42,6 +42,9 @@ class Config(configparser.ConfigParser):
         self["sigla"]["definitions"] = self["sigla"].get(
             "definitions", ".sigla/definitions"
         )
+        self["sigla"]["filters"] = self["sigla"].get(
+            "filters", ".sigla/filters.py"
+        )
 
         #
         # templates
@@ -74,6 +77,10 @@ class Config(configparser.ConfigParser):
     @property
     def snapshots_path(self):
         return join(self.base_path, self["sigla"]["snapshots"])
+
+    @property
+    def filters_path(self):
+        return join(self.base_path, self["sigla"]["filters"])
 
     def save(self):
         with open(self.config_path, "w") as configfile:

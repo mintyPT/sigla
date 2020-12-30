@@ -1,7 +1,11 @@
 ---
 require: {{name}}-in
-age: 22
+ages: {% for n in range(5) %}
+    - {{ n }}
+{%- endfor %}
 ---
 
 "{{name}}-in"
-age: {{ age }}
+
+
+{{ ages | dump }}

@@ -1,5 +1,4 @@
-from pprint import pprint
-from typing import Optional
+from typing import Optional, List
 
 import frontmatter
 import json
@@ -7,8 +6,8 @@ import os
 from pathlib import Path
 import pydash as _
 from frontmatter import u
+from yaml.parser import ParserError
 
-from sigla.lib import Node
 from sigla.lib.Nodes.Node import Node
 from sigla.lib.Nodes.template.engines.njk import njk
 from sigla.lib.helpers.Context import Context
@@ -38,7 +37,23 @@ def fm_parse_fm(fm, handler, metadata=None):
     if metadata is None:
         metadata = {}
 
-    fm = handler.load(fm)
+    try:
+        fm = handler.load(fm)
+    except ParserError as e:
+        print("")
+        print(
+            f"""
+===
+There should be an error on the following yaml (frontmatter)
+
+{fm}
+
+===
+
+"""
+        )
+        raise e
+
     if isinstance(fm, dict):
         metadata.update(fm)
 
@@ -53,7 +68,6 @@ def fm_parse_fm(fm, handler, metadata=None):
 def get_default_template_content(context):
     def default_njk_template(dumped_context):
         return f"""
-    
     Available vars: {dumped_context}
     
     Handle children:
@@ -75,6 +89,19 @@ class NodeTemplate(Node):
     kind = "template"
     templates_directory = "./.sigla/templates"
     create_missing_templates = True
+    filters = {}
+
+    def __init__(
+        self,
+        children: List["Node"] = None,
+        attributes=None,
+        meta=None,
+        filters=None,
+    ):
+        super().__init__(children, attributes, meta)
+        if filters is None:
+            filters = {}
+        self.filters = filters
 
     @property
     def template_name(self):
@@ -114,7 +141,11 @@ class NodeTemplate(Node):
         if not template:
             return {}
         fm_raw, __, handler = fm_split(template)
-        metadata = fm_parse_fm(self.render(fm_raw, ctx), handler) if fm_raw and handler else {}
+        metadata = (
+            fm_parse_fm(self.render(fm_raw, ctx), handler)
+            if fm_raw and handler
+            else {}
+        )
         return metadata
 
     def get_metadata(self, ctx):
@@ -145,7 +176,7 @@ class NodeTemplate(Node):
 
     def get_raw_template(self):
         try:
-            with open(self.template_path, 'r') as h:
+            with open(self.template_path, "r") as h:
                 return h.read()
         except FileNotFoundError:
             pass
@@ -160,6 +191,7 @@ class NodeTemplate(Node):
         result = njk(
             template,
             **context,
+            filters=self.filters,
             ctx=context,
             children=self.children,
             **kwargs,
@@ -191,11 +223,7 @@ class NodeTemplate(Node):
 
         #
         res = self.render(
-            body_raw,
-            ctx,
-            meta=metadata,
-            render=wrapped,
-            **self_metadata
+            body_raw, ctx, meta=metadata, render=wrapped, **self_metadata
         )
         ctx.pop_context()
 

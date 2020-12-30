@@ -24,7 +24,9 @@ def without_filter(obj, *args):
     return result
 
 
-def njk(template: str, **kwargs):
+def njk(template: str, filters=None, **kwargs):
+    if filters is None:
+        filters = {}
     env = Environment()
     env.filters["without"] = without_filter
     env.filters["as_kwargs"] = as_kwargs_filter
@@ -41,5 +43,8 @@ def njk(template: str, **kwargs):
     env.filters["map"] = _.map_
     env.filters["filter"] = _.filter_
     env.filters["uniq"] = _.uniq
+
+    for k, v in filters.items():
+        env.filters[k] = v
 
     return env.from_string(template).render(**kwargs)

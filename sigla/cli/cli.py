@@ -1,4 +1,4 @@
-import pretty_errors
+import pretty_errors  # noqa F401
 from os.path import join
 from pathlib import Path
 
@@ -70,14 +70,29 @@ def run_definition(name):
     p = Path(join(config.definitions_path, name + ".xml"))
     if not p.exists():
         raise Exception("This definition does not exists")
-    run(file=p)
+
+    print()
+
+    import types
+    import importlib.machinery
+
+    filters = {}
+    loader = importlib.machinery.SourceFileLoader(
+        "filters", config.filters_path
+    )
+    filters_module = types.ModuleType(loader.name)
+    loader.exec_module(filters_module)
+    if "FILTERS" in dir(filters_module):
+        filters = filters_module.FILTERS
+
+    run(file=p, filters=filters)
 
 
-@cli.command()  # @cli, not @click!
-@click.argument("files", nargs=-1, type=click.Path(exists=True))
-def render(files):
-    for file in files:
-        run(file=file)
+# @cli.command()  # @cli, not @click!
+# @click.argument("files", nargs=-1, type=click.Path(exists=True))
+# def render(files):
+#     for file in files:
+#         run(file=file)
 
 
 @cli.command()
