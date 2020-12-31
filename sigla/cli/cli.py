@@ -1,8 +1,8 @@
 import pretty_errors  # noqa F401
 
-# import logging
 import click
 import types
+import textwrap
 from os.path import join
 from pathlib import Path
 import importlib.machinery
@@ -12,56 +12,61 @@ from sigla.main import run
 from sigla.lib.Config import Config
 from sigla.cli.SnapshotCli import SnapshotCli
 
-# logging.basicConfig(
-#     level=logging.INFO,
-#     format="[%(levelname)s] %(message)s",
-#     handlers=[
-#         logging.FileHandler("debug.log"),
-#         # logging.StreamHandler()
-#     ],
-# )
 
-config = Config()
+class SiglaConfig(Config):
+    config: Path = Path.cwd().joinpath(".sigla/config.json")
+    defaults = {
+        "path_templates": ".sigla/templates",
+        "path_snapshots": ".sigla/snapshots",
+        "path_definitions": ".sigla/definitions",
+        "path_filters": ".sigla/filters.py",
+    }
+
+
+pass_config = click.make_pass_decorator(SiglaConfig, ensure=True)
 
 
 # @click.option("--debug/--no-debug", default=False)
 # click.echo('Debug mode is %s' % ('on' if debug else 'off'))
 @click.group()
-def cli():
-    pass
+@pass_config
+def cli(config):
+    config.load()
 
 
 @cli.command()
-def init():
+@pass_config
+def init(config):
     ensure_dirs(
-        config.sigma_path,
-        config.templates_path,
-        config.snapshots_path,
-        config.definitions_path,
+        config["path_templates"],
+        config["path_snapshots"],
+        config["path_definitions"],
     )
-    ensure_file(
-        config.filters_path,
-        """\
-\"\"\"
-Export filters to use on the templates using the `FILTERS` variable
-\"\"\"
-import json
+    DEFAULT_FILTERS_FILE_CONTENT = textwrap.dedent(
+        """
+        \"\"\"
+        Export filters to use on the templates using the `FILTERS` variable
+        \"\"\"
+        import json
 
 
-def dump(var):
-    return json.dumps(var, indent=4)
+        def dump(var):
+            return json.dumps(var, indent=4)
 
 
-FILTERS = {"dump": dump}
-""",
+        FILTERS = {"dump": dump}
+        """
     )
+
+    ensure_file(config["path_filters"], DEFAULT_FILTERS_FILE_CONTENT)
     config.save()
 
 
 @cli.command()
+@pass_config
 @click.argument("name", type=click.types.STRING)
-def new_definition(name):
-    p = Path(join(config.definitions_path, name + ".xml"))
+def new_definition(config, name):
+    p = Path(join(config["path_definitions"], name + ".xml"))
     ensure_parent_dir(p)
     name = name.replace("/", "-")
 
@@ -81,9 +86,10 @@ def new_definition(name):
 
 
 @cli.command()
+@pass_config
 @click.argument("name", type=click.types.STRING)
-def run_definition(name):
-    p = Path(join(config.definitions_path, name + ".xml"))
+def run_definition(config, name):
+    p = Path(join(config["path_definitions"], name + ".xml"))
     if not p.exists():
         raise Exception("This definition does not exists")
 
@@ -91,7 +97,7 @@ def run_definition(name):
 
     try:
         loader = importlib.machinery.SourceFileLoader(
-            "filters", config.filters_path
+            "filters", config["path_filters"]
         )
         filters_module = types.ModuleType(loader.name)
         loader.exec_module(filters_module)

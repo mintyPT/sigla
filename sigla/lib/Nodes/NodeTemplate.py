@@ -1,4 +1,5 @@
-from typing import Optional, List
+import textwrap
+from typing import Optional, List, Dict, Callable, Any
 
 import frontmatter
 import json
@@ -67,22 +68,24 @@ There should be an error on the following yaml (frontmatter)
 
 def get_default_template_content(context):
     def default_njk_template(dumped_context):
-        return f"""
----
-some_var: some_value
----
+        return textwrap.dedent(
+            f"""
+            ---
+            some_var: some_value
+            ---
 
-Available vars: {dumped_context}
+            Available vars: {dumped_context}
 
-Handle children:
+            Handle children:
 
-{{{{ render(children) }}}}
+            {{{{ render(children) }}}}
 
-{{% for child in children %}}
-    {{{{ render(child) }}}}
-{{% endfor %}}
-    
-    """
+            {{% for child in children %}}
+                {{{{ render(child) }}}}
+            {{% endfor %}}
+
+            """
+        )
 
     json_context = json.dumps(list(context.keys()) + ["children"])
     return default_njk_template(json_context)
@@ -93,7 +96,7 @@ class NodeTemplate(Node):
     kind = "template"
     templates_directory = "./.sigla/templates"
     create_missing_templates = True
-    filters = {}
+    filters: Dict[str, Callable[[Any], Any]] = {}
 
     def __init__(
         self,
@@ -190,13 +193,16 @@ class NodeTemplate(Node):
 
         context = ctx.get_context()
 
+        data = {}
+        data.update(context)
+        data.update(kwargs)
+
         result = njk(
             template,
-            **context,
+            **data,
             filters=self.filters,
             ctx=context,
             children=self.children,
-            **kwargs,
         )
 
         return result

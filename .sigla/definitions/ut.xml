@@ -1,0 +1,3 @@
+<ut kgdir="kg">
+  <test cmd="sigla run-definition apifier" out="output/apifier.py" />
+</ut>

@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.sigla/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.sigla/definitions/ut.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.sigla/filters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/definitions/sandbox.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/definitions/sandbox.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/filters.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/config.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/helpers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +58,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.sigla/definitions" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -60,10 +66,10 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/sigla" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/sigla/lib" />
       <recent name="$PROJECT_DIR$/.sigla/definitions" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/sigla" />
+      <recent name="$PROJECT_DIR$/src/sigla/lib" />
       <recent name="$PROJECT_DIR$/.sigla/templates" />
     </key>
   </component>
@@ -123,7 +129,7 @@
       <workItem from="1608674654537" duration="6627000" />
       <workItem from="1608766397851" duration="6865000" />
       <workItem from="1608799694063" duration="2441000" />
-      <workItem from="1608832995614" duration="24360000" />
+      <workItem from="1608832995614" duration="28376000" />
     </task>
     <servers />
   </component>
@@ -139,10 +145,10 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="890" y="461" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2048.1257@0.23.2048.1257" timestamp="1608072843468" />
-    <state x="2070" y="454" key="#com.intellij.ide.util.MemberChooser" timestamp="1609291297935">
+    <state x="2070" y="454" key="#com.intellij.ide.util.MemberChooser" timestamp="1609374459667">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
-    <state x="2070" y="454" key="#com.intellij.ide.util.MemberChooser/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609291297935" />
+    <state x="2070" y="454" key="#com.intellij.ide.util.MemberChooser/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609374459667" />
     <state x="2019" y="179" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1608594390150">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
@@ -163,11 +169,11 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="1221" y="413" key="FileChooserDialogImpl/0.23.2048.1257@0.23.2048.1257" timestamp="1608054352360" />
-    <state x="1571" y="324" key="SettingsEditor" timestamp="1608502121811">
+    <state x="1571" y="324" key="SettingsEditor" timestamp="1609377101596">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="935" y="290" key="SettingsEditor/0.23.2048.1257@0.23.2048.1257" timestamp="1608054379124" />
-    <state x="1571" y="324" key="SettingsEditor/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608502121811" />
+    <state x="1571" y="324" key="SettingsEditor/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609377101596" />
     <state x="903" y="420" width="504" height="465" key="StructurePopup" timestamp="1609108477229">
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
@@ -185,20 +191,20 @@
       <screen x="0" y="23" width="2048" height="1257" />
     </state>
     <state x="824" y="575" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.2048.1257@0.23.2048.1257" timestamp="1609031739962" />
-    <state x="1392" y="458" width="1148" height="550" key="find.popup" timestamp="1609292870115">
+    <state x="1392" y="458" width="1148" height="550" key="find.popup" timestamp="1609378135271">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="829" y="408" width="683" height="486" key="find.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609118057938" />
-    <state x="1392" y="458" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292870115" />
+    <state x="1392" y="458" width="1148" height="550" key="find.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609378135271" />
     <state x="1567" y="323" key="refactoring.ChangeSignatureDialog" timestamp="1609292495881">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
     <state x="1567" y="323" key="refactoring.ChangeSignatureDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292495881" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609292706908">
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609378057484">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609115084421" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292706908" />
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609378057484" />
   </component>
 </project>

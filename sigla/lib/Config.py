@@ -1,87 +1,62 @@
-import configparser
-from os.path import join
-
-import os
-from typing import Optional
-
-BASE_PATH = os.getcwd()
+import json
+import textwrap
+from pathlib import Path
 
 
-class Config(configparser.ConfigParser):
-    base_path: Optional[str] = None
-    sigma_path: Optional[str] = None
-    config_filename: Optional[str] = None
+class Config(dict):
+    """
+    The helps keep local configuration for simple stuff like command line
+    tools.
 
-    def __init__(
-        self,
-        sigma_path=".sigla",
-        config_filename="config.ini",
-        *args,
-        **kwargs
-    ):
+    To use, extend this class and add some defaults and the path to store the
+    config.
+
+    class SomeConfig(Config):
+        config: Path = Path.cwd().joinpath('config.json')
+        defaults = {
+            "name": "James"
+        }
+
+    Then to use it
+
+    > config = SiglaConfig()
+    > config.load()
+    > config['name'] = 'Bond'
+    > config.save()
+
+    """
+
+    defaults = {}
+    config: Path = None
+
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-        self.base_path = BASE_PATH
-        self.sigma_path = join(self.base_path, sigma_path)
-        self.config_filename = config_filename
+        if self._config is None:
+            warning_message = textwrap.dedent(
+                """
+                You need to override Config.config or Config.get_config
+                with something like `Path.cwd().joinpath('config.json')`
+            """
+            )
+            raise NotImplementedError(warning_message)
 
-        self.read(self.config_path)
-
-        #
-        # sigla
-        #
-        if not self.has_section("sigla"):
-            self["sigla"] = {}
-
-        self["sigla"]["templates"] = self["sigla"].get(
-            "templates", ".sigla/templates"
-        )
-        self["sigla"]["snapshots"] = self["sigla"].get(
-            "snapshots", ".sigla/snapshots"
-        )
-        self["sigla"]["definitions"] = self["sigla"].get(
-            "definitions", ".sigla/definitions"
-        )
-        self["sigla"]["filters"] = self["sigla"].get(
-            "filters", ".sigla/filters.py"
-        )
-
-        #
-        # templates
-        #
-        if not self.has_section("templates"):
-            self["templates"] = {}
-
-        self["templates"]["create_missing_templates"] = str(
-            self.create_missing_templates
-        )
+    def get_config(self) -> object:
+        return None
 
     @property
-    def create_missing_templates(self):
-        return self["templates"].getboolean(
-            "create_missing_templates", fallback=True
-        )
+    def _config(self):
+        return self.config or self.get_config()
 
-    @property
-    def config_path(self):
-        return os.path.join(self.sigma_path, self.config_filename)
-
-    @property
-    def templates_path(self):
-        return join(self.base_path, self["sigla"]["templates"])
-
-    @property
-    def definitions_path(self):
-        return join(self.base_path, self["sigla"]["definitions"])
-
-    @property
-    def snapshots_path(self):
-        return join(self.base_path, self["sigla"]["snapshots"])
-
-    @property
-    def filters_path(self):
-        return join(self.base_path, self["sigla"]["filters"])
+    def load(self):
+        self.update(self.defaults)
+        try:
+            raw = self.config.read_text()
+            if raw:
+                self.update(json.loads(raw))
+        except FileNotFoundError:
+            pass
 
     def save(self):
-        with open(self.config_path, "w") as configfile:
-            self.write(configfile)
+        self.config.parent.mkdir(parents=True, exist_ok=True)
+        self.config.write_text(json.dumps(self, indent=4))

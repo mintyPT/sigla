@@ -33,6 +33,6 @@ black:
 	poetry run black . -l 79
 
 mypy:
-	poetry run mypy -m sigla -m sigla_cli
+	poetry run mypy -m sigla
 
 check: black flake8 mypy
