@@ -24,7 +24,7 @@ def without_filter(obj, *args):
     return result
 
 
-def njk(template: str, filters=None, **kwargs):
+def jinja(template: str, filters=None, **kwargs):
     if filters is None:
         filters = {}
     env = Environment()

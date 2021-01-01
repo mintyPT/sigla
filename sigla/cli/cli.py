@@ -1,13 +1,10 @@
-import pretty_errors  # noqa F401
-
 import click
-import types
 import textwrap
 from os.path import join
 from pathlib import Path
-import importlib.machinery
 from sigla import __version__
-from sigla.lib.helpers.files import ensure_dirs, ensure_parent_dir, ensure_file
+from sigla.cli.utils import load_filters_from
+from sigla.lib.helpers.files import ensure_dirs, ensure_file
 from sigla.main import run
 from sigla.lib.Config import Config
 from sigla.cli.SnapshotCli import SnapshotCli
@@ -67,46 +64,43 @@ def init(config):
 @click.argument("name", type=click.types.STRING)
 def new_definition(config, name):
     p = Path(join(config["path_definitions"], name + ".xml"))
-    ensure_parent_dir(p)
-    name = name.replace("/", "-")
+    p.parent.mkdir(parents=True, exist_ok=True)
 
     if p.exists():
         raise Exception("This definition already exists")
 
+    name = name.replace("/", "-")
+
     # if file exists throw error
     with open(p, "w") as h:
-        h.write(
-            f"""<root>
-    <file name="output/{name}[.ext]">
-        <{name}>
-        </{name}>
-    </file>
-</root>"""
-        )
+        h.write(textwrap.dedent(
+            f"""\
+                <root>
+                    <file name="output/{name}[.ext]">
+                        <{name}>
+                            [...]
+                        </{name}>
+                    </file>
+                </root>
+            """
+        ))
 
 
 @cli.command()
 @pass_config
-@click.argument("name", type=click.types.STRING)
-def run_definition(config, name):
-    p = Path(join(config["path_definitions"], name + ".xml"))
-    if not p.exists():
-        raise Exception("This definition does not exists")
+@click.argument("references", nargs=-1, type=click.types.STRING)
+def run_definition(config, references):
+    filters = load_filters_from(config["path_filters"])
 
-    filters = {}
-
-    try:
-        loader = importlib.machinery.SourceFileLoader(
-            "filters", config["path_filters"]
-        )
-        filters_module = types.ModuleType(loader.name)
-        loader.exec_module(filters_module)
-        if "FILTERS" in dir(filters_module):
-            filters = filters_module.FILTERS
-    except FileNotFoundError:
-        pass
-
-    run(file=p, filters=filters)
+    for reference in references:
+        glob = Path(config["path_definitions"]).glob(f"{reference}.xml")
+        for p in glob:
+            if not p.exists():
+                raise Exception("This definition does not exists")
+            if p.is_dir():
+                continue
+            run(file=p, filters=filters)
+        return
 
 
 # @cli.command()  # @cli, not @click!

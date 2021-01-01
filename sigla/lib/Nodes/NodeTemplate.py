@@ -10,7 +10,7 @@ from frontmatter import u
 from yaml.parser import ParserError
 
 from sigla.lib.Nodes.Node import Node
-from sigla.lib.Nodes.template.engines.njk import njk
+from sigla.lib.Nodes.template.engines.jinja import jinja
 from sigla.lib.helpers.Context import Context
 from sigla.lib.helpers.files import ensure_parent_dir, ensure_file
 
@@ -67,7 +67,7 @@ There should be an error on the following yaml (frontmatter)
 
 
 def get_default_template_content(context):
-    def default_njk_template(dumped_context):
+    def default_jinja_template(dumped_context):
         return textwrap.dedent(
             f"""
             ---
@@ -88,7 +88,7 @@ def get_default_template_content(context):
         )
 
     json_context = json.dumps(list(context.keys()) + ["children"])
-    return default_njk_template(json_context)
+    return default_jinja_template(json_context)
 
 
 class NodeTemplate(Node):
@@ -114,7 +114,7 @@ class NodeTemplate(Node):
     def template_name(self):
         name = self.get_template_name()
         name = name.replace("-", "/")
-        name = f"{name}.njk"
+        name = f"{name}.jinja2"
         return name
 
     @property
@@ -197,7 +197,7 @@ class NodeTemplate(Node):
         data.update(context)
         data.update(kwargs)
 
-        result = njk(
+        result = jinja(
             template,
             **data,
             filters=self.filters,

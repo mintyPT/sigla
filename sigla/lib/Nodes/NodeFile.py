@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from sigla.lib.Nodes.Node import Node
 from sigla.lib.helpers.files import ensure_parent_dir
@@ -23,9 +24,6 @@ class NodeFile(Node):
 
         ctx.pop_context()
 
-        path = os.path.join(os.getcwd(), self.name)
-
-        ensure_parent_dir(path)
-
-        with open(path, "w") as h:
-            h.write(text)
+        filepath = Path.cwd().joinpath(self.name)
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        filepath.write_text(text)
