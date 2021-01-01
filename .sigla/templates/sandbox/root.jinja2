@@ -1,3 +1,6 @@
+{% extends "sandbox/sandbox.jinja2" %}
+
+{% block body %}
 {{ meta | flatten | map_get('require') }}
 
 root: {{ name }}
@@ -5,4 +8,6 @@ root: {{ name }}
 {% for child in children %}
     {{ render(child) }}
 {% endfor %}
+{% endblock %}
+
 

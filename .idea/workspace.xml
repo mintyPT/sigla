@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sigla/cli/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/mg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/mg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.sigla/templates/sandbox/sandbox.jinja2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/block.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/call.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/crud.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/apifier/root.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/sandbox/in.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/sandbox/in2.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/sandbox/root.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/seed/seed.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/seed/seeds.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/column.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/edit.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/edit_form.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/int.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/row.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/string.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.sigla/templates/t/table_page.njk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/cli/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/njk.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/jinja.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sigla/templates/sandbox/root.jinja2" beforeDir="false" afterPath="$PROJECT_DIR$/.sigla/templates/sandbox/root.jinja2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/jinja.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/jinja.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +120,7 @@
       <workItem from="1608674654537" duration="6627000" />
       <workItem from="1608766397851" duration="6865000" />
       <workItem from="1608799694063" duration="2441000" />
-      <workItem from="1608832995614" duration="31227000" />
+      <workItem from="1608832995614" duration="31765000" />
     </task>
     <servers />
   </component>
@@ -212,10 +193,10 @@
     </state>
     <state x="933" y="289" key="refactoring.ChangeSignatureDialog/0.23.2048.1257@0.23.2048.1257" timestamp="1608073042387" />
     <state x="1567" y="323" key="refactoring.ChangeSignatureDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609292495881" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609378057484">
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1609475310483">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="1001" y="311" width="670" height="600" key="search.everywhere.popup/0.23.2048.1257@0.23.2048.1257" timestamp="1609115084421" />
-    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609378057484" />
+    <state x="1681" y="348" width="670" height="676" key="search.everywhere.popup/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1609475310483" />
   </component>
 </project>
