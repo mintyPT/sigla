@@ -100,7 +100,6 @@ def run_definition(config, references):
             if p.is_dir():
                 continue
             run(file=p, filters=filters)
-        return
 
 
 # @cli.command()  # @cli, not @click!

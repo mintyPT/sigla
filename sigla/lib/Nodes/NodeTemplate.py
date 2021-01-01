@@ -1,64 +1,16 @@
 import textwrap
 from typing import Optional, List, Dict, Callable, Any
 
-import frontmatter
 import json
 import os
 from pathlib import Path
 import pydash as _
-from frontmatter import u
-from yaml.parser import ParserError
 
 from sigla.lib.Nodes.Node import Node
 from sigla.lib.Nodes.template.engines.jinja import jinja
+from sigla.lib.Nodes.template.utils import fm_split, fm_parse_fm
 from sigla.lib.helpers.Context import Context
 from sigla.lib.helpers.files import ensure_parent_dir, ensure_file
-
-
-#
-# frontmatter utils
-#
-def fm_split(text, encoding="utf-8", handler=None):
-    text = u(text, encoding).strip()
-
-    # this will only run if a handler hasn't been set higher up
-    handler = handler or frontmatter.detect_format(text, frontmatter.handlers)
-    if handler is None:
-        return None, text, None
-
-    try:
-        fm, content = handler.split(text)
-    except ValueError:
-        return None, text, handler
-
-    return fm, content, handler
-
-
-def fm_parse_fm(fm, handler, metadata=None):
-    if metadata is None:
-        metadata = {}
-
-    try:
-        fm = handler.load(fm)
-    except ParserError as e:
-        print("")
-        print(
-            f"""
-===
-There should be an error on the following yaml (frontmatter)
-
-{fm}
-
-===
-
-"""
-        )
-        raise e
-
-    if isinstance(fm, dict):
-        metadata.update(fm)
-
-    return metadata
 
 
 #
@@ -91,6 +43,14 @@ def get_default_template_content(context):
     return default_jinja_template(json_context)
 
 
+class NodeTemplateRenderer:
+    pass
+
+
+class NodeTemplateJinjaRender(NodeTemplateRenderer):
+    pass
+
+
 class NodeTemplate(Node):
     template: Optional[str] = None
     kind = "template"
@@ -99,11 +59,11 @@ class NodeTemplate(Node):
     filters: Dict[str, Callable[[Any], Any]] = {}
 
     def __init__(
-        self,
-        children: List["Node"] = None,
-        attributes=None,
-        meta=None,
-        filters=None,
+            self,
+            children: List["Node"] = None,
+            attributes=None,
+            meta=None,
+            filters=None,
     ):
         super().__init__(children, attributes, meta)
         if filters is None:
@@ -112,7 +72,7 @@ class NodeTemplate(Node):
 
     @property
     def template_name(self):
-        name = self.get_template_name()
+        name = self.get_name()
         name = name.replace("-", "/")
         name = f"{name}.jinja2"
         return name

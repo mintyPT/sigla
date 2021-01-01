@@ -64,7 +64,7 @@ class Node(object):
     def __iter__(self):
         return iter(self.children)
 
-    def get_template_name(self):
+    def get_name(self):
         return self.otag
 
     def process(self, ctx: Context = None):
