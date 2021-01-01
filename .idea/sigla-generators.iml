@@ -13,7 +13,7 @@
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/_/cgia_bc10/uigen/templates" />
+        <option value="$MODULE_DIR$/.sigla/templates" />
       </list>
     </option>
   </component>
