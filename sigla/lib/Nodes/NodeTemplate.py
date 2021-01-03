@@ -146,22 +146,24 @@ class NodeTemplate(Node):
         except FileNotFoundError:
             pass
 
-    def render(self, template, ctx, **kwargs):
+    def render(self, template, ctx: Context, **kwargs):
 
         if ctx is None:
             ctx = Context()
 
         context = ctx.get_context()
+        last_context = ctx.get_last_context()
 
         data = {}
-        data.update(context)
+        data.update(last_context)
         data.update(kwargs)
 
         result = jinja(
             template,
             **data,
             filters=self.filters,
-            ctx=context,
+            context=last_context,
+            all_context=context,
             children=self.children,
         )
 

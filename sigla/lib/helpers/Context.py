@@ -5,13 +5,13 @@ if TYPE_CHECKING:
 
 
 class Context:
-
     node_stack: List["Node"] = []
     context_stack: List[Dict] = []
 
     def get_context(self):
-        arr = self.context_stack
+        return self.merge_contexts(self.context_stack)
 
+    def merge_contexts(self, arr):
         result = {}
         for obj in arr:
             for k, v in obj.items():
@@ -26,3 +26,6 @@ class Context:
     def pop_context(self):
         self.node_stack.pop()
         return self.context_stack.pop()
+
+    def get_last_context(self):
+        return self.merge_contexts(self.context_stack[-1:])
