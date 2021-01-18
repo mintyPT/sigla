@@ -28,8 +28,7 @@ def jinja(template: str, filters=None, **kwargs):
     if filters is None:
         filters = {}
 
-    loader = FileSystemLoader('.sigla/templates')
-    env = Environment(loader=loader)
+    env = Environment()
 
     env.filters["without"] = without_filter
     env.filters["as_kwargs"] = as_kwargs_filter
@@ -50,4 +49,6 @@ def jinja(template: str, filters=None, **kwargs):
     for k, v in filters.items():
         env.filters[k] = v
 
-    return env.from_string(template).render(**kwargs)
+    template = env.from_string(template)
+
+    return template.render(**kwargs)

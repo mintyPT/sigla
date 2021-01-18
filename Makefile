@@ -18,7 +18,7 @@ show:
 	poetry show -v
 
 test:
-	poetry run pytest
+	poetry run pytest -x -s .
 
 main-render:
 	poetry run sigla render $(file)
