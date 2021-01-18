@@ -48,6 +48,7 @@ class BaseNode:
     context: dict
 
     def __init__(self, tag, attributes=None, children=None, context=None):
+
         if children is None:
             children = []
         if attributes is None:
@@ -57,10 +58,16 @@ class BaseNode:
         self.tag = tag
         self.attributes = attributes
         self.children = children
-        self.context = context
+        self.context = context.copy()
 
     def __eq__(self, other):
-        return self.tag == other.tag and self.attributes == other.attributes and self.children == other.children and self.context == other.context
+        return self.tag == other.tag and self.attributes == other.attributes and self.children == other.children  # and self.context == other.context
+
+    def append(self, node: "BaseNode"):
+        self.children.append(node)
+        context = self.context.copy()
+        context.update(self.attributes)
+        node.context = context
 
     def process(self):
         raise NotImplementedError("Please implement process")
@@ -101,20 +108,16 @@ class NodeTemplate(BaseNode):
 
         str_tpl = self.template_loader(self.tag)
 
-        flat_data = self.context.copy()
-        flat_data.update(self.attributes)
-        print('*' * 20)
-        print('|> flat_data', flat_data)
-        print('|> self.context', self.context)
+        data = self.context.copy()
+        data.update(self.attributes)
 
-        data = {
-            **self.attributes,
-            "meta": self.attributes,  # self
-            "children": self.children,
-            "render": internal_render_method,
-        }
-
-        return self.render(str_tpl, **data)
+        return self.render(
+            str_tpl,
+            **data,
+            meta=self.attributes,  # self
+            children=self.children,
+            render=internal_render_method,
+        )
 
     def template_loader(self, tag) -> str:
         raise NotImplementedError("Please implement template_loader")
@@ -130,23 +133,20 @@ class NodeTemplate(BaseNode):
 
 def from_nodes_to_internal(node: Node, context=None):
     if context is None:
-        context = {}
-    # child_context = context.copy()
-    # child_context.update(node.attributes.copy())
-    #
-    # print('*'*40)
-    # print('*'*40)
-    # print('|> context', context)
-    # print('|> node.attributes', node.attributes)
-    # print('|> child_context', child_context)
-    # print('*'*40)
-    # print('*'*40)
+        context = {"ping": "pong"}
+    child_context = context.copy()
+    child_context.update(node.attributes.copy())
 
     ret = NodeTemplate(
         node.tag,
-        node.attributes,
-        [from_nodes_to_internal(r) for r in node.children],
+        attributes=node.attributes,
+        children=[],
+        context=context.copy()
     )
+
+    for r in node.children:
+        node = from_nodes_to_internal(r)
+        ret.append(node)
 
     return ret
 
@@ -199,12 +199,14 @@ class TestRendering:
         assert got == expected
 
     def test_render_context(self):
-        node = MemoryNodeTemplate('ta', {"ra": "-ra-"}, [
-            MemoryNodeTemplate('tb', {"name": "ttbb", "rb": '-rb-'}, [
-                MemoryNodeTemplate('tc', {"name": "ttcc"}, [])
-            ])
-        ])
-        got = node.process()
+        node_a = MemoryNodeTemplate('ta', {"ra": "-ra-"}, [])
+        node_b = MemoryNodeTemplate('tb', {"name": "ttbb", "rb": '-rb-'}, [])
+        node_c = MemoryNodeTemplate('tc', {"name": "ttcc"}, [])
+
+        node_a.append(node_b)
+        node_b.append(node_c)
+
+        got = node_a.process()
         expected = '-ra--rb-ttcc'
 
         assert got == expected
