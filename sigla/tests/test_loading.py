@@ -132,16 +132,10 @@ class NodeTemplate(BaseNode):
 
 
 def from_nodes_to_internal(node: Node, context=None):
-    if context is None:
-        context = {"ping": "pong"}
-    child_context = context.copy()
-    child_context.update(node.attributes.copy())
-
     ret = NodeTemplate(
         node.tag,
         attributes=node.attributes,
-        children=[],
-        context=context.copy()
+        children=[]
     )
 
     for r in node.children:
