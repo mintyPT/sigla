@@ -1,6 +1,6 @@
-from sigla.lib2.ImportNode import ImportNode
-from sigla.lib2.node.BaseNode import BaseNode
-from sigla.lib2.node.NodeTemplate import NodeTemplate
+from sigla.lib2.helpers.ImportNode import ImportNode
+from sigla.lib2.nodes.BaseNode import BaseNode
+from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
 
 def from_nodes_to_internal(node: ImportNode) -> BaseNode:

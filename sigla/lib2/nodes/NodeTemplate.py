@@ -2,8 +2,8 @@ from typing import Union, List
 
 from jinja2 import Environment, BaseLoader, StrictUndefined
 
-from sigla.lib2.FrontMatterHelper import FrontMatterHelper
-from sigla.lib2.node.BaseNode import BaseNode
+from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
+from sigla.lib2.nodes.BaseNode import BaseNode
 
 
 class NodeTemplate(BaseNode):

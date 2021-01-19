@@ -1,7 +1,7 @@
 from textwrap import dedent
 
-from sigla.lib2.ImportNode import ImportNode
-from sigla.lib2.node.NodeTemplate import NodeTemplate
+from sigla.lib2.helpers.ImportNode import ImportNode
+from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
 
 class MemoryNodeTemplate(NodeTemplate):

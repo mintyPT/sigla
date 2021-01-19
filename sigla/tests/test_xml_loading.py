@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from sigla.lib2.ImportNode import ImportNode
+from sigla.lib2.helpers.ImportNode import ImportNode
 from sigla.lib2.importers.xml import load_xml
 
 

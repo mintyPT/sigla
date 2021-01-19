@@ -1,6 +1,6 @@
 from xml.etree import ElementTree as ET
 
-from sigla.lib2.ImportNode import ImportNode
+from sigla.lib2.helpers.ImportNode import ImportNode
 from sigla.lib2.funcs import from_nodes_to_internal
 
 

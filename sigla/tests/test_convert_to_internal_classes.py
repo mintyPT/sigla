@@ -1,5 +1,5 @@
 from sigla.lib2.importers.xml import import_from_xml_string
-from sigla.lib2.node.NodeTemplate import NodeTemplate
+from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
 
 class TestConvertToInternalClasses:
