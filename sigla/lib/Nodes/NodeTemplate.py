@@ -60,7 +60,7 @@ class NodeTemplate(Node):
 
     def __init__(
             self,
-            children: List["Node"] = None,
+            children: List["NodeTemplate"] = None,
             attributes=None,
             meta=None,
             filters=None,

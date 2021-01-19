@@ -49,6 +49,6 @@ def jinja(template: str, filters=None, **kwargs):
     for k, v in filters.items():
         env.filters[k] = v
 
-    template = env.from_string(template)
+    template = env
 
     return template.render(**kwargs)
