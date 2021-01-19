@@ -1,7 +1,7 @@
 from xml.etree import ElementTree as ET
 
 from sigla.lib2.helpers.ImportNode import ImportNode
-from sigla.lib2.funcs import from_nodes_to_internal
+from sigla.lib2.funcs import from_import_node_to_base_node
 
 
 def load_xml(s) -> ImportNode:
@@ -18,4 +18,4 @@ def process_xml(obj) -> ImportNode:
 
 
 def import_from_xml_string(source):
-    return from_nodes_to_internal(load_xml(source))
+    return from_import_node_to_base_node(load_xml(source))

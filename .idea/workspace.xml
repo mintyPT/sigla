@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sigla/lib2/nodes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/Node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/FrontMatterHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/FrontMatterHelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/ImportNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/ImportNode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib2/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/funcs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/node/BaseNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/nodes/BaseNode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/node/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/node/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/tests/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/tests/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/tests/test_xml_loading.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/tests/test_xml_loading.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

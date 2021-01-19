@@ -3,8 +3,8 @@ from sigla.lib2.nodes.BaseNode import BaseNode
 from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
 
-def from_nodes_to_internal(node: ImportNode) -> BaseNode:
-    child_nodes = [from_nodes_to_internal(r) for r in node.children]
+def from_import_node_to_base_node(node: ImportNode) -> BaseNode:
+    child_nodes = [from_import_node_to_base_node(r) for r in node.children]
 
     ret = NodeTemplate(
         node.tag,
