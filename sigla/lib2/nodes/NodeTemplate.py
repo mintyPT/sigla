@@ -6,8 +6,13 @@ from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
 from sigla.lib2.nodes.BaseNode import BaseNode
 
 
-class NodeTemplate(BaseNode):
+def render(tpl, **kwargs) -> str:
+    env = Environment(loader=BaseLoader, undefined=StrictUndefined)
+    template = env.from_string(tpl)
+    return template.render(**kwargs)
 
+
+class NodeTemplate(BaseNode):
     def __init__(self, tag, attributes=None):
         super().__init__(tag, attributes)
 
@@ -24,7 +29,9 @@ class NodeTemplate(BaseNode):
         return self.render_template(str_tpl)
 
     def render_template(self, str_tpl):
-        def internal_render_method(something: Union[NodeTemplate, List[NodeTemplate]], sep=''):
+        def internal_render_method(
+            something: Union[NodeTemplate, List[NodeTemplate]], sep=""
+        ):
             if isinstance(something, BaseNode):
                 return something.process()
             else:
@@ -58,9 +65,3 @@ class NodeTemplate(BaseNode):
 
     def raw_template_loader(self, tag) -> str:
         raise NotImplementedError("Please implement raw_template_loader")
-
-
-def render(tpl, **kwargs) -> str:
-    env = Environment(loader=BaseLoader, undefined=StrictUndefined)
-    template = env.from_string(tpl)
-    return template.render(**kwargs)

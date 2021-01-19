@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib2/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/funcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib2/helpers/FrontMatterHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/FrontMatterHelper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib2/helpers/ImportNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/ImportNode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib2/nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/nodes/NodeTemplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,10 +157,10 @@
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
     <state x="2103" y="645" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1608589396872" />
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1611039645956">
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1611040138818">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>
-    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1611039645956" />
+    <state x="1562" y="471" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.3440.1417/-1792.23.1792.1097@0.23.3440.1417" timestamp="1611040138818" />
     <state x="2051" y="463" key="FileChooserDialogImpl" timestamp="1611015956541">
       <screen x="0" y="23" width="3440" height="1417" />
     </state>

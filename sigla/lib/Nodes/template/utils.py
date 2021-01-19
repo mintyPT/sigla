@@ -34,8 +34,9 @@ def fm_parse_fm(fm, handler, metadata=None):
         fm = handler.load(fm)
     except ParserError as e:
         print("")
-        print(textwrap.dedent(
-            f"""
+        print(
+            textwrap.dedent(
+                f"""
                 ===
                 There should be an error on the following yaml (front matter)
                 
@@ -44,7 +45,8 @@ def fm_parse_fm(fm, handler, metadata=None):
                 ===
                 
                 """
-        ))
+            )
+        )
         raise e
 
     if isinstance(fm, dict):

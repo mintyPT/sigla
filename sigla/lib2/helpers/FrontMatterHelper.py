@@ -1,7 +1,5 @@
 from textwrap import dedent
-
-import frontmatter
-from frontmatter import u
+from frontmatter import u, detect_format, handlers
 from yaml.parser import ParserError
 
 
@@ -11,7 +9,7 @@ class FrontMatterHelper:
         text = u(text, encoding).strip()
 
         # this will only run if a handler hasn't been set higher up
-        handler = handler or frontmatter.detect_format(text, frontmatter.handlers)
+        handler = handler or detect_format(text, handlers)
         if handler is None:
             return None, text, None
 
@@ -30,7 +28,9 @@ class FrontMatterHelper:
         try:
             fm = handler.load(fm)
         except ParserError as e:
-            print(dedent(f"""
+            print(
+                dedent(
+                    f"""
             ===
             There is an error on the following yaml (front matter)
             
@@ -38,7 +38,9 @@ class FrontMatterHelper:
             
             ===
             
-            """))
+            """
+                )
+            )
             raise e
 
         if isinstance(fm, dict):

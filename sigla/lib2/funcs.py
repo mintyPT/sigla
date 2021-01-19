@@ -1,4 +1,5 @@
 from sigla.lib2.helpers.ImportNode import ImportNode
+from sigla.lib2.importers.xml import load_xml
 from sigla.lib2.nodes.BaseNode import BaseNode
 from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
@@ -15,3 +16,7 @@ def from_import_node_to_base_node(node: ImportNode) -> BaseNode:
         ret.append(node)
 
     return ret
+
+
+def import_from_xml_string(source):
+    return from_import_node_to_base_node(load_xml(source))

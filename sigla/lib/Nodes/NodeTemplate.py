@@ -59,11 +59,11 @@ class NodeTemplate(Node):
     filters: Dict[str, Callable[[Any], Any]] = {}
 
     def __init__(
-            self,
-            children: List["NodeTemplate"] = None,
-            attributes=None,
-            meta=None,
-            filters=None,
+        self,
+        children: List["NodeTemplate"] = None,
+        attributes=None,
+        meta=None,
+        filters=None,
     ):
         super().__init__(children, attributes, meta)
         if filters is None:

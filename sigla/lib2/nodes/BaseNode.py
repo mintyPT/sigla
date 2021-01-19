@@ -4,7 +4,7 @@ from typing import List
 class BaseNode:
     tag: str
     attributes: dict
-    children: List['BaseNode']
+    children: List["BaseNode"]
     context: dict
 
     def __init__(self, tag, attributes=None):
@@ -16,7 +16,11 @@ class BaseNode:
         self.context = {}
 
     def __eq__(self, other):
-        return self.tag == other.tag and self.attributes == other.attributes and self.children == other.children  # and self.context == other.context
+        return (
+            self.tag == other.tag
+            and self.attributes == other.attributes
+            and self.children == other.children
+        )  # and self.context == other.context
 
     def append(self, node: "BaseNode"):
         self.children.append(node)
