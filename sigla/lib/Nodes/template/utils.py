@@ -5,11 +5,6 @@ from frontmatter import u
 from yaml.parser import ParserError
 
 
-#
-# front matter utils
-#
-
-
 def fm_split(text, encoding="utf-8", handler=None):
     text = u(text, encoding).strip()
 
@@ -39,11 +34,11 @@ def fm_parse_fm(fm, handler, metadata=None):
                 f"""
                 ===
                 There should be an error on the following yaml (front matter)
-                
+
                 {fm}
-                
+
                 ===
-                
+
                 """
             )
         )

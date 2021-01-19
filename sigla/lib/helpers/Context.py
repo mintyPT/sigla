@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 
 
 class Context:
-    node_stack: List["ImportNode"] = []
+    node_stack: List["Node"] = []
     context_stack: List[Dict] = []
 
     def get_context(self):
@@ -18,7 +18,7 @@ class Context:
                 result[k] = v
         return result
 
-    def push_context(self, node: "ImportNode"):
+    def push_context(self, node: "Node"):
         self.node_stack.append(node)
         self.context_stack.append(node.attributes)
         return self.get_context()

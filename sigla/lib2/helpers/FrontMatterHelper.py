@@ -33,11 +33,11 @@ class FrontMatterHelper:
                     f"""
             ===
             There is an error on the following yaml (front matter)
-            
+
             {fm}
-            
+
             ===
-            
+
             """
                 )
             )

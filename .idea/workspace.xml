@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc76fab-a917-484b-9b16-2fc15128339b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/funcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/Node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/NodeFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/NodeFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/jinja.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/engines/jinja.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/Nodes/template/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/Nodes/template/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigla/lib/helpers/Context.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib/helpers/Context.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigla/lib2/helpers/FrontMatterHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/FrontMatterHelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/helpers/ImportNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/helpers/ImportNode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/importers/xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/lib2/nodes/NodeTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/lib2/nodes/NodeTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sigla/tests/test_convert_to_internal_classes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

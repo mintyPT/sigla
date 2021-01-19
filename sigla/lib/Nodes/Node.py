@@ -7,7 +7,7 @@ from sigla.lib.helpers.Context import Context
 class Node(object):
     attributes: Dict[str, Union[str, int]] = {}
     meta: Dict[str, Union[str, int]] = {}
-    children: List["ImportNode"] = []
+    children: List["Node"] = []
     kind = "nodes"
 
     def is_(self, what):
@@ -19,7 +19,7 @@ class Node(object):
         )
 
     def __init__(
-        self, children: List["ImportNode"] = None, attributes=None, meta=None
+        self, children: List["Node"] = None, attributes=None, meta=None
     ):
         if children is None:
             children = []
