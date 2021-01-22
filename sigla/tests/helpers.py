@@ -1,11 +1,11 @@
 from textwrap import dedent
-
-from sigla.lib2.helpers.ImportNode import ImportNode
 from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 
 
 class MemoryNodeTemplate(NodeTemplate):
     def raw_template_loader(self, tag):
+        if tag == "print-name":
+            return "{{ name }}"
         if tag == "b":
             return "{{ name }}-{{ age }}"
         if tag == "person":
@@ -27,18 +27,32 @@ class MemoryNodeTemplate(NodeTemplate):
             return "{{ render(children) }}"
         if tag == "tc":
             return "{{ ra }}{{ rb }}{{ name }}"
+
+        if tag == "first-level":
+            return dedent(
+                """
+                ---
+                upper: "one"
+                ---
+                {{ render(children) }}
+                """
+            )
+        if tag == "second-level":
+            return dedent(
+                """
+                ---
+                me: "two"
+                ---
+                {% set lower = bottom | flatten_deep | map_get("lower") | join(',') -%}
+                __{{ upper }}/{{ me }}/{{ lower }}__
+                """
+            )
+        if tag == "third-level":
+            return dedent(
+                """
+                ---
+                lower: "three"
+                ---
+                """
+            )
         raise NotImplementedError(f"Missing memory template for {tag}")
-
-
-def from_nodes_to_internal_memory(node: ImportNode, context=None):
-    child_nodes = [from_nodes_to_internal_memory(r) for r in node.children]
-
-    ret = MemoryNodeTemplate(
-        node.tag,
-        attributes=node.attributes,
-    )
-
-    for node in child_nodes:
-        ret.append(node)
-
-    return ret

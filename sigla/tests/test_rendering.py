@@ -1,8 +1,6 @@
+from sigla.lib2.funcs import from_import_node_to_base_node
 from sigla.lib2.importers.xml import load_xml
-from sigla.tests.helpers import (
-    MemoryNodeTemplate,
-    from_nodes_to_internal_memory,
-)
+from sigla.tests.helpers import MemoryNodeTemplate
 
 
 class TestRendering:
@@ -16,7 +14,9 @@ class TestRendering:
         provided = """
         <person name="minty" age="33" />
         """
-        got = from_nodes_to_internal_memory(load_xml(provided)).process()
+        got = from_import_node_to_base_node(
+            load_xml(provided), TemplateClass=MemoryNodeTemplate
+        ).process()
 
         expected = "minty-santos-33"
         assert got == expected
@@ -41,7 +41,25 @@ class TestRendering:
             </tb>
         </ta>
         """
-        got = from_nodes_to_internal_memory(load_xml(provided)).process()
+        got = from_import_node_to_base_node(
+            load_xml(provided), TemplateClass=MemoryNodeTemplate
+        ).process()
         expected = "one/two/three"
+
+        assert got == expected
+
+    def test_fm_child(self):
+        provided = """
+        <first-level>
+            <second-level>
+                <third-level>
+                </third-level>
+            </second-level>
+        </first-level>
+        """
+        got = from_import_node_to_base_node(
+            load_xml(provided), TemplateClass=MemoryNodeTemplate
+        ).process()
+        expected = "__one/two/three__"
 
         assert got == expected
