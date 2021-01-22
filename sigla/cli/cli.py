@@ -73,9 +73,8 @@ def new_definition(config, name):
 
     # if file exists throw error
     with open(p, "w") as h:
-        h.write(
-            textwrap.dedent(
-                f"""\
+        h.write(textwrap.dedent(
+            f"""\
                 <root>
                     <file name="output/{name}[.ext]">
                         <{name}>
@@ -84,8 +83,7 @@ def new_definition(config, name):
                     </file>
                 </root>
             """
-            )
-        )
+        ))
 
 
 @cli.command()

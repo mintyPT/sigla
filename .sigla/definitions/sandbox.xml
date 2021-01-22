@@ -1,7 +1,7 @@
 <root>
     <file name="output/sandbox.txt">
         <sandbox-root name="cenas">
-            <sandbox-in name="mauro"/>
+            <sandbox-in name="sigla"/>
             <sandbox-in name="igor"/>
             <div><sandbox-in2 name="igor"/></div>
         </sandbox-root>

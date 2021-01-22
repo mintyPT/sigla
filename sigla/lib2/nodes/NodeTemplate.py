@@ -64,23 +64,14 @@ class NodeTemplate(BaseNode):
 
     def render_template(self, str_tpl):
         def internal_render_method(
-            something: Union[NodeTemplate, List[NodeTemplate]], sep=""
+            something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
         ):
             if isinstance(something, BaseNode):
                 return something.process()
             else:
                 return sep.join([node.process() for node in something])
 
-        child_context = self.get_recursive_children_metadata()
-
-        kwargs = {
-            **self.context.copy(),
-            **self.attributes,
-            "attributes": self.attributes,  # data from self
-            "context": self.context,  # data from parents
-            "bottom": child_context,  # data from children
-            "children": self.children,
-        }
+        kwargs = self.get_data_for_template()
 
         try:
             return render(
@@ -95,6 +86,17 @@ class NodeTemplate(BaseNode):
             print(pformat(kwargs))
             print("=== TEMPLATE ===")
             raise e
+
+    def get_data_for_template(self):
+        kwargs = {
+            **self.context.copy(),
+            **self.attributes,
+            "attributes": self.attributes,  # data from self
+            "context": self.context,  # data from parents
+            "bottom": (self.get_recursive_children_metadata()),  # data from children
+            "children": self.children,
+        }
+        return kwargs
 
     def update_context(self):
         self.attributes.update(self.get_self_metadata())

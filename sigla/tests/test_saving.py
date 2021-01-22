@@ -10,10 +10,10 @@ class TestSaving:
         provided = """
             <root>
                 <file to="result.txt">
-                    <print-name name="mauro"/>
+                    <print-name name="sigla"/>
                 </file>
                 <echo>
-                    <print-name name="mauro"/>
+                    <print-name name="sigla"/>
                 </echo>
             </root>
         """
@@ -21,8 +21,8 @@ class TestSaving:
             load_xml(provided), TemplateClass=MemoryNodeTemplate
         ).process()
         expected = [
-            FileOutput(path="result.txt", content="mauro"),
-            EchoOutput(content="mauro"),
+            FileOutput(path="result.txt", content="sigla"),
+            EchoOutput(content="sigla"),
         ]
 
         assert got == expected

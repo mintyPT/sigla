@@ -1,5 +1,5 @@
 import pydash as _
-from jinja2 import Environment
+from jinja2 import Environment, FileSystemLoader
 
 
 def as_kwargs_filter(obj):
@@ -28,7 +28,8 @@ def jinja(template: str, filters=None, **kwargs):
     if filters is None:
         filters = {}
 
-    env = Environment()
+    loader = FileSystemLoader('.sigla/templates')
+    env = Environment(loader=loader)
 
     env.filters["without"] = without_filter
     env.filters["as_kwargs"] = as_kwargs_filter
@@ -49,6 +50,4 @@ def jinja(template: str, filters=None, **kwargs):
     for k, v in filters.items():
         env.filters[k] = v
 
-    template = env
-
-    return template.render(**kwargs)
+    return env.from_string(template).render(**kwargs)

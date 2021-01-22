@@ -8,7 +8,7 @@ class Node(object):
     attributes: Dict[str, Union[str, int]] = {}
     meta: Dict[str, Union[str, int]] = {}
     children: List["Node"] = []
-    kind = "nodes"
+    kind = "node"
 
     def is_(self, what):
         return self.kind == what
