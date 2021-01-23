@@ -1,5 +1,7 @@
 from typing import Union
 
+from sigla.cli.utils import write_file
+
 
 class FileOutput:
     path: str = None
@@ -8,6 +10,9 @@ class FileOutput:
     def __init__(self, path, content):
         self.path = path
         self.content = content
+
+    def save(self):
+        write_file(self.path, self.content)
 
     def __eq__(self, o: Union[object, "FileOutput"]) -> bool:
         if type(self) != type(o):
