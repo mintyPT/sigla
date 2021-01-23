@@ -1,4 +1,3 @@
-
 """
 Export filters to use on the templates using the `FILTERS` variable
 """

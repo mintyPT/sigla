@@ -19,7 +19,7 @@ class Config(dict):
 
     Then to use it
 
-    > config = SiglaConfig()
+    > config = CliConfig()
     > config.load()
     > config['name'] = 'Bond'
     > config.save()

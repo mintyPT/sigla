@@ -1,7 +1,5 @@
-import textwrap
 from typing import Optional, List, Dict, Callable, Any
 
-import json
 import os
 from pathlib import Path
 import pydash as _
@@ -16,31 +14,7 @@ from sigla.lib.helpers.files import ensure_parent_dir, ensure_file
 #
 #
 #
-
-
-def get_default_template_content(context):
-    def default_jinja_template(dumped_context):
-        return textwrap.dedent(
-            f"""
-            ---
-            some_var: some_value
-            ---
-
-            Available vars: {dumped_context}
-
-            Handle children:
-
-            {{{{ render(children) }}}}
-
-            {{% for child in children %}}
-                {{{{ render(child) }}}}
-            {{% endfor %}}
-
-            """
-        )
-
-    json_context = json.dumps(list(context.keys()) + ["children"])
-    return default_jinja_template(json_context)
+from sigla.cli.constants import get_default_template_content
 
 
 class NodeTemplateRenderer:

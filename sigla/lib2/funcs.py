@@ -32,11 +32,11 @@ class EchoNode(BaseNode):
 
 
 def from_import_node_to_base_node(
-    node: ImportNode,
-    TemplateClass=NodeTemplate,
-    RootClass=RootNode,
-    FileClass=FileNode,
-    EchoClass=EchoNode,
+        node: ImportNode,
+        TemplateClass=NodeTemplate,
+        RootClass=RootNode,
+        FileClass=FileNode,
+        EchoClass=EchoNode,
 ) -> BaseNode:
     child_nodes = [
         from_import_node_to_base_node(r, TemplateClass=TemplateClass)
@@ -70,7 +70,16 @@ def from_import_node_to_base_node(
     return ret
 
 
-def import_from_xml_string(source, TemplateClass=NodeTemplate):
+def import_from_xml_string(
+        source,
+        TemplateClass=NodeTemplate,
+        RootClass=RootNode,
+        FileClass=FileNode,
+        EchoClass=EchoNode):
     return from_import_node_to_base_node(
-        load_xml(source), TemplateClass=TemplateClass
+        load_xml(source),
+        TemplateClass=TemplateClass,
+        RootClass=RootClass,
+        FileClass=FileClass,
+        EchoClass=EchoClass,
     )
