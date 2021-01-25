@@ -91,6 +91,18 @@ class TestRendering:
 
         assert got == "minty-sigla-33"
 
+    def test_context_through_file(self):
+        provided = """
+        <echo name="minty" age="33" >
+            <person />
+        </echo>
+        """
+        got = from_import_node_to_base_node(
+            load_xml(provided), TemplateClass=MemoryNodeTemplate
+        ).process()
+
+        assert got.content == "minty-sigla-33"
+
     def test_render_child(self):
         node = MemoryNodeTemplate("a", {})
         node.append(MemoryNodeTemplate("b", {"name": "minty", "age": "33"}))

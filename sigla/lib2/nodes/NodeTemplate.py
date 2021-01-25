@@ -1,14 +1,19 @@
+import logging
 from pprint import pformat
 from typing import Union, List
 import pydash as _
-from jinja2 import Environment, BaseLoader, StrictUndefined, UndefinedError
+from jinja2 import Environment, BaseLoader, StrictUndefined, UndefinedError, make_logging_undefined, Undefined
 
 from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
 from sigla.lib2.nodes.BaseNode import BaseNode
 
 
-def render(tpl, **kwargs) -> str:
-    env = Environment(loader=BaseLoader, undefined=StrictUndefined)
+def render(tpl, filters=None, **kwargs) -> str:
+    # logging.basicConfig()
+    # logger = logging.getLogger('sigla')
+    # LoggingUndefined = make_logging_undefined(logger=logger, base=Undefined)
+    # env = Environment(loader=BaseLoader, undefined=LoggingUndefined)  # StrictUndefined
+    env = Environment(loader=BaseLoader)
 
     env.filters["flatten"] = _.flatten
     env.filters["flatten_depth"] = _.flatten_depth
@@ -46,6 +51,8 @@ def render(tpl, **kwargs) -> str:
     env.filters["as_kwargs"] = as_kwargs_filter
     env.filters["map_get"] = map_get_filter
 
+    env.filters.update(filters)
+
     template = env.from_string(tpl)
     return template.render(**kwargs)
 
@@ -58,13 +65,12 @@ class NodeTemplate(BaseNode):
         return f"<{self.tag} {self.attributes}>"
 
     def process(self):
-        str_tpl = self.template_loader(self.tag)
-        self.update_context()
-        return self.render_template(str_tpl)
+        super().process()
+        return self.render_template(self.template_loader(self.tag))
 
     def render_template(self, str_tpl):
         def internal_render_method(
-            something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
+                something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
         ):
             if isinstance(something, BaseNode):
                 return something.process()
@@ -77,12 +83,13 @@ class NodeTemplate(BaseNode):
             return render(
                 str_tpl,
                 **kwargs,
+                filters=self.get_filters(),
                 render=internal_render_method,
             )
         except UndefinedError as e:
             print("=== TEMPLATE ===")
             print(str_tpl)
-            print("-")
+            print("---")
             print(pformat(kwargs))
             print("=== TEMPLATE ===")
             raise e
@@ -100,13 +107,7 @@ class NodeTemplate(BaseNode):
 
     def update_context(self):
         self.attributes.update(self.get_self_metadata())
-
-        for child in self.children:
-            ctx = self.context.copy()
-            ctx.update(self.attributes.copy())
-            child.context = ctx
-
-            child.update_context()
+        super().update_context()
 
     def get_recursive_children_metadata(self):
         data = []
@@ -134,3 +135,6 @@ class NodeTemplate(BaseNode):
 
     def raw_template_loader(self, tag) -> str:
         raise NotImplementedError("Please implement raw_template_loader")
+
+    def get_filters(self):
+        return {}

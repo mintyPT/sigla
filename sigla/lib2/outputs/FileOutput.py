@@ -1,6 +1,7 @@
 from typing import Union
 
 from sigla.cli.utils import write_file
+from sigla.lib.helpers.files import ensure_parent_dir
 
 
 class FileOutput:
@@ -12,6 +13,7 @@ class FileOutput:
         self.content = content
 
     def save(self):
+        ensure_parent_dir(self.path)
         write_file(self.path, self.content)
 
     def __eq__(self, o: Union[object, "FileOutput"]) -> bool:

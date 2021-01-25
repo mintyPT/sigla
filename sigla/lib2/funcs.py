@@ -1,34 +1,10 @@
 from sigla.lib2.helpers.ImportNode import ImportNode
 from sigla.lib2.importers.xml import load_xml
 from sigla.lib2.nodes.BaseNode import BaseNode
+from sigla.lib2.nodes.EchoNode import EchoNode
 from sigla.lib2.nodes.NodeTemplate import NodeTemplate
-from sigla.lib2.outputs.EchoOutput import EchoOutput
-from sigla.lib2.outputs.FileOutput import FileOutput
-
-
-class FileNode(BaseNode):
-    def process(self):
-        results = [child.process() for child in self.children]
-        content = "\n".join(results)
-        if "to" not in self.attributes.keys():
-            raise Exception(
-                "You need to provide the propriety `to` with a filepath on the element <file> to save the results to"
-            )
-        to = self.attributes["to"]
-
-        return FileOutput(to, content)
-
-
-class RootNode(BaseNode):
-    def process(self):
-        return [child.process() for child in self.children]
-
-
-class EchoNode(BaseNode):
-    def process(self):
-        results = [child.process() for child in self.children]
-        content = "\n".join(results)
-        return EchoOutput(content)
+from sigla.lib2.nodes.RootNode import RootNode
+from sigla.lib2.nodes.FileNode import FileNode
 
 
 def from_import_node_to_base_node(

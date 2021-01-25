@@ -1,6 +1,0 @@
-{% for tag in children | get_nested('children') | flatten | map_get('tag') | unique %}
-from random_generators import generate_{{ tag }}
-{%- endfor %}
-
-{{ render(children) }}
-

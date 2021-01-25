@@ -1,4 +1,0 @@
-<ut kgdir="kg">
-  <test cmd="sigla render definitions/definition-form.xml" out="output/form1.html" />
-  <test cmd="sigla render definitions/definition-table.xml" out="output/table1.html" />
-</ut>

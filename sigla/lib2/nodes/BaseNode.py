@@ -26,4 +26,11 @@ class BaseNode:
         self.children.append(node)
 
     def process(self):
-        raise NotImplementedError("Please implement process")
+        self.update_context()
+
+    def update_context(self):
+        for child in self.children:
+            ctx = self.context.copy()
+            ctx.update(self.attributes.copy())
+            child.context = ctx
+            child.update_context()

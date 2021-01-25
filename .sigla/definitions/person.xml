@@ -1,8 +1,0 @@
-<root>
-    <file to="./output/person.txt" name="./output/person.txt">
-        <person fname="mauro" lname="santos" age="33" />
-    </file>
-    <echo to="./output/person.txt" name="./output/person.txt">
-        <person fname="mauro" lname="santos" age="33" />
-    </echo>
-</root>
