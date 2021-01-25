@@ -2,7 +2,7 @@ from sigla.lib2.funcs import from_import_node_to_base_node
 from sigla.lib2.importers.xml import load_xml
 from sigla.tests.helpers import MemoryNodeTemplate
 
-expected = '''
+expected = """
 def call_wrapper(url: str, method: str = "GET"):
     def call(query, body, params):
         print('call api')
@@ -53,9 +53,9 @@ apifier = {
         },
 
 }
-'''
+"""
 
-definition = '''
+definition = """
 <apifier-root>
     <apifier-block name="auth">
         <apifier-call name="me"/>
@@ -72,7 +72,7 @@ definition = '''
         <apifier-crud name="bookmarks" singular="bookmark" urlprefix=""/>
     </apifier-block>
 </apifier-root>
-'''
+"""
 
 
 class TestRendering:
@@ -144,4 +144,6 @@ class TestRendering:
         got = from_import_node_to_base_node(
             load_xml(definition), TemplateClass=MemoryNodeTemplate
         ).process()
-        assert got.replace(" ", "").replace("\n", "") == expected.replace(" ", "").replace("\n", "")
+        assert got.replace(" ", "").replace("\n", "") == expected.replace(
+            " ", ""
+        ).replace("\n", "")

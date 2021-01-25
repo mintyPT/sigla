@@ -37,7 +37,6 @@ def read_file(p):
 
 
 def cliNodeTemplateFactory(config: CliConfig):
-
     class CliNodeTemplate(NodeTemplate):
         def __init__(self, tag, attributes=None):
             super().__init__(tag, attributes)
@@ -51,7 +50,9 @@ def cliNodeTemplateFactory(config: CliConfig):
             try:
                 return read_file(template_path)
             except FileNotFoundError:
-                content = get_default_template_content(self.get_data_for_template())
+                content = get_default_template_content(
+                    self.get_data_for_template()
+                )
                 write_file(template_path, content)
                 return content
 

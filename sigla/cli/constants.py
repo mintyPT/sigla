@@ -17,7 +17,8 @@ filter_file_template = textwrap.dedent(
     """
 )
 
-new_definition_template = lambda name: textwrap.dedent(f"""\
+new_definition_template = lambda name: textwrap.dedent(
+    f"""\
     <root>
         <file name="output/{name}[.ext]">
             <{name}>
@@ -25,12 +26,14 @@ new_definition_template = lambda name: textwrap.dedent(f"""\
             </{name}>
         </file>
     </root>
-""")
+"""
+)
 
 
 def get_default_template_content(context):
     def default_jinja_template(dumped_context):
-        return textwrap.dedent(f"""
+        return textwrap.dedent(
+            f"""
             ---
             some_var: some_value
             ---

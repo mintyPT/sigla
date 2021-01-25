@@ -9,5 +9,5 @@ class CliConfig(Config):
         "path_templates": ".sigla/templates",
         "path_snapshots": ".sigla/snapshots",
         "path_definitions": ".sigla/definitions",
-        "path_filters": ".sigla/filters.py"
+        "path_filters": ".sigla/filters.py",
     }

@@ -2,7 +2,14 @@ import logging
 from pprint import pformat
 from typing import Union, List
 import pydash as _
-from jinja2 import Environment, BaseLoader, StrictUndefined, UndefinedError, make_logging_undefined, Undefined
+from jinja2 import (
+    Environment,
+    BaseLoader,
+    StrictUndefined,
+    UndefinedError,
+    make_logging_undefined,
+    Undefined,
+)
 
 from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
 from sigla.lib2.nodes.BaseNode import BaseNode
@@ -70,7 +77,7 @@ class NodeTemplate(BaseNode):
 
     def render_template(self, str_tpl):
         def internal_render_method(
-                something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
+            something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
         ):
             if isinstance(something, BaseNode):
                 return something.process()
@@ -100,7 +107,9 @@ class NodeTemplate(BaseNode):
             **self.attributes,
             "attributes": self.attributes,  # data from self
             "context": self.context,  # data from parents
-            "bottom": (self.get_recursive_children_metadata()),  # data from children
+            "bottom": (
+                self.get_recursive_children_metadata()
+            ),  # data from children
             "children": self.children,
         }
         return kwargs

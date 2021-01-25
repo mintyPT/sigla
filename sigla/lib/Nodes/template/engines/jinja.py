@@ -28,7 +28,7 @@ def jinja(template: str, filters=None, **kwargs):
     if filters is None:
         filters = {}
 
-    loader = FileSystemLoader('.sigla/templates')
+    loader = FileSystemLoader(".sigla/templates")
     env = Environment(loader=loader)
 
     env.filters["without"] = without_filter

@@ -7,8 +7,9 @@ from sigla.lib2.nodes.NodeTemplate import NodeTemplate
 class MemoryNodeTemplate(NodeTemplate):
     def raw_template_loader(self, tag):
 
-        if tag == 'apifier-root':
-            return dedent("""
+        if tag == "apifier-root":
+            return dedent(
+                """
                 ---
                 name:  "sigla"
                 ---
@@ -27,27 +28,34 @@ class MemoryNodeTemplate(NodeTemplate):
                 {% for child in children %}
                     {{ render(child) | indent(8) }},
                 {% endfor %}
-                }""")
+                }"""
+            )
 
-        if tag == 'apifier-block':
-            return dedent("""
+        if tag == "apifier-block":
+            return dedent(
+                """
                 ---
                 name:  "sigla"
                 ---
                 "{{ name }}": { {% for child in children %}
                     {{ render(child) | indent(8) }},
                 {%- endfor %}
-                }""")
-        if tag == 'apifier-call':
-            return dedent('''"{{name}}": call_wrapper("/{{name}}", {{ attributes | without("name") | as_kwargs() }})''')
-        if tag == 'apifier-crud':
-            return dedent("""
+                }"""
+            )
+        if tag == "apifier-call":
+            return dedent(
+                """"{{name}}": call_wrapper("/{{name}}", {{ attributes | without("name") | as_kwargs() }})"""
+            )
+        if tag == "apifier-crud":
+            return dedent(
+                """
                 "list": call_wrapper("{{ urlprefix }}/{{name}}", method="GET"),
                 "create": call_wrapper("{{ urlprefix }}/{{name}}", method="POST"),
                 "read": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="GET"),
                 "update": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
                 "update_p": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
-                "delete": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="DELETE")""")
+                "delete": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="DELETE")"""
+            )
 
         if tag == "print-name":
             return "{{ name }}"

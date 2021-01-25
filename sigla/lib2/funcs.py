@@ -8,11 +8,11 @@ from sigla.lib2.nodes.FileNode import FileNode
 
 
 def from_import_node_to_base_node(
-        node: ImportNode,
-        TemplateClass=NodeTemplate,
-        RootClass=RootNode,
-        FileClass=FileNode,
-        EchoClass=EchoNode,
+    node: ImportNode,
+    TemplateClass=NodeTemplate,
+    RootClass=RootNode,
+    FileClass=FileNode,
+    EchoClass=EchoNode,
 ) -> BaseNode:
     child_nodes = [
         from_import_node_to_base_node(r, TemplateClass=TemplateClass)
@@ -47,11 +47,12 @@ def from_import_node_to_base_node(
 
 
 def import_from_xml_string(
-        source,
-        TemplateClass=NodeTemplate,
-        RootClass=RootNode,
-        FileClass=FileNode,
-        EchoClass=EchoNode):
+    source,
+    TemplateClass=NodeTemplate,
+    RootClass=RootNode,
+    FileClass=FileNode,
+    EchoClass=EchoNode,
+):
     return from_import_node_to_base_node(
         load_xml(source),
         TemplateClass=TemplateClass,

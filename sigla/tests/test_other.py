@@ -19,5 +19,3 @@ class TestOther:
             assert data["name"] == "sigla"
 
         assert ok, "Expected an exception due to missing template"
-
-

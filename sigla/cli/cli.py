@@ -6,7 +6,12 @@ from pathlib import Path
 from sigla import __version__
 from sigla.cli.CliConfig import CliConfig
 from sigla.cli.constants import filter_file_template, new_definition_template
-from sigla.cli.utils import load_filters_from, write_file, read_file, cliNodeTemplateFactory
+from sigla.cli.utils import (
+    load_filters_from,
+    write_file,
+    read_file,
+    cliNodeTemplateFactory,
+)
 from sigla.lib.helpers.files import ensure_dirs, ensure_file
 from sigla.lib2.errors import TemplateDoesNotExistError
 from sigla.lib2.funcs import import_from_xml_string
@@ -22,10 +27,10 @@ pass_config = click.make_pass_decorator(CliConfig, ensure=True)
 @click.group()
 @pass_config
 def cli(config: CliConfig):
-    print('=== sigla ===')
+    print("=== sigla ===")
     config.load()
-    print(f':: config\n{pformat(config, indent=1)}')
-    print('')
+    print(f":: config\n{pformat(config, indent=1)}")
+    print("")
     config.save()
 
 
@@ -35,14 +40,16 @@ def init(config):
     """
     Every project needs a home. Creates the folders and files necessary
     """
-    dirs = (config["path_templates"],
-            config["path_snapshots"],
-            config["path_definitions"],)
+    dirs = (
+        config["path_templates"],
+        config["path_snapshots"],
+        config["path_definitions"],
+    )
     filter_file = config["path_filters"]
 
     for d in dirs:
-        print(f':: checking/creating folder {d}')
-    print(f':: checking/creating file {filter_file}')
+        print(f":: checking/creating folder {d}")
+    print(f":: checking/creating file {filter_file}")
 
     ensure_dirs(*dirs)
     ensure_file(filter_file, filter_file_template)
@@ -61,11 +68,11 @@ def version():
 @click.argument("name", type=click.types.STRING)
 def nd(config, name):
     """
-        Will generate a new definition (nd) file inside your definitions
-        folder. This file is used to add data/variables to generate code.
+    Will generate a new definition (nd) file inside your definitions
+    folder. This file is used to add data/variables to generate code.
     """
     path_ = join(config["path_definitions"], name + ".xml")
-    print(f':: creating file {path_}')
+    print(f":: creating file {path_}")
 
     p = Path(path_)
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -108,22 +115,22 @@ def rd(config: CliConfig, references, version):
                 run(file=p, filters=filters)
             elif version == 1:
                 try:
-                    print(f':: Reading {p}')
+                    print(f":: Reading {p}")
                     str_xml = read_file(p)
                     stuff = import_from_xml_string(
-                        str_xml,
-                        TemplateClass=cliNodeTemplateFactory(config)).process()
+                        str_xml, TemplateClass=cliNodeTemplateFactory(config)
+                    ).process()
 
                     for s in stuff:
                         if isinstance(s, FileOutput):
-                            print(f':: Saving {s.path}')
+                            print(f":: Saving {s.path}")
                             s.save()
                         else:
-                            print('\n' * 1)
-                            print(':: template to output')
+                            print("\n" * 1)
+                            print(":: template to output")
                             print(s.content)
                 except TemplateDoesNotExistError as e:
-                    print('|> e', e)
+                    print("|> e", e)
                     raise Exception()
             else:
                 print(f"✋ Unknown version: {version}")
