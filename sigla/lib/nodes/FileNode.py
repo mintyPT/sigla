@@ -1,5 +1,5 @@
-from sigla.lib2.nodes.BaseNode import BaseNode
-from sigla.lib2.outputs.FileOutput import FileOutput
+from sigla.lib.nodes.BaseNode import BaseNode
+from sigla.lib.outputs.FileOutput import FileOutput
 
 
 class FileNode(BaseNode):

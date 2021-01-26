@@ -12,9 +12,9 @@ from sigla.cli.utils import (
     cliNodeTemplateFactory,
 )
 from sigla.helpers.files import ensure_dirs, ensure_file
-from sigla.lib2.errors import TemplateDoesNotExistError
-from sigla.lib2.funcs import import_from_xml_string
-from sigla.lib2.outputs.FileOutput import FileOutput
+from sigla.lib.errors import TemplateDoesNotExistError
+from sigla.lib.funcs import import_from_xml_string
+from sigla.lib.outputs.FileOutput import FileOutput
 from sigla.classes.SnapshotCli import SnapshotCli
 
 pass_config = click.make_pass_decorator(CliConfig, ensure=True)

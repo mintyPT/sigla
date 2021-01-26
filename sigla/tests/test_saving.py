@@ -1,7 +1,7 @@
-from sigla.lib2.funcs import from_import_node_to_base_node
-from sigla.lib2.importers.xml import load_xml
-from sigla.lib2.outputs.EchoOutput import EchoOutput
-from sigla.lib2.outputs.FileOutput import FileOutput
+from sigla.lib.funcs import from_import_node_to_base_node
+from sigla.lib.importers.xml import load_xml
+from sigla.lib.outputs.EchoOutput import EchoOutput
+from sigla.lib.outputs.FileOutput import FileOutput
 from sigla.tests.helpers import MemoryNodeTemplate
 
 

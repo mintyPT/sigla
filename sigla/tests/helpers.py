@@ -1,7 +1,7 @@
 from textwrap import dedent
 
-from sigla.lib2.errors import TemplateDoesNotExistError
-from sigla.lib2.nodes.NodeTemplate import NodeTemplate
+from sigla.lib.errors import TemplateDoesNotExistError
+from sigla.lib.nodes.NodeTemplate import NodeTemplate
 
 
 class MemoryNodeTemplate(NodeTemplate):

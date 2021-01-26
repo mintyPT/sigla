@@ -7,8 +7,8 @@ from jinja2 import (
     UndefinedError,
 )
 
-from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
-from sigla.lib2.nodes.BaseNode import BaseNode
+from sigla.lib.helpers.FrontMatterHelper import FrontMatterHelper
+from sigla.lib.nodes.BaseNode import BaseNode
 
 
 def render(tpl, filters=None, **kwargs) -> str:

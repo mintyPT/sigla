@@ -1,5 +1,5 @@
 from xml.etree import ElementTree as ET
-from sigla.lib2.helpers.ImportNode import ImportNode
+from sigla.lib.helpers.ImportNode import ImportNode
 
 
 def load_xml(s) -> ImportNode:

@@ -1,4 +1,4 @@
-from sigla.lib2.nodes.BaseNode import BaseNode
+from sigla.lib.nodes.BaseNode import BaseNode
 
 
 class RootNode(BaseNode):
