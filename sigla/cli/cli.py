@@ -14,7 +14,7 @@ from sigla.cli.utils import (
 from sigla.helpers.files import ensure_dirs, ensure_file
 from sigla.classes.errors import TemplateDoesNotExistError
 from sigla.helpers.importers import import_from_xml_string
-from sigla.lib.outputs.FileOutput import FileOutput
+from sigla.classes.outputs.FileOutput import FileOutput
 from sigla.classes.SnapshotCli import SnapshotCli
 
 pass_config = click.make_pass_decorator(CliConfig, ensure=True)

@@ -1,5 +1,5 @@
 from sigla.classes.nodes.BaseNode import BaseNode
-from sigla.lib.outputs.EchoOutput import EchoOutput
+from sigla.classes.outputs.EchoOutput import EchoOutput
 
 
 class EchoNode(BaseNode):
