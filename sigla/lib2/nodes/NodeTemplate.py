@@ -1,14 +1,10 @@
-import logging
 from pprint import pformat
 from typing import Union, List
 import pydash as _
 from jinja2 import (
     Environment,
     BaseLoader,
-    StrictUndefined,
     UndefinedError,
-    make_logging_undefined,
-    Undefined,
 )
 
 from sigla.lib2.helpers.FrontMatterHelper import FrontMatterHelper
@@ -16,10 +12,6 @@ from sigla.lib2.nodes.BaseNode import BaseNode
 
 
 def render(tpl, filters=None, **kwargs) -> str:
-    # logging.basicConfig()
-    # logger = logging.getLogger('sigla')
-    # LoggingUndefined = make_logging_undefined(logger=logger, base=Undefined)
-    # env = Environment(loader=BaseLoader, undefined=LoggingUndefined)  # StrictUndefined
     env = Environment(loader=BaseLoader)
 
     env.filters["flatten"] = _.flatten

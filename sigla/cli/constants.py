@@ -17,8 +17,10 @@ filter_file_template = textwrap.dedent(
     """
 )
 
-new_definition_template = lambda name: textwrap.dedent(
-    f"""\
+
+def new_definition_template(name):
+    return textwrap.dedent(
+        f"""\
     <root>
         <file name="output/{name}[.ext]">
             <{name}>
@@ -27,7 +29,7 @@ new_definition_template = lambda name: textwrap.dedent(
         </file>
     </root>
 """
-)
+    )
 
 
 def get_default_template_content(context):
@@ -39,8 +41,8 @@ def get_default_template_content(context):
             ---
 
             Vars: {dumped_context}
-            
-            # render children 
+
+            # render children
 
             {{{{ render(children) }}}}
 

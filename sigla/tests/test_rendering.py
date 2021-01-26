@@ -42,8 +42,8 @@ apifier = {
                 },
         },
 
-    
-        "sigla": { 
+
+        "sigla": {
             "list": call_wrapper("/bookmarks", method="GET"),
                 "create": call_wrapper("/bookmarks", method="POST"),
                 "read": call_wrapper("/bookmarks/:id", method="GET"),
@@ -53,7 +53,7 @@ apifier = {
         },
 
 }
-"""
+"""  # noqa
 
 definition = """
 <apifier-root>
@@ -72,7 +72,7 @@ definition = """
         <apifier-crud name="bookmarks" singular="bookmark" urlprefix=""/>
     </apifier-block>
 </apifier-root>
-"""
+"""  # noqa
 
 
 class TestRendering:

@@ -27,7 +27,7 @@ version:
 	poetry run sigla version
 
 flake8:
-	poetry run flake8 --exclude dist
+	poetry run flake8 --exclude dist,output,.sigla
 
 black:
 	poetry run black . -l 79

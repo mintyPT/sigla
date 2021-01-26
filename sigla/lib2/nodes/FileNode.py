@@ -9,7 +9,7 @@ class FileNode(BaseNode):
         content = "\n".join(results)
         if "to" not in self.attributes.keys():
             raise Exception(
-                "You need to provide the propriety `to` with a filepath on the element <file> to save the results to"
+                "You need to provide the propriety `to` with a filepath on the element <file> to save the results to"  # noqa
             )
         to = self.attributes["to"]
 

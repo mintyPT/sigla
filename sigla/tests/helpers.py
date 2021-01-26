@@ -22,8 +22,8 @@ class MemoryNodeTemplate(NodeTemplate):
                         print('- body:', body)
                         print('- params:', params)
                     return call
-                
-                
+
+
                 apifier = {
                 {% for child in children %}
                     {{ render(child) | indent(8) }},
@@ -43,9 +43,8 @@ class MemoryNodeTemplate(NodeTemplate):
                 }"""
             )
         if tag == "apifier-call":
-            return dedent(
-                """"{{name}}": call_wrapper("/{{name}}", {{ attributes | without("name") | as_kwargs() }})"""
-            )
+            return '"{{name}}": call_wrapper("/{{name}}", {{ attributes | without("name") | as_kwargs() }})'  # noqa
+
         if tag == "apifier-crud":
             return dedent(
                 """
@@ -54,7 +53,8 @@ class MemoryNodeTemplate(NodeTemplate):
                 "read": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="GET"),
                 "update": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
                 "update_p": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="PUT"),
-                "delete": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="DELETE")"""
+                "delete": call_wrapper("{{ urlprefix }}/{{name}}/:id", method="DELETE")
+                """  # noqa
             )
 
         if tag == "print-name":
@@ -73,7 +73,7 @@ class MemoryNodeTemplate(NodeTemplate):
         if tag == "a":
             return "-a-{{ render(children) }}-a-"
         if tag == "a2":
-            return "-a-{% for child in children %}{{ render(child) }}{% endfor %}-a-"
+            return "-a-{% for child in children %}{{ render(child) }}{% endfor %}-a-"  # noqa
         if tag == "ta":
             return "{{ render(children) }}"
         if tag == "tb":
@@ -98,7 +98,7 @@ class MemoryNodeTemplate(NodeTemplate):
                 ---
                 {% set lower = bottom | flatten_deep | map_get("lower") | join(',') -%}
                 __{{ upper }}/{{ me }}/{{ lower }}__
-                """
+                """  # noqa
             )
         if tag == "third-level":
             return dedent(
