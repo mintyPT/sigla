@@ -18,7 +18,8 @@ class TestSaving:
             </root>
         """
         got = from_import_node_to_base_node(
-            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided),
+            TemplateClass=MemoryNodeTemplate,
         ).process()
         expected = [
             FileOutput(path="result.txt", content="sigla"),

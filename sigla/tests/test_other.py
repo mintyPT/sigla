@@ -10,7 +10,8 @@ class TestOther:
         try:
             provided = """<most-random name="sigla"></most-random>"""
             from_import_node_to_base_node(
-                load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
+                load_xml_string_into_nodes(provided),
+                TemplateClass=MemoryNodeTemplate,
             ).process()
         except TemplateDoesNotExistError as e:
             ok = True
