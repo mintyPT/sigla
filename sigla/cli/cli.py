@@ -5,13 +5,9 @@ from os.path import join
 from pathlib import Path
 from sigla import __version__
 from sigla.classes.Config import CliConfig
-from sigla.cli.constants import filter_file_template, new_definition_template
-from sigla.cli.utils import (
-    write_file,
-    read_file,
-    cliNodeTemplateFactory,
-)
-from sigla.helpers.files import ensure_dirs, ensure_file
+from sigla.constants import filter_file_template, new_definition_template
+from sigla.classes.CliEntityConfigFactory import CliEntityConfigFactory
+from sigla.helpers.files import ensure_dirs, ensure_file, write_file, read_file
 from sigla.classes.errors import TemplateDoesNotExistError
 from sigla.helpers.importers import import_from_xml_string
 from sigla.classes.outputs.FileOutput import FileOutput
@@ -111,7 +107,7 @@ def rd(config: CliConfig, references):
                 print(f":: Reading {p}")
                 str_xml = read_file(p)
                 stuff = import_from_xml_string(
-                    str_xml, TemplateClass=cliNodeTemplateFactory(config)
+                    str_xml, TemplateClass=CliEntityConfigFactory(config)
                 ).process()
 
                 for s in stuff:

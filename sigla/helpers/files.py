@@ -16,3 +16,13 @@ def ensure_file(filepath, content=""):
         return
     with open(filepath, "w") as h:
         h.write(content)
+
+
+def write_file(p, content):
+    with open(p, "w") as h:
+        h.write(content)
+
+
+def read_file(p):
+    with open(p, "r") as h:
+        return h.read()
