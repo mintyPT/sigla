@@ -4,7 +4,7 @@ import click
 from os.path import join
 from pathlib import Path
 from sigla import __version__
-from sigla.classes.CliConfig import CliConfig
+from sigla.classes.Config import CliConfig
 from sigla.cli.constants import filter_file_template, new_definition_template
 from sigla.cli.utils import (
     write_file,

@@ -3,7 +3,7 @@ from frontmatter import u, detect_format, handlers
 from yaml.parser import ParserError
 
 
-class FrontMatterHelper:
+class FrontMatter:
     @classmethod
     def split(cls, text, encoding="utf-8", handler=None):
         text = u(text, encoding).strip()

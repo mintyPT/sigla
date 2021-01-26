@@ -1,5 +1,5 @@
 from sigla.lib.funcs import from_import_node_to_base_node
-from sigla.lib.importers.xml import load_xml
+from sigla.helpers.xml import load_xml_string_into_nodes
 from sigla.tests.helpers import MemoryNodeTemplate
 
 expected = """
@@ -86,7 +86,7 @@ class TestRendering:
         <person name="minty" age="33" />
         """
         got = from_import_node_to_base_node(
-            load_xml(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
         ).process()
 
         assert got == "minty-sigla-33"
@@ -98,7 +98,7 @@ class TestRendering:
         </echo>
         """
         got = from_import_node_to_base_node(
-            load_xml(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
         ).process()
 
         assert got.content == "minty-sigla-33"
@@ -122,7 +122,7 @@ class TestRendering:
         </ta>
         """
         got = from_import_node_to_base_node(
-            load_xml(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
         ).process()
         assert got == "one/two/three"
 
@@ -136,13 +136,13 @@ class TestRendering:
         </first-level>
         """
         got = from_import_node_to_base_node(
-            load_xml(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
         ).process()
         assert got == "__one/two/three__"
 
     def test_big(self):
         got = from_import_node_to_base_node(
-            load_xml(definition), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(definition), TemplateClass=MemoryNodeTemplate
         ).process()
         assert got.replace(" ", "").replace("\n", "") == expected.replace(
             " ", ""

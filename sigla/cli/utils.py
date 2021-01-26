@@ -2,7 +2,7 @@ import importlib.machinery
 import types
 from os.path import join
 
-from sigla.classes.CliConfig import CliConfig
+from sigla.classes.Config import CliConfig
 from sigla.cli.constants import get_default_template_content
 from sigla.lib.nodes.NodeTemplate import NodeTemplate
 

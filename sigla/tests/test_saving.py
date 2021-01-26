@@ -1,5 +1,5 @@
 from sigla.lib.funcs import from_import_node_to_base_node
-from sigla.lib.importers.xml import load_xml
+from sigla.helpers.xml import load_xml_string_into_nodes
 from sigla.lib.outputs.EchoOutput import EchoOutput
 from sigla.lib.outputs.FileOutput import FileOutput
 from sigla.tests.helpers import MemoryNodeTemplate
@@ -18,7 +18,7 @@ class TestSaving:
             </root>
         """
         got = from_import_node_to_base_node(
-            load_xml(provided), TemplateClass=MemoryNodeTemplate
+            load_xml_string_into_nodes(provided), TemplateClass=MemoryNodeTemplate
         ).process()
         expected = [
             FileOutput(path="result.txt", content="sigla"),

@@ -60,3 +60,13 @@ class Config(dict):
     def save(self):
         self.config.parent.mkdir(parents=True, exist_ok=True)
         self.config.write_text(json.dumps(self, indent=4))
+
+
+class CliConfig(Config):
+    config: Path = Path.cwd().joinpath(".sigla/config.json")
+    defaults = {
+        "path_templates": ".sigla/templates",
+        "path_snapshots": ".sigla/snapshots",
+        "path_definitions": ".sigla/definitions",
+        "path_filters": ".sigla/filters.py",
+    }

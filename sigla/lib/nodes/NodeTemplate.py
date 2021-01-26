@@ -7,7 +7,7 @@ from jinja2 import (
     UndefinedError,
 )
 
-from sigla.lib.helpers.FrontMatterHelper import FrontMatterHelper
+from sigla.classes.FrontMatter import FrontMatter
 from sigla.lib.nodes.BaseNode import BaseNode
 
 
@@ -120,10 +120,10 @@ class NodeTemplate(BaseNode):
 
     def get_self_metadata(self):
         template = self.raw_template_loader(self.tag)
-        fm_raw, template_content, handler = FrontMatterHelper.split(template)
+        fm_raw, template_content, handler = FrontMatter.split(template)
 
         metadata = (
-            FrontMatterHelper.parse(self.render_template(fm_raw), handler)
+            FrontMatter.parse(self.render_template(fm_raw), handler)
             if fm_raw and handler
             else {}
         )
@@ -131,7 +131,7 @@ class NodeTemplate(BaseNode):
 
     def template_loader(self, tag) -> str:
         template = self.raw_template_loader(tag)
-        fm_raw, template_content, handler = FrontMatterHelper.split(template)
+        fm_raw, template_content, handler = FrontMatter.split(template)
         return template_content.strip()
 
     def raw_template_loader(self, tag) -> str:

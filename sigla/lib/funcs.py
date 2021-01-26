@@ -1,5 +1,5 @@
-from sigla.lib.helpers.ImportNode import ImportNode
-from sigla.lib.importers.xml import load_xml
+from sigla.classes.ImportNode import ImportNode
+from sigla.helpers.xml import load_xml_string_into_nodes
 from sigla.lib.nodes.BaseNode import BaseNode
 from sigla.lib.nodes.EchoNode import EchoNode
 from sigla.lib.nodes.NodeTemplate import NodeTemplate
@@ -54,7 +54,7 @@ def import_from_xml_string(
     EchoClass=EchoNode,
 ):
     return from_import_node_to_base_node(
-        load_xml(source),
+        load_xml_string_into_nodes(source),
         TemplateClass=TemplateClass,
         RootClass=RootClass,
         FileClass=FileClass,
