@@ -4,7 +4,7 @@ import click
 from os.path import join
 from pathlib import Path
 from sigla import __version__
-from sigla.cli.CliConfig import CliConfig
+from sigla.classes.CliConfig import CliConfig
 from sigla.cli.constants import filter_file_template, new_definition_template
 from sigla.cli.utils import (
     write_file,
@@ -15,7 +15,7 @@ from sigla.helpers.files import ensure_dirs, ensure_file
 from sigla.lib2.errors import TemplateDoesNotExistError
 from sigla.lib2.funcs import import_from_xml_string
 from sigla.lib2.outputs.FileOutput import FileOutput
-from sigla.cli.SnapshotCli import SnapshotCli
+from sigla.classes.SnapshotCli import SnapshotCli
 
 pass_config = click.make_pass_decorator(CliConfig, ensure=True)
 

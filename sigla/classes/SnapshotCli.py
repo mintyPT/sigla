@@ -2,7 +2,7 @@ import os
 from shutil import copyfile
 
 from sigla.helpers.files import ensure_parent_dir, ensure_dirs
-from sigla.lib.helpers.loaders import load_xml
+from sigla.helpers.xml import load_xml
 
 SNAPSHOTS_DIRECTORY = ".sigla/snapshots"
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sigla.lib.Config import Config
+from sigla.classes.Config import Config
 
 
 class CliConfig(Config):
