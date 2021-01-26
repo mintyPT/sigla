@@ -2,12 +2,12 @@
 
 # Sigla...
 
-Is a code generator dressed as a cli. It is intended to help you generate code (or any text really) the easiest why possible. The core idea for the code generator came from the book "Code Generation in Action" by Jack Herrington, but with extra stuff built into it.
+Is a code generator dressed as a cli. It is intended to help you generate code (or any text really) the easiest way possible. The core idea for the code generator came from the book "Code Generation in Action" by Jack Herrington, but with extra stuff built into it.
 
-There are two thinks to understand about this cli:
+There are two things to understand about this cli:
 
-1. This cli is mean to allow you to generate your code, make some changes and re-generate the code. The improvement and updating of the templates is meant to me made iteratively. This goes specially well with object oriented languages where you can manually write classes that extend generated ones. You can always just generate the code once, but you are throwing away so much potential.
-2. Despite being coded in python, the generator is meant and capable to generate code for any language or just simple text. As of this day, I've used it to generate a complete django rest framework api (complete with simple views, serializers, fixtures, seeds and test) and also, a frontend built in react.
+1. This cli is meant to allow you to generate your code, make some changes and re-generate the code. The improvement and updating of the templates is meant to be made iteratively. This goes specially well with object oriented languages where you can manually write classes that extend generated ones. You can always just generate the code once, but you are throwing away so much potential.
+2. Despite being coded in python, the generator is meant and capable to generate code for any language or just simple text. As of this day, I've used it to generate a complete django rest framework api (complete with simple views, serializers, fixtures, seeds and tests) and also, a frontend built in react.
 
 To use it, you'll need to have some basic knowledge of python, xml, jinja and ideally frontmatter.  
 
@@ -31,7 +31,7 @@ The use of sigla is rather simple. Start by initializing sigma using the command
 sigla init
 ```
 
-This will create a directory named `.sigma` were it will store data (definitions, templates, filters, configurations and snapshots) related to your code generation. Next, create a new definition (xml file) to old the data to generate you code:
+This will create a directory named `.sigma` where it will store data (definitions, templates, filters, configurations and snapshots) related to your code generation. Next, create a new definition (xml file) to hold the data to generate you code:
 
 ```bash
 poetry run sigla nd person
@@ -120,7 +120,7 @@ It was mentioned earlier that besides some special tags, you could use any tag i
 
 ### Multiple outputs
 
-Since you know about `<file/>` and `<root/>` it is time to mention that you do have to generate a single file from a definition like it was showed previously. So, each definition file can be responsible for the generation of multiple files. To do it, simple add more `<file/>` wrapped into a `<root/>`. Example:
+Since you know about `<file/>` and `<root/>` it is time to mention that you do have to generate a single file from a definition like it was showed previously. So, each definition file can be responsible for the generation of multiple files. To do it, simply add more `<file/>` wrapped into a `<root/>`. Example:
 
 ```xml
 <root>
@@ -178,7 +178,7 @@ Todo...
 
 ## Contributing
 
-Like most of my projects, this own grew to scratch my own itch. It is so useful that it should be shared. Since this is the first time that I'm publishing something hopping that others might find it useful, I'll do my best to write some documentation and tests (this is the first time I'm doing so).
+Like most of my projects, this one grew to scratch my own itch. It is so useful that it should be shared. Since this is the first time that I'm publishing something hoping that others might find it useful, I'll do my best to write some documentation and tests (this is the first time I'm doing so).
 
 Pull requests are more than welcome. For major changes, please open an issue first to discuss what you would like to change.
 
