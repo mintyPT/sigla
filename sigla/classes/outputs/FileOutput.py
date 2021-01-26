@@ -1,6 +1,6 @@
 from typing import Union
 
-from sigla.helpers.files import ensure_parent_dir, write_file
+from sigla.helpers.files import ensure_parent_dir, write
 
 
 class FileOutput:
@@ -13,7 +13,7 @@ class FileOutput:
 
     def save(self):
         ensure_parent_dir(self.path)
-        write_file(self.path, self.content)
+        write(self.path, self.content)
 
     def __eq__(self, o: Union[object, "FileOutput"]) -> bool:
         if type(self) != type(o):

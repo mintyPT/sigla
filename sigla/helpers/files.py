@@ -12,17 +12,20 @@ def ensure_parent_dir(*paths):
 
 
 def ensure_file(filepath, content=""):
-    if Path(filepath).exists():
+    if exists(filepath):
         return
-    with open(filepath, "w") as h:
-        h.write(content)
+    write(filepath, content)
 
 
-def write_file(p, content):
+def exists(filepath):  # pragma: no cover
+    return Path(filepath).exists()
+
+
+def write(p, content):  # pragma: no cover
     with open(p, "w") as h:
         h.write(content)
 
 
-def read_file(p):
+def read(p):  # pragma: no cover
     with open(p, "r") as h:
         return h.read()

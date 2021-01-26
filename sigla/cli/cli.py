@@ -1,17 +1,16 @@
 from pprint import pformat
-
 import click
-from os.path import join
-from pathlib import Path
 from sigla import __version__
 from sigla.classes.Config import CliConfig
-from sigla.constants import filter_file_template, new_definition_template
-from sigla.classes.CliEntityConfigFactory import CliEntityConfigFactory
-from sigla.helpers.files import ensure_dirs, ensure_file, write_file, read_file
-from sigla.classes.errors import TemplateDoesNotExistError
-from sigla.helpers.importers import import_from_xml_string
-from sigla.classes.outputs.FileOutput import FileOutput
-from sigla.classes.SnapshotCli import SnapshotCli
+from sigla.helpers.cli import (
+    cli_new_definition,
+    cli_run_definitions,
+    cli_read_snapshot_definition,
+    cli_make_snapshots,
+    cli_verify_snapshots,
+)
+from sigla.constants import filter_file_template
+from sigla.helpers.files import ensure_dirs, ensure_file
 
 pass_config = click.make_pass_decorator(CliConfig, ensure=True)
 
@@ -34,18 +33,17 @@ def init(config):
     """
     Every project needs a home. Creates the folders and files necessary
     """
-    dirs = (
+    print(f":: checking/creating folder {config['path_templates']}")
+    print(f":: checking/creating folder {config['path_snapshots']}")
+    print(f":: checking/creating folder {config['path_definitions']}")
+    ensure_dirs(
         config["path_templates"],
         config["path_snapshots"],
         config["path_definitions"],
     )
+    #
     filter_file = config["path_filters"]
-
-    for d in dirs:
-        print(f":: checking/creating folder {d}")
     print(f":: checking/creating file {filter_file}")
-
-    ensure_dirs(*dirs)
     ensure_file(filter_file, filter_file_template)
 
 
@@ -65,25 +63,10 @@ def nd(config, name):
     Will generate a new definition (nd) file inside your definitions
     folder. This file is used to add data/variables to generate code.
     """
-    path_ = join(config["path_definitions"], name + ".xml")
-    print(f":: creating file {path_}")
-
-    p = Path(path_)
-    p.parent.mkdir(parents=True, exist_ok=True)
-
-    if p.exists():
-        print("✋ This definition already exists")
-        return
-
-    # if file exists throw error
-    content = new_definition_template(name)
-    write_file(p, content)
-
-
-#
-#
-#
-#
+    print(f":: creating new definition: {name}")
+    destination_folder = config["path_definitions"]
+    ensure_dirs(destination_folder)
+    cli_new_definition(destination_folder, name)
 
 
 @cli.command()
@@ -93,34 +76,7 @@ def rd(config: CliConfig, references):
     """
     Run a definition (rd) file to generate files from templates
     """
-
-    for reference in references:
-        glob = Path(config["path_definitions"]).glob(f"{reference}.xml")
-        for p in glob:
-            if not p.exists():
-                print("✋ This definition does not exists")
-                return
-            if p.is_dir():
-                continue
-
-            try:
-                print(f":: Reading {p}")
-                str_xml = read_file(p)
-                stuff = import_from_xml_string(
-                    str_xml, TemplateClass=CliEntityConfigFactory(config)
-                ).process()
-
-                for s in stuff:
-                    if isinstance(s, FileOutput):
-                        print(f":: Saving {s.path}")
-                        s.save()
-                    else:
-                        print("\n" * 1)
-                        print(":: template to output")
-                        print(s.content)
-            except TemplateDoesNotExistError as e:
-                print("|> e", e)
-                raise Exception()
+    cli_run_definitions(config, references)
 
 
 @cli.command()
@@ -130,8 +86,7 @@ def snapshot(files):
     Makes snapshots
     """
     for file in files:
-        snap = SnapshotCli(file)
-        snap.make_snapshots()
+        cli_make_snapshots(cli_read_snapshot_definition(file))
 
 
 @cli.command()
@@ -141,8 +96,7 @@ def verify(files):
     Verify snapshots
     """
     for file in files:
-        snap = SnapshotCli(file)
-        snap.verify_snapshots()
+        cli_verify_snapshots(cli_read_snapshot_definition(file))
 
 
 if __name__ == "__main__":

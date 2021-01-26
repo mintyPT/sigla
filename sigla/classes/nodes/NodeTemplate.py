@@ -3,7 +3,6 @@ from typing import Union, List
 from jinja2 import (
     UndefinedError,
 )
-
 from sigla.classes.FrontMatter import FrontMatter
 from sigla.classes.nodes.BaseNode import BaseNode
 from sigla.helpers.renderers import jinja_render
@@ -22,7 +21,7 @@ class NodeTemplate(BaseNode):
 
     def render_template(self, str_tpl):
         def internal_render_method(
-                something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
+            something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
         ):
             if isinstance(something, BaseNode):
                 return something.process()
