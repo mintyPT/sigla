@@ -1,4 +1,4 @@
-from sigla.lib.funcs import from_import_node_to_base_node
+from sigla.helpers.importers import from_import_node_to_base_node
 from sigla.helpers.xml import load_xml_string_into_nodes
 from sigla.tests.helpers import MemoryNodeTemplate
 
