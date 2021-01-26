@@ -1,59 +1,12 @@
 from pprint import pformat
 from typing import Union, List
-import pydash as _
 from jinja2 import (
-    Environment,
-    BaseLoader,
     UndefinedError,
 )
 
 from sigla.classes.FrontMatter import FrontMatter
 from sigla.classes.nodes.BaseNode import BaseNode
-
-
-def render(tpl, filters=None, **kwargs) -> str:
-    env = Environment(loader=BaseLoader)
-
-    env.filters["flatten"] = _.flatten
-    env.filters["flatten_depth"] = _.flatten_depth
-    env.filters["flatten_deep"] = _.flatten_deep
-    env.filters["get"] = _.get
-    env.filters["map"] = _.map_
-    env.filters["filter"] = _.filter_
-    env.filters["uniq"] = _.uniq
-    env.filters["dump"] = pformat
-
-    def as_kwargs_filter(obj):
-        kwargs = []
-        for k, v in obj.items():
-            if type(v) == int:
-                kwargs.append(f"{k}={v}")
-            else:
-                kwargs.append(f'{k}="{v}"')
-        return ", ".join(kwargs)
-
-    def map_get_filter(arr, key):
-        return [_.get(o, key) for o in arr]
-
-    def without_filter(obj, *args):
-        result = {}
-        for k, v in obj.items():
-            if k not in args:
-                result[k] = v
-        return result
-
-    def get_nested(arr, field):
-        return map(lambda el: _.get(el, field), arr)
-
-    env.filters["get_nested"] = get_nested
-    env.filters["without"] = without_filter
-    env.filters["as_kwargs"] = as_kwargs_filter
-    env.filters["map_get"] = map_get_filter
-
-    env.filters.update(filters)
-
-    template = env.from_string(tpl)
-    return template.render(**kwargs)
+from sigla.helpers.renderers import jinja_render
 
 
 class NodeTemplate(BaseNode):
@@ -69,7 +22,7 @@ class NodeTemplate(BaseNode):
 
     def render_template(self, str_tpl):
         def internal_render_method(
-            something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
+                something: Union[NodeTemplate, List[NodeTemplate]], sep="\n"
         ):
             if isinstance(something, BaseNode):
                 return something.process()
@@ -79,7 +32,7 @@ class NodeTemplate(BaseNode):
         kwargs = self.get_data_for_template()
 
         try:
-            return render(
+            return jinja_render(
                 str_tpl,
                 **kwargs,
                 filters=self.get_filters(),
