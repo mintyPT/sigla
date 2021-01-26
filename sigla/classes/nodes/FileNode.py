@@ -1,4 +1,4 @@
-from sigla.lib.nodes.BaseNode import BaseNode
+from sigla.classes.nodes.BaseNode import BaseNode
 from sigla.lib.outputs.FileOutput import FileOutput
 
 

@@ -1,10 +1,10 @@
 from sigla.classes.ImportNode import ImportNode
 from sigla.helpers.xml import load_xml_string_into_nodes
-from sigla.lib.nodes.BaseNode import BaseNode
-from sigla.lib.nodes.EchoNode import EchoNode
-from sigla.lib.nodes.NodeTemplate import NodeTemplate
-from sigla.lib.nodes.RootNode import RootNode
-from sigla.lib.nodes.FileNode import FileNode
+from sigla.classes.nodes.BaseNode import BaseNode
+from sigla.classes.nodes.EchoNode import EchoNode
+from sigla.classes.nodes.NodeTemplate import NodeTemplate
+from sigla.classes.nodes.RootNode import RootNode
+from sigla.classes.nodes.FileNode import FileNode
 
 
 def from_import_node_to_base_node(

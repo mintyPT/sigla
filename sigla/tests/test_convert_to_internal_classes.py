@@ -1,5 +1,5 @@
 from sigla.lib.funcs import import_from_xml_string
-from sigla.lib.nodes.NodeTemplate import NodeTemplate
+from sigla.classes.nodes.NodeTemplate import NodeTemplate
 from sigla.tests.helpers import MemoryNodeTemplate
 
 

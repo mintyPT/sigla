@@ -8,7 +8,7 @@ from jinja2 import (
 )
 
 from sigla.classes.FrontMatter import FrontMatter
-from sigla.lib.nodes.BaseNode import BaseNode
+from sigla.classes.nodes.BaseNode import BaseNode
 
 
 def render(tpl, filters=None, **kwargs) -> str:
