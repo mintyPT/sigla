@@ -7,16 +7,14 @@ from sigla import __version__
 from sigla.cli.CliConfig import CliConfig
 from sigla.cli.constants import filter_file_template, new_definition_template
 from sigla.cli.utils import (
-    load_filters_from,
     write_file,
     read_file,
     cliNodeTemplateFactory,
 )
-from sigla.lib.helpers.files import ensure_dirs, ensure_file
+from sigla.helpers.files import ensure_dirs, ensure_file
 from sigla.lib2.errors import TemplateDoesNotExistError
 from sigla.lib2.funcs import import_from_xml_string
 from sigla.lib2.outputs.FileOutput import FileOutput
-from sigla.main import run
 from sigla.cli.SnapshotCli import SnapshotCli
 
 pass_config = click.make_pass_decorator(CliConfig, ensure=True)
@@ -95,8 +93,7 @@ def nd(config, name):
 @cli.command()
 @pass_config
 @click.argument("references", nargs=-1, type=click.types.STRING)
-@click.option("-v", "--version", default=0)
-def rd(config: CliConfig, references, version):
+def rd(config: CliConfig, references):
     """
     Run a definition (rd) file to generate files from templates
     """
@@ -110,31 +107,24 @@ def rd(config: CliConfig, references, version):
             if p.is_dir():
                 continue
 
-            if version == 0:
-                filters = load_filters_from(config["path_filters"])
-                run(file=p, filters=filters)
-            elif version == 1:
-                try:
-                    print(f":: Reading {p}")
-                    str_xml = read_file(p)
-                    stuff = import_from_xml_string(
-                        str_xml, TemplateClass=cliNodeTemplateFactory(config)
-                    ).process()
+            try:
+                print(f":: Reading {p}")
+                str_xml = read_file(p)
+                stuff = import_from_xml_string(
+                    str_xml, TemplateClass=cliNodeTemplateFactory(config)
+                ).process()
 
-                    for s in stuff:
-                        if isinstance(s, FileOutput):
-                            print(f":: Saving {s.path}")
-                            s.save()
-                        else:
-                            print("\n" * 1)
-                            print(":: template to output")
-                            print(s.content)
-                except TemplateDoesNotExistError as e:
-                    print("|> e", e)
-                    raise Exception()
-            else:
-                print(f"✋ Unknown version: {version}")
-                return
+                for s in stuff:
+                    if isinstance(s, FileOutput):
+                        print(f":: Saving {s.path}")
+                        s.save()
+                    else:
+                        print("\n" * 1)
+                        print(":: template to output")
+                        print(s.content)
+            except TemplateDoesNotExistError as e:
+                print("|> e", e)
+                raise Exception()
 
 
 @cli.command()

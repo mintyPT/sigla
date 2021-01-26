@@ -1,7 +1,7 @@
 from typing import Union
 
 from sigla.cli.utils import write_file
-from sigla.lib.helpers.files import ensure_parent_dir
+from sigla.helpers.files import ensure_parent_dir
 
 
 class FileOutput:

@@ -1,7 +1,7 @@
 import os
 from shutil import copyfile
 
-from sigla.lib.helpers.files import ensure_parent_dir, ensure_dirs
+from sigla.helpers.files import ensure_parent_dir, ensure_dirs
 from sigla.lib.helpers.loaders import load_xml
 
 SNAPSHOTS_DIRECTORY = ".sigla/snapshots"

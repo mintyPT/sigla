@@ -8,7 +8,7 @@ from sigla.lib.Nodes.Node import Node
 from sigla.lib.Nodes.template.engines.jinja import jinja
 from sigla.lib.Nodes.template.utils import fm_split, fm_parse_fm
 from sigla.lib.helpers.Context import Context
-from sigla.lib.helpers.files import ensure_parent_dir, ensure_file
+from sigla.helpers.files import ensure_parent_dir, ensure_file
 
 
 #
