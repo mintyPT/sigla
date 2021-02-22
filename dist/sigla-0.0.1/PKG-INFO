@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: sigla
+Version: 0.0.1
+Summary: 
+Author: mg santos
+Author-email: mauro.goncalo@gmail.com
+Requires-Python: >=3.8,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: Jinja2 (>=2.11.2,<3.0.0)
+Requires-Dist: arrow (>=0.17.0,<0.18.0)
+Requires-Dist: click (>=7.1.2,<8.0.0)

@@ -1,0 +1,1 @@
+"{{ node.name }}": call_wrapper("/{{ node.name }}", {{ node.attributes.without("name").as_kwargs() }})

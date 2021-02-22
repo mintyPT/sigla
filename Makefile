@@ -18,7 +18,7 @@ show:
 	poetry show -v
 
 test:
-	poetry run pytest --cov-config=.coveragerc --cov=sigla -x -s -vv .
+	poetry run pytest --cov-config=.coveragerc --cov=src -x -s -vv .
 
 main-render:
 	poetry run sigla render $(file)
@@ -33,6 +33,6 @@ black:
 	poetry run black . -l 79
 
 mypy:
-	poetry run mypy -m sigla
+	poetry run mypy -m src
 
 check: black flake8 mypy

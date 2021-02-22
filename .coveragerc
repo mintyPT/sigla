@@ -1,2 +1,2 @@
 [run]
-omit = sigla/tests/*
+omit = tests/*

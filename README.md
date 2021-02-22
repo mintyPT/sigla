@@ -25,13 +25,13 @@ pip install sigla
 
 ### Basic workflow
 
-The use of sigla is rather simple. Start by initializing sigma using the command line
+The use of sigla is rather simple. Start by initializing sigla using the command line
 
 ```bash
 sigla init
 ```
 
-This will create a directory named `.sigma` where it will store data (definitions, templates, filters, configurations and snapshots) related to your code generation. Next, create a new definition (xml file) to hold the data to generate you code:
+This will create a directory named `.sigla` where it will store data (definitions, templates, filters, configurations and snapshots) related to your code generation. Next, create a new definition (xml file) to hold the data to generate you code:
 
 ```bash
 poetry run sigla nd person
@@ -51,7 +51,7 @@ Exempting `file`, `root` and `echo`, you can use any (xml valid) name for the ta
 poetry run sigla rd person
 ``` 
 
-Since this is the first time running the code generator and since you have no templates: sigla will create them for you. Take a look at the newly created template `.sigla/template/peson.jinja2` and update its content to match the following:
+Since this is the first time running the code generator and since you have no templates: sigla will create them for you. Take a look at the newly created template `.sigla/template/person.jinja2` and update its content to match the following:
 
 ```my name is {{ name }} and I'm {{ age }} years old```
     
@@ -84,15 +84,15 @@ Run the generator again. It should create a new template `family.ninja2` that yo
 ```
 My family presentations:
 
-{{ render(children) }}
+{{ node.children() }}
 ```
 
 or
  
 ```
 My family presentations:
-{% for child in children %}
-    {{ render(child) }}
+{% for child in node.children %}
+    {{ child() }}
 {% endfor %}
 ```
 
@@ -172,8 +172,9 @@ Todo...
 
 Todo...
 
+### Properties type convertion
 
-
+Todo...
 
 
 ## Contributing
