@@ -33,6 +33,6 @@ black:
 	poetry run black . -l 79
 
 mypy:
-	poetry run mypy -m sigla
+	poetry run mypy -p sigla #--disallow-untyped-calls --disallow-untyped-defs
 
 check: black flake8 mypy

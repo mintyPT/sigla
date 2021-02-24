@@ -1,19 +1,15 @@
 from pathlib import Path
-from typing import Union
 from xml.etree import ElementTree
 from sigla.core.cls.Data import Data
 from sigla.core.nodes.NodeEcho import NodeEcho
 from sigla.core.nodes.NodeFile import NodeFile
 from sigla.core.nodes.NodeRoot import NodeRoot
 from sigla.core.nodes.NodeTemplate import NodeTemplate
-from sigla.utils import import_node, cast_xml_property
+from sigla.types import NodeType
+from sigla.utils import cast_xml_property
 
-Node = import_node()
 
-
-def node_factory(
-    tag, attributes
-) -> Union[NodeRoot, NodeFile, NodeEcho, NodeTemplate]:
+def node_factory(tag, attributes) -> NodeType:
     if tag == "root":
         return NodeRoot(tag, attributes=attributes)
     elif tag == "file":
@@ -24,9 +20,7 @@ def node_factory(
         return NodeTemplate(tag, attributes=attributes)
 
 
-def data_to_node(
-    node: Data, *, factory=node_factory
-) -> Union[NodeRoot, NodeFile, NodeEcho, NodeTemplate]:
+def data_to_node(node: Data, *, factory=node_factory) -> NodeType:
     """Takes Data classes and converts them to Node"""
     ret = factory(node.tag, node.attributes)
 
@@ -59,10 +53,10 @@ def string_to_data(s) -> Data:
     return node
 
 
-def from_xml_string(source, *, factory=node_factory) -> Node:
+def from_xml_string(source, *, factory=node_factory) -> NodeType:
     return data_to_node(string_to_data(source), factory=factory)
 
 
-def from_xml_file(source, *, factory=node_factory) -> Node:
+def from_xml_file(source, *, factory=node_factory) -> NodeType:
     source = Path(source).read_text()
     return from_xml_string(source, factory=factory)

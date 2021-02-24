@@ -1,13 +1,11 @@
 from sigla.core.nodes.NodeEcho import NodeEcho
 from sigla.core.nodes.NodeFile import NodeFile
 from sigla.core.nodes.NodeRoot import NodeRoot
-from sigla.utils import import_node
+from sigla.types import NodeType
 from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
 
-Node = import_node()
 
-
-def node_factory_for_testing(tag, attributes) -> Node:
+def node_factory_for_testing(tag, attributes) -> NodeType:
     if tag == "root":
         return NodeRoot(tag, attributes=attributes)
     elif tag == "file":
