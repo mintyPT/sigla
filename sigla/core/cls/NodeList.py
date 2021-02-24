@@ -17,12 +17,14 @@ class NodeList(list):
     def flatten(self):
         ret = []
         for child in self:
+            if not child:
+                continue
             if hasattr(child, "flatten"):
                 ret += child.flatten()
             elif isinstance(child, list):
                 ret += child
             else:
-                raise Exception("Case not accounted for")
+                raise Exception(f"Case not accounted for: {type(child)}")
         return self.__class__(ret)
 
     def uniq(self):
@@ -36,7 +38,7 @@ class NodeList(list):
         return self.__class__(filter(lambda e: e is not None, self))
 
     def get(self, name):
-        return self.__class__(map(lambda e: getattr(e, name), self))
+        return self.__class__(map(lambda e: getattr(e, name, None), self))
 
     def join(self, sep):
         return sep.join(self)

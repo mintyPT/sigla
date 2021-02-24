@@ -2,8 +2,11 @@ import json
 import types
 import importlib
 import importlib.machinery
+from contextlib import suppress
 from pathlib import Path
 from textwrap import dedent
+from typing import TypeVar
+
 from frontmatter import u, detect_format, handlers
 from yaml.parser import ParserError
 
@@ -17,7 +20,7 @@ def ensure_dirs(*paths: str):
         Path(path_).mkdir(parents=True, exist_ok=True)
 
 
-def import_reference(ref):
+def import_reference(ref: str) -> type:
     """Imports stuff from modules dinamically"""
     p, m = ref.rsplit(".", 1)
     mod = importlib.import_module(p)
@@ -25,14 +28,14 @@ def import_reference(ref):
     return res
 
 
-def import_node_list():
+def import_node_list() -> type:
     """Imports NodeList"""
     ref = config.cls.node_list
     res = import_reference(ref)
     return res
 
 
-def import_node():
+def import_node() -> type:
     """Imports NodeList"""
     ref = config.cls.node
     res = import_reference(ref)
@@ -67,12 +70,10 @@ def load_module(module_name, module_path):
 def load_filters_from(module_path):
     filters = {}
     module_name = "filters"
-    try:
+    with suppress(FileNotFoundError):
         filters_module = load_module(module_name, module_path)
         if "FILTERS" in dir(filters_module):
             filters = filters_module.FILTERS
-    except FileNotFoundError:
-        pass
     return filters
 
 
