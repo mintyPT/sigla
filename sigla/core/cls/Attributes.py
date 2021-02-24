@@ -3,9 +3,10 @@ from copy import deepcopy
 
 
 class Attributes(ChainMap):
-    def without(self, name):
+    def without(self, *names):
         data = deepcopy(dict(self))
-        del data[name]
+        for name in names:
+            del data[name]
         return Attributes(data)
 
     def as_kwargs(self, sep=","):
