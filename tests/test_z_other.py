@@ -1,6 +1,6 @@
+from sigla.errors import TemplateDoesNotExistError
+from sigla.sigla import string_to_data, data_to_node
 from .helpers.node_factory_for_testing import node_factory_for_testing
-from core.errors import TemplateDoesNotExistError
-from core.importers import base_node_to_node, string_to_nodes
 
 
 class TestOther:
@@ -8,8 +8,8 @@ class TestOther:
         ok = False
         try:
             provided = """<most-random name="core"></most-random>"""
-            base = base_node_to_node(
-                string_to_nodes(provided),
+            base = data_to_node(
+                string_to_data(provided),
                 factory=node_factory_for_testing,
             )
             base()

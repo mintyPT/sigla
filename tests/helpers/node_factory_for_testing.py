@@ -1,13 +1,15 @@
-from core.nodes.NodeEcho import NodeEcho
-from core.nodes.NodeFile import NodeFile
-from core.nodes.RootRoot import RootRoot
+from sigla.core.nodes.NodeEcho import NodeEcho
+from sigla.core.nodes.NodeFile import NodeFile
+from sigla.core.nodes.NodeRoot import NodeRoot
+from sigla.utils import import_node
 from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
-from core.nodes.Node import Node
+
+Node = import_node()
 
 
 def node_factory_for_testing(tag, attributes) -> Node:
     if tag == "root":
-        return RootRoot(tag, attributes=attributes)
+        return NodeRoot(tag, attributes=attributes)
     elif tag == "file":
         return NodeFile(tag, attributes=attributes)
     elif tag == "echo":

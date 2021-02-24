@@ -1,4 +1,4 @@
-from core.nodes.NodeFile import NodeFile
+from sigla.core.nodes.NodeFile import NodeFile
 
 
 class TestFileNode:

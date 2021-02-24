@@ -1,43 +1,64 @@
 **Note:** This is a WIP for the v1.0 so stuff might be broken but not for long
 
-# Sigla...
+# Sigla
 
-Is a code generator dressed as a cli. It is intended to help you generate code (or any text really) the easiest way possible. The core idea for the code generator came from the book "Code Generation in Action" by Jack Herrington, but with extra stuff built into it.
+## Introduction
 
-There are two things to understand about this cli:
+Sigla is a code generator dressed as a cli. It is intended to help you generate code (or any type of text) in the easiest and most forward way possible. The core idea for the code generator came from the book "Code Generation in Action" by Jack Herrington, but with some extra magic built into it.
 
-1. This cli is meant to allow you to generate your code, make some changes and re-generate the code. The improvement and updating of the templates is meant to be made iteratively. This goes specially well with object oriented languages where you can manually write classes that extend generated ones. You can always just generate the code once, but you are throwing away so much potential.
-2. Despite being coded in python, the generator is meant and capable to generate code for any language or just simple text. As of this day, I've used it to generate a complete django rest framework api (complete with simple views, serializers, fixtures, seeds and tests) and also, a frontend built in react.
+There are two things you need to understand about sigla:
 
-To use it, you'll need to have some basic knowledge of python, xml, jinja and ideally frontmatter.  
+1. The workflow to use the cli is: 
+    1. Create or modify the definition file for a generator;
+    2. Create or modify a template;
+    3. Generate some code;
+    4. Repeat until the end of the project;
+    
+    The improvement and updating of the templates and definition files are meant to be iterative where you can re-generate the code any time you want. This goes specially well with object oriented languages where you can generate some base classes and then extend those manually, overriding stuff as necessary. You can always just generate the code once, but you are throwing away so much potential.
+
+2. Despite being coded in python, the generator is well capable of generating code for any language or project. As of this day, I've used it to generate a django rest framework api (includes views, serializers, fixtures, seeds and tests), a frontend built with react, some text (conversion of data to text).
+
+## TODO
+- definitions
+- templates
+- filters
+- configurations
+- snapshots
+- special attributes for node and node.children
 
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install sigla.
+Use a package manager to install sigla.
 
 ```bash
 pip install sigla
+
+poetry add sigla
 ```
 
+## Requirements
+
+Besides installing sigla, you'll need to have some basic knowledge of python, xml, jinja and ideally frontmatter to take full advantage of sigla.
 
 ## Usage
 
 ### Basic workflow
 
-The use of sigla is rather simple. Start by initializing sigla using the command line
+The use of sigla is rather simple. Start by initializing the necessary folder structure for sigla using the command line
 
 ```bash
 sigla init
 ```
 
-This will create a directory named `.sigla` where it will store data (definitions, templates, filters, configurations and snapshots) related to your code generation. Next, create a new definition (xml file) to hold the data to generate you code:
+This will create a directory named `.sigla` to store the data related to your code generation. Next, create a new definition. This holds the config and structure for the code generation.
 
 ```bash
-poetry run sigla nd person
+poetry run sigla new person
 ``` 
+The new file can be located here: `.sigla/definitions/person.xml`. With definition files, you can do pretty much anything, as long as it's valid xml. All the data in this fill will later be present inside the templates.
 
-This will generate a new definition file `.sigla/definitions/person.xml`. Fill that definition with something along the lines of:
+Fill the definition with this:
 
 ```xml
 <file to="people.txt">
@@ -45,28 +66,32 @@ This will generate a new definition file `.sigla/definitions/person.xml`. Fill t
 </file>
 ```    
 
-Exempting `file`, `root` and `echo`, you can use any (xml valid) name for the tag inside the xml file. For the attributes, you can use any valid xml attribute name. Now to the good stuff: once your data is filled and properly saved, run the generator:
+This tells sigla to generate a new file called `person.txt`, where the content will come from the template `.sigla/templates/person.jinja2`. The person template will receive 2 variables called `name` and `age` that will be accessible through the `node` like this `node.name` and `node.age`. 
+
+Exempting `file`, `root` and `echo`, which have special meaning, you can use any (valid xml) name for the tags inside the xml file and they'll have a matching template inside `.sigla/templates`. For the attributes, you can use any valid xml attribute name. 
+
+Once your definition is filled and saved, run the generator:
 
 ```bash
 poetry run sigla rd person
 ``` 
 
-Since this is the first time running the code generator and since you have no templates: sigla will create them for you. Take a look at the newly created template `.sigla/template/person.jinja2` and update its content to match the following:
+Since this is the first time running the code generator and you have no templates, sigla will create them for you. Take a look at the newly created template `.sigla/template/person.jinja2`. You can update its content with the following:
 
-```my name is {{ name }} and I'm {{ age }} years old```
+```my name is {{ node.name }} and I'm {{ node.age }} years old```
     
     
-If you rerun the generator and look into `people.txt`, you should see the result: 
+If you rerun the generator and look at the file `people.txt`, you should see the following result: 
 
 
 ```my name is james and I'm 33 years old```
 
-You just completed your first generator.
+You just completed your first generator and your first iteration. Now if you go back and change the name or the template, you can re-run the code generation to refresh the resulting code.
 
 
 ### Lists
 
-We've seen how to make a simple code generator by considering only one person. What if you wish to generate the same but for your family? In that case, the data becomes:
+We've seen how to make a simple code generator by considering only one person. What if you wish to generate the same but for your whole family? In that case, the data becomes:
 
 ```xml
 <file to="people.txt">
@@ -79,7 +104,9 @@ We've seen how to make a simple code generator by considering only one person. W
 </file>
 ```    
 
-Run the generator again. It should create a new template `family.ninja2` that you should update with:
+Notice that this is the first time you encounter nesting. The only thing to know is that you can nest up to infinity and when writing the templates, the nested children will be available through `node.children`.
+
+RunCommand the generator again to generated the new template: `family.ninja2`. You can update it like this:
 
 ```
 My family presentations:
@@ -87,7 +114,7 @@ My family presentations:
 {{ node.children() }}
 ```
 
-or
+or 
  
 ```
 My family presentations:
@@ -120,7 +147,7 @@ It was mentioned earlier that besides some special tags, you could use any tag i
 
 ### Multiple outputs
 
-Since you know about `<file/>` and `<root/>` it is time to mention that you do have to generate a single file from a definition like it was showed previously. So, each definition file can be responsible for the generation of multiple files. To do it, simply add more `<file/>` wrapped into a `<root/>`. Example:
+Since you know about `<file/>` and `<root/>` it is a good time to mention that a valide xml file should have a single root node. That is why `<root/>` exists. If you want to generate more than one file from a single definition, simply wrapp all the `<file/>` with `<root/>`, like so:
 
 ```xml
 <root>
@@ -148,7 +175,7 @@ It is important to note that the attributes from the parents are passed automati
 
 Then, `family_name` will be available inside `person.jinja2` and as such, you can do this:
 
-```my name is {{ name }} {{ family_name }} and I'm {{ age }} years old```
+```my name is {{ node.name }} {{ node.family_name }} and I'm {{ node.age }} years old```
 
 To generate this:
 
@@ -174,8 +201,27 @@ Todo...
 
 ### Properties type convertion
 
-Todo...
+Passing only string as the value of properties is slighly constraining. As such, there is a way to cast into other types of variables:
 
+```xml
+    <something 
+        name='a' 
+        age-int='33' 
+        price-float='1.2' 
+        data-json='{\"v1\": 1}' 
+    />
+```
+Notice the `-int`, `-float` and `-json`.
+
+The previous example will result into the following variables:
+```json
+{
+    "name": "a",
+    "age": 33,
+    "price": 1.2,
+    "data": {"v1": 1}
+}
+```
 
 ## Contributing
 
@@ -185,3 +231,10 @@ Pull requests are more than welcome. For major changes, please open an issue fir
 
 Please make sure to update tests as appropriate.
 
+### Poetry
+
+If you wish to "locally" install this into another project, you can do it like so
+
+```
+sigla = { path = "../sigla/", develop = true }
+```

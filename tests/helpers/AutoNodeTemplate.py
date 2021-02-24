@@ -1,6 +1,7 @@
 from pathlib import Path
-from core.errors import TemplateDoesNotExistError
-from core.nodes.NodeTemplate import NodeTemplate
+
+from sigla.errors import TemplateDoesNotExistError
+from sigla.core.nodes.NodeTemplate import NodeTemplate
 
 
 class AutoNodeTemplate(NodeTemplate):

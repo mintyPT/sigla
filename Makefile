@@ -27,12 +27,12 @@ version:
 	poetry run sigla version
 
 flake8:
-	poetry run flake8 --exclude dist,output,.sigla
+	poetry run flake8
 
 black:
 	poetry run black . -l 79
 
 mypy:
-	poetry run mypy -m src
+	poetry run mypy -m sigla
 
 check: black flake8 mypy

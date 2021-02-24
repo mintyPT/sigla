@@ -1,7 +1,7 @@
-from core.importers import base_node_to_node, string_to_nodes
+from sigla.sigla import string_to_data, data_to_node
+from sigla.core.outputs.OutputEcho import OutputEcho
+from sigla.core.outputs.OutputFile import OutputFile
 from .helpers.node_factory_for_testing import node_factory_for_testing
-from core.outputs.OutputEcho import OutputEcho
-from core.outputs.OutputFile import OutputFile
 
 
 class TestOutputs:
@@ -16,8 +16,8 @@ class TestOutputs:
                 </echo>
             </root>
         """
-        got = base_node_to_node(
-            string_to_nodes(provided), factory=node_factory_for_testing
+        got = data_to_node(
+            string_to_data(provided), factory=node_factory_for_testing
         )()
         expected = [
             OutputFile(path="result.txt", content="core"),

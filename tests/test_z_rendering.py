@@ -1,4 +1,4 @@
-from core.importers import base_node_to_node, string_to_nodes
+from sigla.sigla import string_to_data, data_to_node
 from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
 from .helpers.node_factory_for_testing import node_factory_for_testing
 
@@ -85,8 +85,8 @@ class TestRendering:
         provided = """
         <person name="minty" age="33" />
         """
-        got = base_node_to_node(
-            string_to_nodes(provided),
+        got = data_to_node(
+            string_to_data(provided),
             factory=node_factory_for_testing,
         )()
 
@@ -98,9 +98,9 @@ class TestRendering:
             <person />
         </echo>
         """
-        nodes = string_to_nodes(provided)
+        nodes = string_to_data(provided)
 
-        got = base_node_to_node(
+        got = data_to_node(
             nodes,
             factory=node_factory_for_testing,
         )
@@ -124,8 +124,8 @@ class TestRendering:
             </tb>
         </ta>
         """
-        got = base_node_to_node(
-            string_to_nodes(provided),
+        got = data_to_node(
+            string_to_data(provided),
             factory=node_factory_for_testing,
         )()
         assert got == "one/two/three"
@@ -139,17 +139,17 @@ class TestRendering:
             </second_level>
         </first_level>
         """
-        nodes = string_to_nodes(provided)
+        nodes = string_to_data(provided)
 
-        got = base_node_to_node(
+        got = data_to_node(
             nodes,
             factory=node_factory_for_testing,
         )
         assert got() == "__one/two/three__"
 
     def test_big_one(self):
-        got = base_node_to_node(
-            string_to_nodes(definition),
+        got = data_to_node(
+            string_to_data(definition),
             factory=node_factory_for_testing,
         )()
 

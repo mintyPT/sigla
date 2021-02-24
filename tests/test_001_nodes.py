@@ -1,19 +1,20 @@
-from core.importers import string_to_nodes
-from core import cast_xml_property
-from core.nodes.Node import BaseNode
-from core.nodes.Node import Node
+from sigla.utils import cast_xml_property, import_node
+from sigla.sigla import string_to_data
+from sigla.core.cls.Data import Data
+
+Node = import_node()
 
 
 class TestBaseNode:
     def test_load_single_node(self):
-        expected = BaseNode("a", {"name": "your_name"})
-        assert string_to_nodes("<a name='your_name' />") == expected
+        expected = Data("a", {"name": "your_name"})
+        assert string_to_data("<a name='your_name' />") == expected
 
     def test_nested_nodes(self):
-        expected = BaseNode(
-            "a", {"name": "a"}, children=[(BaseNode("b", {"name": "b"}))]
+        expected = Data(
+            "a", {"name": "a"}, children=[(Data("b", {"name": "b"}))]
         )
-        assert string_to_nodes("<a name='a'><b name='b'></b></a>") == expected
+        assert string_to_data("<a name='a'><b name='b'></b></a>") == expected
 
     def test_tag_props_conversion(self):
         assert cast_xml_property("age-int", "23") == ("age", 23)
