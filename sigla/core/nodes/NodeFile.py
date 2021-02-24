@@ -9,7 +9,7 @@ class NodeFile(Node):
         super().process()
         content = self.children()
         if "to" not in self.data.attributes.keys():
-            raise Exception(
+            raise AttributeError(
                 "You need to provide the propriety `to` with a filepath on the element <file> to save the results to"  # noqa
             )
         to = self.data.attributes["to"]
