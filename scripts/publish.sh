@@ -14,4 +14,4 @@ git tag -a "v$version" -m "v$version"
 git push
 git push --tags
 
-poetry publish
+poetry publish --username minty
