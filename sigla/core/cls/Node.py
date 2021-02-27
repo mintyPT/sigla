@@ -27,7 +27,6 @@ class Node(object):
     def __getattr__(self, name: str) -> Any:
         if name in self.attributes:
             return self.attributes[name]
-        # print(f'node does not have attr {name}')
         raise AttributeError(f"{self.__class__.__name__}.{name} is invalid.")
 
     def __repr__(self) -> str:
@@ -37,11 +36,7 @@ class Node(object):
         return dedent(f"""<{tag} {attrs}>{children}</{self.data.tag}>""")
 
     def __eq__(self, other):
-        return (
-            self.data.tag == other.data.tag
-            and self.data.attributes == other.data.attributes
-            and self.data.children == other.data.children
-        )  # and self.context == other.context
+        return self.data == other.data
 
     def append(self, node: "Node"):
         self.data.children.append(node)

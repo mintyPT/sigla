@@ -125,19 +125,19 @@ class NodeTemplate(Node):
         path = self.get_template_path(tag)
 
         if path.exists() is False:
-            variables = self.attributes
-
-            methods_children = NodeList.get_node_list_methods()
-
-            content = self.render_template(
-                default_template_content,
-                variables=variables,
-                methods=(list(methods_children)),
-            )
-            
-            path.write_text(content)
+            self.create_default_template(path)
 
         return path.read_text()
+
+    def create_default_template(self, path):
+        variables = self.attributes
+        methods = NodeList.get_node_list_methods()
+        content = self.render_template(
+            default_template_content,
+            variables=variables,
+            methods=(list(methods)),
+        )
+        path.write_text(content)
 
     def get_template_path(self, tag):
         path = get_template_path(
