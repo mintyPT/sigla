@@ -156,3 +156,15 @@ class TestRendering:
         assert got.replace(" ", "").replace("\n", "") == expected.replace(
             " ", ""
         ).replace("\n", "")
+
+    def test_bundling(self):
+        provided = """
+        <persona bundle="nurse" name="Jeanne"/>
+        """
+        nodes = string_to_data(provided)
+
+        got = data_to_node(
+            nodes,
+            factory=node_factory_for_testing,
+        )
+        assert got() == "This nurse's name is Jeanne"

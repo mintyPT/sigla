@@ -6,6 +6,7 @@ from jinja2 import (
     UndefinedError,
 )
 
+from sigla import config
 from sigla.utils import (
     frontmatter_split,
     frontmatter_parse,
@@ -18,8 +19,16 @@ Node = import_node()
 NodeList = import_node_list()
 
 
+def get_template_path(base_path, tag, ext="jinja2", bundle=None):
+    path = Path(base_path)
+    if bundle:
+        path = path.joinpath(bundle)
+    path = path.joinpath(f'{tag}.{ext}')
+    return path
+
+
 class NodeTemplate(Node):
-    template_path = "./.sigla/templates/%s.jinja2"
+    base_path = config.path.templates
 
     def process(self):
         super().process()
@@ -76,7 +85,8 @@ class NodeTemplate(Node):
         return template_content.strip()
 
     def raw_template_loader(self, tag) -> str:
-        path = Path(self.template_path % tag)
+        path = self.get_template_path(tag)
+
         if path.exists() is False:
             variables = self.attributes
 
@@ -126,6 +136,10 @@ class NodeTemplate(Node):
             path.write_text(content)
 
         return path.read_text()
+
+    def get_template_path(self, tag):
+        path = get_template_path(self.base_path, tag, 'jinja2', bundle=(self.attributes.get('bundle')))
+        return path
 
     @staticmethod
     def get_filters():

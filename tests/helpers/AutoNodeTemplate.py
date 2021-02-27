@@ -5,10 +5,10 @@ from sigla.core.nodes.NodeTemplate import NodeTemplate
 
 
 class AutoNodeTemplate(NodeTemplate):
-    base_path = "tests/templates/%s.jinja2"
+    base_path = "tests/templates/"
 
     def load_test_template(self, name):
-        return Path(self.base_path % name).read_text()
+        return Path(self.get_template_path(name)).read_text()
 
     def raw_template_loader(self, tag) -> str:
         try:
