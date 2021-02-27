@@ -9,5 +9,6 @@ class TestFileNode:
 
         with suppress(AttributeError):
             node()
-            assert False, "Should throw an exception since no `to` attr was provided"
-
+            assert (
+                False
+            ), "Should throw an exception since no `to` attr was provided"

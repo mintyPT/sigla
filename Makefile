@@ -18,7 +18,7 @@ show:
 	poetry show -v
 
 test:
-	poetry run pytest --cov-config=.coveragerc --cov=src -x -s -vv .
+	poetry run pytest --cov-config=.coveragerc --cov=sigla -x -s -vv .
 
 main-render:
 	poetry run sigla render $(file)

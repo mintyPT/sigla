@@ -5,7 +5,6 @@ import importlib.machinery
 from contextlib import suppress
 from pathlib import Path
 from textwrap import dedent
-from typing import TypeVar
 
 from frontmatter import u, detect_format, handlers
 from yaml.parser import ParserError

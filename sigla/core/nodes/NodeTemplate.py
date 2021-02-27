@@ -7,13 +7,13 @@ from jinja2 import (
 )
 
 from sigla import config
+from sigla.core.renders import render
 from sigla.utils import (
     frontmatter_split,
     frontmatter_parse,
     import_node,
     import_node_list,
 )
-from sigla.core.renders.JinjaRenderer import JinjaRenderer
 
 Node = import_node()
 NodeList = import_node_list()
@@ -23,7 +23,7 @@ def get_template_path(base_path, tag, ext="jinja2", bundle=None):
     path = Path(base_path)
     if bundle:
         path = path.joinpath(bundle)
-    path = path.joinpath(f'{tag}.{ext}')
+    path = path.joinpath(f"{tag}.{ext}")
     return path
 
 
@@ -36,15 +36,16 @@ class NodeTemplate(Node):
 
     def render_template(self, str_tpl, **kwargs):
         try:
-            renderer = JinjaRenderer()
-            return renderer.render(
-                str_tpl, filters=self.get_filters(), **kwargs, node=self
+            return render(
+                "jinja",
+                str_tpl,
+                filters=self.get_filters(),
+                **kwargs,
+                node=self,
             )
 
         except UndefinedError as e:
-            print(
-                dedent(
-                    f"""\
+            err_message = dedent(f"""\
                     ------------------------------
                     ERROR WHILE RENDERING TEMPLATE
                     ------------------------------
@@ -57,9 +58,9 @@ class NodeTemplate(Node):
 
                     ---
 
-                    """
-                )
-            )
+                    """)
+
+            print(err_message)
 
             raise e
 
@@ -138,7 +139,12 @@ class NodeTemplate(Node):
         return path.read_text()
 
     def get_template_path(self, tag):
-        path = get_template_path(self.base_path, tag, 'jinja2', bundle=(self.attributes.get('bundle')))
+        path = get_template_path(
+            self.base_path,
+            tag,
+            "jinja2",
+            bundle=(self.attributes.get("bundle")),
+        )
         return path
 
     @staticmethod

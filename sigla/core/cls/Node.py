@@ -28,7 +28,7 @@ class Node(object):
         if name in self.attributes:
             return self.attributes[name]
         # print(f'node does not have attr {name}')
-        raise AttributeError(f'{self.__class__.__name__}.{name} is invalid.')
+        raise AttributeError(f"{self.__class__.__name__}.{name} is invalid.")
 
     def __repr__(self) -> str:
         tag = self.data.tag
