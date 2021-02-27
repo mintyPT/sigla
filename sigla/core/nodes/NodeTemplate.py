@@ -27,6 +27,57 @@ def get_template_path(base_path, tag, ext="jinja2", bundle=None):
     return path
 
 
+def get_default_error_message(node, str_tpl):
+    return dedent(
+        f"""\
+        ------------------------------
+        ERROR WHILE RENDERING TEMPLATE
+        ------------------------------
+
+        TEMPLATE:
+        {str_tpl}
+
+        NODE:
+        {node}
+
+        ---
+
+        """
+    )
+
+
+default_template_content = dedent(
+    """\
+    ---
+    title: Generating code like it's 99
+    ---
+
+    You can use variables written inside the frontmatter:
+        - {% raw %}{{ node.title }}{% endraw %}: Generating code like it's 99
+
+    Available variables (with current values for first node as an example):
+    {%- for key, value in variables.items() %}
+        - {{ "{{ node." + key + " }}" }}: {{value}}
+    {%- else %}
+        - none for now
+    {%- endfor %}
+
+    Methods available on node.children:
+    {%- for value in methods %}
+        - {{ value }}
+    {%- endfor %}
+
+    You can also iterate over node.children and access variables, render, ...
+    {% raw %}
+    {% for child in node.children %}
+        {{ child() }}
+    {% endfor %}
+    {% endraw %}
+
+    """  # noqa E501
+)
+
+
 class NodeTemplate(Node):
     base_path = config.path.templates
 
@@ -45,23 +96,8 @@ class NodeTemplate(Node):
             )
 
         except UndefinedError as e:
-            err_message = dedent(f"""\
-                    ------------------------------
-                    ERROR WHILE RENDERING TEMPLATE
-                    ------------------------------
-
-                    TEMPLATE:
-                    {str_tpl}
-
-                    NODE:
-                    {self}
-
-                    ---
-
-                    """)
-
+            err_message = get_default_error_message(self, str_tpl)
             print(err_message)
-
             raise e
 
     def update_context(self):
@@ -82,8 +118,8 @@ class NodeTemplate(Node):
 
     def template_loader(self, tag) -> str:
         template = self.raw_template_loader(tag)
-        fm_raw, template_content, handler = frontmatter_split(template)
-        return template_content.strip()
+        frontmatter, content, handler = frontmatter_split(template)
+        return content.strip()
 
     def raw_template_loader(self, tag) -> str:
         path = self.get_template_path(tag)
@@ -91,49 +127,14 @@ class NodeTemplate(Node):
         if path.exists() is False:
             variables = self.attributes
 
-            methods_children = []
-            for method in NodeList.methods:
-                args = inspect.getfullargspec(getattr(NodeList, method)).args
-                args = [a for a in args if a not in ["self"]]
-                method = f".{method}" if method != "__call__" else ""
-                methods_children.append(
-                    f"node.children{method}({','.join(args)})"
-                )
+            methods_children = NodeList.get_node_list_methods()
 
             content = self.render_template(
-                dedent(
-                    """\
-                    ---
-                    title: Generating code like it's 99
-                    ---
-
-                    You can use variables written inside the frontmatter:
-                        - {% raw %}{{ node.title }}{% endraw %}: Generating code like it's 99
-
-                    Available variables (with current values for first node as an example):
-                    {%- for key, value in variables.items() %}
-                        - {{ "{{ node." + key + " }}" }}: {{value}}
-                    {%- else %}
-                        - none for now
-                    {%- endfor %}
-
-                    Methods available on node.children:
-                    {%- for value in methods %}
-                        - {{ value }}
-                    {%- endfor %}
-
-                    You can also iterate over node.children and access variables, render, ...
-                    {% raw %}
-                    {% for child in node.children %}
-                        {{ child() }}
-                    {% endfor %}
-                    {% endraw %}
-
-                    """  # noqa E501
-                ),
+                default_template_content,
                 variables=variables,
                 methods=(list(methods_children)),
             )
+            
             path.write_text(content)
 
         return path.read_text()

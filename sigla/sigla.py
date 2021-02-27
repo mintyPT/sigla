@@ -6,7 +6,7 @@ from sigla.core.nodes.NodeFile import NodeFile
 from sigla.core.nodes.NodeRoot import NodeRoot
 from sigla.core.nodes.NodeTemplate import NodeTemplate
 from sigla.types import NodeType
-from sigla.utils import cast_xml_property
+from sigla.utils import cast_property
 
 
 def node_factory(tag, attributes) -> NodeType:
@@ -36,7 +36,7 @@ def xml_to_data(obj) -> Data:
     new_attributes = {}
 
     for prop_name, prop_value in attributes.items():
-        prop_name, prop_value = cast_xml_property(prop_name, prop_value)
+        prop_name, prop_value = cast_property(prop_name, prop_value)
         new_attributes[prop_name] = prop_value
 
     node = Data(obj.tag, attributes=new_attributes, children=[])

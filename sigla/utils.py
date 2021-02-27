@@ -1,5 +1,6 @@
 import json
 import types
+import warnings
 import importlib
 import importlib.machinery
 from contextlib import suppress
@@ -41,22 +42,35 @@ def import_node() -> type:
     return res
 
 
-def cast_xml_property(prop_name, prop_value):
+def cast_property(prop_name, prop_value):
     if prop_name.endswith("-int"):
         return prop_name.replace("-int", ""), int(prop_value)
+
     elif prop_name.endswith("-float"):
         new_key = prop_name.replace("-float", "")
         new_value = float(prop_value)
+        return new_key, new_value
+
     elif prop_name.endswith("-json"):
         new_key = prop_name.replace("-json", "")
         new_value = json.loads(prop_value)
+        return new_key, new_value
+
     elif prop_name.endswith("-bool"):
         new_key = prop_name.replace("-bool", "")
         new_value = True if prop_value in ["True", "true", "1"] else False
-    else:
-        new_key = prop_name
-        new_value = prop_value
+        return new_key, new_value
+
+    new_key = prop_name
+    new_value = prop_value
     return new_key, new_value
+
+
+
+
+def cast_xml_property(prop_name, prop_value):
+    warnings.warn("This will be deprecated. Please us `cast_property`")
+    return cast_property(prop_name, prop_value)
 
 
 def load_module(module_name, module_path):

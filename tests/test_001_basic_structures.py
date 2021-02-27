@@ -1,4 +1,4 @@
-from sigla.utils import cast_xml_property, import_node
+from sigla.utils import cast_property, import_node
 from sigla.sigla import string_to_data
 from sigla.core.cls.Data import Data
 
@@ -17,9 +17,9 @@ class TestBaseNode:
         assert string_to_data("<a name='a'><b name='b'></b></a>") == expected
 
     def test_tag_props_conversion(self):
-        assert cast_xml_property("age-int", "23") == ("age", 23)
-        assert cast_xml_property("height-float", "1.87") == ("height", 1.87)
-        assert cast_xml_property("data-json", '{"name": "mauro"}') == (
+        assert cast_property("age-int", "23") == ("age", 23)
+        assert cast_property("height-float", "1.87") == ("height", 1.87)
+        assert cast_property("data-json", '{"name": "mauro"}') == (
             "data",
             {"name": "mauro"},
         )

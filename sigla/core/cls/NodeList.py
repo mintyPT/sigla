@@ -1,3 +1,6 @@
+import inspect
+
+
 class NodeList(list):
     methods = [
         "__call__",
@@ -42,3 +45,15 @@ class NodeList(list):
 
     def join(self, sep):
         return sep.join(self)
+
+    @classmethod
+    def get_node_list_methods(cls):
+        methods_children = []
+        for method in cls.methods:
+            args = inspect.getfullargspec(getattr(NodeList, method)).args
+            args = [a for a in args if a not in ["self"]]
+            method = f".{method}" if method != "__call__" else ""
+            methods_children.append(
+                f"node.children{method}({','.join(args)})"
+            )
+        return methods_children
