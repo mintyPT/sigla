@@ -4,17 +4,45 @@
 
 ## Introduction
 
-Sigla is a code generator dressed as a cli. It is intended to help you generate code (or any type of text) in the easiest and most forward way possible. The core idea for the code generator came from the book "Code Generation in Action" by Jack Herrington, but with some extra magic built into it.
+Sigla is a code generator.  Some important points about it: 
+
+- It's is meant to be used as a cli (mostly);
+- I will allow you to re-generate the templates whenever you need; Either because the data changed or the templates;
+- It is intended to help you generate code or simple text in the easiest and most forward way possible. For this reasons we added an init command and the automatic creation of missing templates;
+- The core idea for the code generator came from the book ["Code Generation in Action" by Jack Herrington](https://www.manning.com/books/code-generation-in-action), but with some extra magic built into it like frontmatter and a way to know the properties both parents and childrens of a node (more on this later).
+
+
+## Requirements (knowledge)
 
 There are two things you need to understand about sigla:
 
-1. The workflow to use the cli is: 
-    1. Create or modify the definition file for a generator;
-    2. Create or modify a template;
-    3. Generate some code;
-    4. Repeat until the end of the project;
+1. It has a clear workflow: 
+    1. Create or modify the definition file for a generator (this is a xml file);
+    2. Create or modify a template (this is a jinja file). You can add/modify frontmatter written in yaml;
+    3. Feed the definition file into the generator;
+    4. Repeat 1-3 as needed.
     
-    The improvement and updating of the templates and definition files are meant to be iterative where you can re-generate the code any time you want. This goes specially well with object oriented languages where you can generate some base classes and then extend those manually, overriding stuff as necessary. You can always just generate the code once, but you are throwing away so much potential.
+    The improvement of the templates and definition files are meant to be iterative, allowing you to re-generate the code any time you want. This pairs specially well with object oriented languages where you can generate some base classes and then extend those manually, overriding stuff as necessary. You can always just generate the code once, but you are throwing away so much potential. For example, we could generated a class like this in python
+    
+    ```python 
+    class PersonGenerated(object):
+        def __init__(self, first_name, last_name):
+            self.first_name = first_name
+            self.last_name = last_name 
+    ```
+   
+   and then extend it like so 
+
+    ```python 
+    class Person(PersonGenerated):
+        @property
+        def full_name(self):
+            return f"{self.first_name} {self.last_name}" 
+    ```
+   
+   Obviously this is a trivial example, but I believe it illustrates the point on what to generate and where to go from there to get the maximum value.
+      
+ 
 
 2. Despite being coded in python, the generator is well capable of generating code for any language or project. As of this day, I've used it to generate a django rest framework api (includes views, serializers, fixtures, seeds and tests), a frontend built with react, some text (conversion of data to text).
 
@@ -197,11 +225,11 @@ Todo...
 
 ### Access to children meta data (frontmatter)
 
-Todo...
+We've seen you can render children either doing node.children() or iterating over node.children and rendering each child with child(). This important thing to notice is that a child is a node just like the base node we use on our templates. This mean you have access to its attributes, children and so on.
 
-### Properties type convertion
+### Properties type conversion
 
-Passing only string as the value of properties is slighly constraining. As such, there is a way to cast into other types of variables:
+Passing only string as the value of properties is slightly constraining. As such, there is a way to cast into other types of variables:
 
 ```xml
     <something 
