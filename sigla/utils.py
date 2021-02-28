@@ -132,3 +132,11 @@ def frontmatter_parse(fm, handler, *, metadata=None):
         metadata.update(fm)
 
     return metadata
+
+
+def get_template_path(base_path, tag, ext="jinja2", bundle=None):
+    path = Path(base_path)
+    if bundle:
+        path = path.joinpath(bundle)
+    path = path.joinpath(f"{tag}.{ext}")
+    return path

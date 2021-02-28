@@ -1,5 +1,3 @@
-import inspect
-from pathlib import Path
 from textwrap import dedent
 
 from jinja2 import (
@@ -13,18 +11,10 @@ from sigla.utils import (
     frontmatter_parse,
     import_node,
     import_node_list,
-)
+    load_filters_from, get_template_path)
 
 Node = import_node()
 NodeList = import_node_list()
-
-
-def get_template_path(base_path, tag, ext="jinja2", bundle=None):
-    path = Path(base_path)
-    if bundle:
-        path = path.joinpath(bundle)
-    path = path.joinpath(f"{tag}.{ext}")
-    return path
 
 
 def get_default_error_message(node, str_tpl):
@@ -135,7 +125,7 @@ class NodeTemplate(Node):
         content = self.render_template(
             default_template_content,
             variables=variables,
-            methods=(list(methods)),
+            methods=list(methods),
         )
         path.write_text(content)
 
@@ -150,4 +140,4 @@ class NodeTemplate(Node):
 
     @staticmethod
     def get_filters():
-        return {}
+        return load_filters_from(config.path.filters)
