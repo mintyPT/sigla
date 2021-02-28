@@ -3,9 +3,9 @@ output/
 *.pyc
 debug.log
 .idea/
-.sigla/
 htmlcov/
 poetry.lock
 .python-version
 .coverage
 src/boreas
+temp/

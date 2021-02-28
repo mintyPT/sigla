@@ -106,6 +106,16 @@ class TestRendering:
         )
         assert got().content == "minty-sigla-33"
 
+    def test_filters(self):
+        provided = "<var value='a'/>"
+        nodes = string_to_data(provided)
+        got = data_to_node(
+            nodes,
+            factory=node_factory_for_testing,
+        )
+        assert got() == "[a]"
+
+
     def test_render_child(self):
         node = AutoNodeTemplate("a", {})
         node.append(AutoNodeTemplate("b", {"name": "minty", "age": "33"}))

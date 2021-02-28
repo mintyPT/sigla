@@ -15,3 +15,9 @@ class AutoNodeTemplate(NodeTemplate):
             return self.load_test_template(tag)
         except FileNotFoundError:
             raise TemplateDoesNotExistError(tag, self)
+
+    @staticmethod
+    def get_filters():
+        return {
+            "wrap": lambda e: f"[{e}]"
+        }
