@@ -1,4 +1,5 @@
 from textwrap import dedent
+from typing import TYPE_CHECKING, Type
 
 from jinja2 import (
     UndefinedError,
@@ -11,10 +12,16 @@ from sigla.utils import (
     frontmatter_parse,
     import_node,
     import_node_list,
-    load_filters_from, get_template_path)
+    load_filters_from,
+    get_template_path,
+)
 
-Node = import_node()
-NodeList = import_node_list()
+if TYPE_CHECKING:
+    from sigla.core.cls.Node import Node as OriginalNode
+    from sigla.core.cls.NodeList import NodeList as OriginalNodeList
+
+Node: Type[OriginalNode] = import_node()
+NodeList: Type[OriginalNodeList] = import_node_list()
 
 
 def get_default_error_message(node, str_tpl):
