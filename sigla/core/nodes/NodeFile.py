@@ -19,6 +19,6 @@ class NodeFile(Node):
 
     def raise_missing_to_attribute(self):
         raise AttributeError(
-            "You need to provide the propriety `to` with a filepath on the element <file> to save the results to"
-            # noqa
+            "You need to provide the propriety `to` with a filepath on "
+            "the element <file> to save the results to"
         )

@@ -115,7 +115,6 @@ class TestRendering:
         )
         assert got() == "[a]"
 
-
     def test_render_child(self):
         node = AutoNodeTemplate("a", {})
         node.append(AutoNodeTemplate("b", {"name": "minty", "age": "33"}))

@@ -14,7 +14,7 @@ def render(plugin, template, **kw):
 
 @register
 def jinja(template: str, filters: dict, **kwargs: any) -> str:
-    env = Environment(loader=BaseLoader)
+    env = Environment(loader=BaseLoader())
     env.filters.update(filters)
     template = env.from_string(template)
     return template.render(**kwargs)

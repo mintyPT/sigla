@@ -18,6 +18,4 @@ class AutoNodeTemplate(NodeTemplate):
 
     @staticmethod
     def get_filters():
-        return {
-            "wrap": lambda e: f"[{e}]"
-        }
+        return {"wrap": lambda e: f"[{e}]"}

@@ -6,12 +6,17 @@ import importlib.machinery
 from contextlib import suppress
 from pathlib import Path
 from textwrap import dedent
+from typing import TYPE_CHECKING, Type, TypeVar
 
 from frontmatter import u, detect_format, handlers
 from yaml.parser import ParserError
 
 #
 from sigla import config
+
+if TYPE_CHECKING:
+    from sigla.core.cls.Node import Node as OriginalNode
+    from sigla.core.cls.NodeList import NodeList as OriginalNodeList
 
 
 def ensure_dirs(*paths: str):
@@ -20,22 +25,25 @@ def ensure_dirs(*paths: str):
         Path(path_).mkdir(parents=True, exist_ok=True)
 
 
-def import_reference(ref: str) -> type:
-    """Imports stuff from modules dinamically"""
+T = TypeVar("T")
+
+
+def import_reference(ref: str) -> Type[T]:
+    """Imports stuff from modules dynamically"""
     p, m = ref.rsplit(".", 1)
     mod = importlib.import_module(p)
-    res = getattr(mod, m)
+    res: Type[T] = getattr(mod, m)
     return res
 
 
-def import_node_list() -> type:
+def import_node_list() -> Type[OriginalNodeList]:
     """Imports NodeList"""
     ref = config.cls.node_list
     res = import_reference(ref)
     return res
 
 
-def import_node() -> type:
+def import_node() -> Type[OriginalNode]:
     """Imports NodeList"""
     ref = config.cls.node
     res = import_reference(ref)
@@ -64,8 +72,6 @@ def cast_property(prop_name, prop_value):
     new_key = prop_name
     new_value = prop_value
     return new_key, new_value
-
-
 
 
 def cast_xml_property(prop_name, prop_value):
@@ -140,5 +146,3 @@ def get_template_path(base_path, tag, ext="jinja2", bundle=None):
         path = path.joinpath(bundle)
     path = path.joinpath(f"{tag}.{ext}")
     return path
-
-
