@@ -15,8 +15,8 @@ from yaml.parser import ParserError
 from sigla import config
 
 if TYPE_CHECKING:
-    from sigla.core.cls.Node import Node as OriginalNode
-    from sigla.core.cls.NodeList import NodeList as OriginalNodeList
+    from sigla.core.cls.Node import Node
+    from sigla.core.cls.NodeList import NodeList
 
 
 def ensure_dirs(*paths: str):
@@ -36,14 +36,14 @@ def import_reference(ref: str) -> Type[T]:
     return res
 
 
-def import_node_list() -> Type[OriginalNodeList]:
+def import_node_list() -> Type["NodeList"]:
     """Imports NodeList"""
     ref = config.cls.node_list
     res = import_reference(ref)
     return res
 
 
-def import_node() -> Type[OriginalNode]:
+def import_node() -> Type["Node"]:
     """Imports NodeList"""
     ref = config.cls.node
     res = import_reference(ref)

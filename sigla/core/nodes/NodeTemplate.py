@@ -20,8 +20,8 @@ if TYPE_CHECKING:
     from sigla.core.cls.Node import Node as OriginalNode
     from sigla.core.cls.NodeList import NodeList as OriginalNodeList
 
-Node: Type[OriginalNode] = import_node()
-NodeList: Type[OriginalNodeList] = import_node_list()
+Node: Type["OriginalNode"] = import_node()
+NodeList: Type["OriginalNodeList"] = import_node_list()
 
 
 def get_default_error_message(node, str_tpl):
