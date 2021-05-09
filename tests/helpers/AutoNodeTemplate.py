@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from sigla.errors import TemplateDoesNotExistError
-from sigla.core.nodes.NodeTemplate import NodeTemplate
+from sigla.utils.errors import TemplateDoesNotExistError
+from sigla.nodes.NodeTemplate import NodeTemplate
 
 
 class AutoNodeTemplate(NodeTemplate):

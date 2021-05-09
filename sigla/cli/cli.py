@@ -1,29 +1,47 @@
 import typer
+from sigla import config
 from typing import List
 from sigla import __version__
-from sigla.cli.commands.RunCommand import RunCommand
-from sigla.cli.commands.dump_config_command import dump_config_command
-from sigla.cli.commands.init_command import init_command
-from sigla.cli.commands.new_command import new_command
+from sigla.cli.actions import NewDefinitionFile, NewFiltersFile, RunCommand
+from sigla.utils.helpers import ensure_dirs
 
 app = typer.Typer()
 
 
 @app.command()
 def dump_config():
-    dump_config_command()
+    print(f"|> config.path.templates:\t {config.path.templates}")
+    print(f"|> config.path.snapshots:\t {config.path.snapshots}")
+    print(f"|> config.path.definitions:\t {config.path.definitions}")
+    print(f"|> config.path.filters:\t {config.path.filters}")
+    print("---")
+    print(f"|> config.cls.node_list:\t {config.cls.node_list}")
 
 
 @app.command()
 def init():
     """ Creates the .init folder to keep stuff """
-    init_command()
+    print(":: sigla init")
+    print(f":: - checking/creating folder {config.path.templates}")
+    print(f":: - checking/creating folder {config.path.snapshots}")
+    print(f":: - checking/creating folder {config.path.definitions}")
+    ensure_dirs(
+        config.path.templates,
+        config.path.snapshots,
+        config.path.definitions,
+    )
+    print(f":: - checking/creating file {config.path.filters}")
+    cmd = NewFiltersFile(
+        config.path.root_directory, config.path.filters_filename
+    )
+    cmd.run()
 
 
 @app.command()
 def new(name: str):
     """ Generate a new definition for a generator. """
-    new_command(name)
+    cmd = NewDefinitionFile(config.path.definitions, name)
+    cmd.run()
 
 
 @app.command()

@@ -2,7 +2,7 @@
 Export filters to use on the templates using the `FILTERS` variable
 """
 import json
-from sigla.filters import *
+from sigla import register_filter
 
 
 @register_filter("dump")
