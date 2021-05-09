@@ -6,7 +6,6 @@ from pathlib import Path
 
 from sigla import config, load_node
 from sigla.utils.errors import TemplateDoesNotExistError
-from sigla.nodes.NodeABC import NodeABC
 
 
 class Action(ABC):
@@ -66,7 +65,7 @@ class NewFiltersFile(FileAction):
             Export filters to use on the templates using the `FILTERS` variable
             \"\"\"
             import json
-            from sigla.filters import *
+            from sigla import register_filter
 
             @register_filter('dump')
             def dump(var):
@@ -85,10 +84,6 @@ class RunCommand:
         ]
         self.matches = [match for glob in self.globs for match in glob]
 
-    @staticmethod
-    def handle_results(s: NodeABC):
-        s.finish()
-
     def handle_match(self, match):
         if not match.exists():
             raise typer.Exit(f"✋ The definition(s) do not exists {match}")
@@ -104,7 +99,7 @@ class RunCommand:
         results = load_node("xml_string", str_xml, factory=None)()
 
         for output in results:
-            self.handle_results(output)
+            output.finish()
 
     def __call__(self, *args, **kwargs):
 

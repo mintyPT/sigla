@@ -30,12 +30,12 @@ class NodeFile(Node):
 
     def __eq__(self, o: any) -> bool:
         if type(self) == self.__class__ and type(o) == self.__class__:
-            if self.content == o.content and self.path == o.path:
+            if self.content == o.content and self.to == o.path:
                 return True
         return False
 
     def finish(self):
-        print(f":: Saving {self.path}")
-        ensure_dirs(Path(self.path).parent)
-        with open(self.path, "w") as h:
+        print(f":: Saving {self.to}")
+        ensure_dirs(Path(self.to).parent)
+        with open(self.to, "w") as h:
             h.write(self.content)

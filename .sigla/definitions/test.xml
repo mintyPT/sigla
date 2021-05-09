@@ -1,5 +1,0 @@
-<root>
-    <file to="temp/test.txt">
-        <wrapped-value value="a"/>
-    </file>
-</root>

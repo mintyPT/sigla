@@ -9,3 +9,5 @@ poetry.lock
 .coverage
 src/boreas
 temp/
+
+.sigla/
