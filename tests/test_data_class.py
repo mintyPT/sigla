@@ -5,16 +5,14 @@ from sigla.data.loaders import data_from_xml_string
 
 class TestDataClass(unittest.TestCase):
     def test_load_single_node(self):
-        expected = Data("a", {"name": "your_name"})
+        expected = Data(tag="a", attributes={"name": "your_name"})
         self.assertEqual(
             data_from_xml_string("<a name='your_name' />"),
             expected,
         )
 
     def test_nested_nodes(self):
-        expected = Data(
-            "a", {"name": "a"}, children=[(Data("b", {"name": "b"}))]
-        )
+        expected = Data(tag="a", attributes={"name": "a"}, children=[(Data("b", {"name": "b"}))])
         self.assertEqual(
             data_from_xml_string("<a name='a'><b name='b'></b></a>"),
             expected,

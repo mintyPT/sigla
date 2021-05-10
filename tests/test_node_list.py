@@ -1,13 +1,13 @@
 import unittest
 
-from sigla.nodes.Node import Node
 from sigla.nodes.NodeList import NodeList
+from sigla.nodes.NodeRoot import NodeRoot
 
 
 class TestNodeList(unittest.TestCase):
     def test_filter(self):
         node_list = NodeList(
-            [Node(s) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
+            [NodeRoot(s) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
         )
 
         filtered = node_list.filter(tag="cenas")
@@ -15,7 +15,7 @@ class TestNodeList(unittest.TestCase):
 
         el = filtered.first()
         self.assertEqual(
-            type(el), Node, "Should fetch one element and be of type Node"
+            type(el), NodeRoot, "Should fetch one element and be of type Node"
         )
 
         filtered = node_list.filter(tag="cenas2")

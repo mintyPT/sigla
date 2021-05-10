@@ -1,7 +1,6 @@
 from textwrap import dedent
 from typing import Any
 
-from sigla.Attributes import Attributes
 from sigla.data.Data import Data
 from sigla.nodes.NodeABC import NodeABC
 from sigla.nodes.NodeList import NodeList
@@ -11,18 +10,12 @@ class Node(NodeABC):
     def __init__(self, tag, attributes=None):
         if attributes is None:
             attributes = {}
-        self.data = Data(
-            tag, attributes=attributes, children=[], parent_attributes={}
-        )
+        self.data = Data(tag=tag, attributes=attributes, children=[], parent_attributes={})
         self.context = {}
 
     @property
     def attributes(self):
-        return Attributes(
-            self.data.frontmatter_attributes,
-            self.data.attributes,
-            self.data.parent_attributes,
-        )
+        return self.data.all_attributes
 
     def __getattr__(self, name: str) -> Any:
         if name in self.attributes:
@@ -44,9 +37,6 @@ class Node(NodeABC):
 
     def process(self):
         self.update_context()
-
-    def __call__(self, *args, **kwargs):
-        return self.process()
 
     def update_parent_context(self, ctx):
         self.data.parent_attributes.update(**ctx)

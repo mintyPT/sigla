@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from sigla.data.Data import Data
 
 
@@ -10,9 +11,8 @@ class NodeABC(ABC):
         pass
 
     @abstractmethod
-    def __call__(self, *args, **kwargs):
-        pass
-
-    @abstractmethod
     def finish(self):
         pass
+
+    def __call__(self, *args, **kwargs):
+        return self.process()

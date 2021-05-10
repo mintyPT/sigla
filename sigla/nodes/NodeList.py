@@ -1,8 +1,4 @@
 import inspect
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from sigla.nodes.Node import Node
 
 
 class NodeList(list):
@@ -32,7 +28,7 @@ class NodeList(list):
                 ret += child
             else:
                 raise NotImplementedError(
-                    f"Case not accounted for: {type(child)}"
+                    f"Cannot flatten {type(child)}"
                 )
         return self.__class__(ret)
 
@@ -50,21 +46,13 @@ class NodeList(list):
         return self.__class__(map(lambda e: getattr(e, name, None), self))
 
     def filter(self, **kwargs):
-        def filter_func(el: "Node"):
-            is_good = True
-
-            if is_good and "tag" in kwargs:
-                is_good = el.data.tag == kwargs["tag"]
-
-            return is_good
-
-        res = filter(filter_func, self)
+        res = filter(lambda el: el.data.tag == kwargs["tag"], self)
         return self.__class__(res)
 
     def first(self):
         return self[0]
 
-    def join(self, sep):
+    def join(self, sep=''):
         return sep.join(self)
 
     @classmethod

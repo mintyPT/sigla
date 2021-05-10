@@ -11,7 +11,7 @@ def data_from_element_tree(element):
         prop_name, prop_value = cast_property(prop_name, prop_value)
         new_attributes[prop_name] = prop_value
 
-    data = Data(element.tag, attributes=new_attributes, children=[])
+    data = Data(tag=element.tag, attributes=new_attributes, children=[])
 
     for child in element:
         child_data = data_from_element_tree(child)
