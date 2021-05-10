@@ -10,7 +10,7 @@ class AutoNodeTemplate(NodeTemplate):
     def load_test_template(self, name):
         return Path(self.get_template_path(name)).read_text()
 
-    def raw_template_loader(self, tag) -> str:
+    def load_template(self, tag) -> str:
         try:
             return self.load_test_template(tag)
         except FileNotFoundError:

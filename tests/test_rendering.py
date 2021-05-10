@@ -80,7 +80,7 @@ definition = """
 class TestRendering(unittest.TestCase):
     def test_simple(self):
         node = AutoNodeTemplate("b", {"name": "minty", "age": "33"})
-        got = node()
+        got = node.process()
         self.assertEqual(got, "minty-33")
 
     def test_simple_with_frontmatter(self):
@@ -102,23 +102,23 @@ class TestRendering(unittest.TestCase):
         got = load_node(
             "xml_string", provided, factory=node_factory_for_testing
         )
-        self.assertEqual(got().content, "minty-sigla-33")
+        self.assertEqual(got.process().content, "minty-sigla-33")
 
     def test_filters(self):
         provided = "<var value='a'/>"
         got = load_node(
             "xml_string", provided, factory=node_factory_for_testing
         )
-        self.assertEqual(got(), "[a]")
+        self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
         node = AutoNodeTemplate("a", {})
         node.append(AutoNodeTemplate("b", {"name": "minty", "age": "33"}))
-        got = node()
+        got = node.process()
         self.assertEqual(got, "-a-minty-33-a-")
 
         node.data.tag = "a2"
-        got = node()
+        got = node.process()
         self.assertEqual(got, "-a-minty-33-a-")
 
     def test_render_context2(self):
@@ -146,12 +146,13 @@ class TestRendering(unittest.TestCase):
         got = load_node(
             "xml_string", provided, factory=node_factory_for_testing
         )
-        self.assertEqual(got(), "__one/two/three__")
+        self.assertEqual(got.process(), "__one/two/three__")
 
     def test_big_one(self):
+        self.maxDiff = None
         got = load_node(
             "xml_string", definition, factory=node_factory_for_testing
-        )()
+        ).process()
 
         self.assertEqual(
             got.replace(" ", "").replace("\n", ""),
@@ -165,4 +166,4 @@ class TestRendering(unittest.TestCase):
         got = load_node(
             "xml_string", provided, factory=node_factory_for_testing
         )
-        self.assertEqual(got(), "This nurse's name is Jeanne")
+        self.assertEqual(got.process(), "This nurse's name is Jeanne")

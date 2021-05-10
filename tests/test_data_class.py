@@ -12,7 +12,11 @@ class TestDataClass(unittest.TestCase):
         )
 
     def test_nested_nodes(self):
-        expected = Data(tag="a", attributes={"name": "a"}, children=[(Data("b", {"name": "b"}))])
+        expected = Data(
+            tag="a",
+            attributes={"name": "a"},
+            children=[(Data("b", {"name": "b"}))],
+        )
         self.assertEqual(
             data_from_xml_string("<a name='a'><b name='b'></b></a>"),
             expected,

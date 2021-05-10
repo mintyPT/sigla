@@ -27,9 +27,7 @@ class NodeList(list):
             elif isinstance(child, list):
                 ret += child
             else:
-                raise NotImplementedError(
-                    f"Cannot flatten {type(child)}"
-                )
+                raise NotImplementedError(f"Cannot flatten {type(child)}")
         return self.__class__(ret)
 
     def uniq(self):
@@ -52,7 +50,7 @@ class NodeList(list):
     def first(self):
         return self[0]
 
-    def join(self, sep=''):
+    def join(self, sep=""):
         return sep.join(self)
 
     @classmethod
@@ -64,3 +62,6 @@ class NodeList(list):
             method = f".{method}" if method != "__call__" else ""
             methods_children.append(f"node.children{method}({','.join(args)})")
         return methods_children
+
+    def finish(self):
+        return [c.finish() for c in self]

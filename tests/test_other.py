@@ -12,7 +12,7 @@ class TestOther(unittest.TestCase):
             base = load_node(
                 "xml_string", provided, factory=node_factory_for_testing
             )
-            base()
+            base.process()
 
         self.assertTrue(
             "Missing template most-random" in context.exception.message

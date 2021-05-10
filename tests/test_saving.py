@@ -18,8 +18,9 @@ class TestOutputs(unittest.TestCase):
         """
         got = load_node(
             "xml_string", provided, factory=node_factory_for_testing
-        )()
+        )
+        got.process()
 
-        self.assertEqual(got[0].to, "result.txt")
-        self.assertEqual(got[0].content, "core")
-        self.assertEqual(got[1].content, "core")
+        self.assertEqual(got.children[0].to, "result.txt")
+        self.assertEqual(got.children[0].content, "core")
+        self.assertEqual(got.children[1].content, "core")

@@ -15,10 +15,12 @@ def init():
     print(f":: - checking/creating folder {config.path.templates}")
     print(f":: - checking/creating folder {config.path.snapshots}")
     print(f":: - checking/creating folder {config.path.definitions}")
+    print(f":: - checking/creating folder {config.path.scripts}")
     ensure_dirs(
         config.path.templates,
         config.path.snapshots,
         config.path.definitions,
+        config.path.scripts,
     )
     print(f":: - checking/creating file {config.path.filters}")
     cmd = NewFiltersFile(

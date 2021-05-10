@@ -25,7 +25,7 @@ def node_from_xml_string(source: str, *, factory=None) -> NodeABC:
     return node_from_data(data, factory=factory)
 
 
-def load_node(kind, content, *, factory=None):
+def load_node(kind, content, *, factory=None) -> NodeABC:
     if kind == "data":
         return node_from_data(content, factory=factory)
     elif kind == "xml_string":

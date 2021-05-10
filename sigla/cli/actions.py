@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-
 import typer
 import textwrap
 from pathlib import Path
@@ -84,7 +83,8 @@ class RunCommand:
         ]
         self.matches = [match for glob in self.globs for match in glob]
 
-    def handle_match(self, match):
+    @staticmethod
+    def handle_definition_file_match(match):
         if not match.exists():
             raise typer.Exit(f"✋ The definition(s) do not exists {match}")
 
@@ -96,10 +96,9 @@ class RunCommand:
         print(f":: Reading {match}")
 
         str_xml = match.read_text()
-        results = load_node("xml_string", str_xml, factory=None)()
-
-        for output in results:
-            output.finish()
+        nodes = load_node("xml_string", str_xml, factory=None)
+        nodes.process()
+        nodes.finish()
 
     def __call__(self, *args, **kwargs):
 
@@ -111,4 +110,4 @@ class RunCommand:
                 raise typer.Exit(e)
 
         for match in self.matches:
-            self.handle_match(match)
+            self.handle_definition_file_match(match)

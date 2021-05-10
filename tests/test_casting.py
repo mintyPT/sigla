@@ -1,5 +1,4 @@
 import unittest
-
 from sigla.utils.type_casters import cast_property
 
 

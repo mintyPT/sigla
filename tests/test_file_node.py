@@ -7,4 +7,4 @@ class TestFileNode(unittest.TestCase):
         node = NodeFile("any")
 
         with self.assertRaises(AttributeError):
-            node()
+            node.process()

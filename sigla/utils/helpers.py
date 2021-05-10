@@ -19,9 +19,8 @@ def load_module(module_name, module_path):
 
 def load_filters_from(module_path):
     filters = {}
-    module_name = "filters"
     with suppress(FileNotFoundError):
-        filters_module = load_module(module_name, module_path)
+        filters_module = load_module("filters", module_path)
         if "FILTERS" in dir(filters_module):
             filters = filters_module.FILTERS
     return filters

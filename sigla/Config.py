@@ -6,22 +6,28 @@ class Config:
     @environ.config
     class Paths:
         root_directory = environ.var(".sigla")
-        templates_filename = environ.var("templates")
-        snapshots_filename = environ.var("snapshots")
-        definitions_filename = environ.var("definitions")
+        templates_folder = environ.var("templates")
+        snapshots_folder = environ.var("snapshots")
+        definitions_folder = environ.var("definitions")
+        scripts_folder = environ.var("scripts")
+
         filters_filename = environ.var("filters.py")
 
         @property
         def templates(self):
-            return f"{self.root_directory}/{self.templates_filename}"
+            return f"{self.root_directory}/{self.templates_folder}"
+
+        @property
+        def scripts(self):
+            return f"{self.root_directory}/{self.scripts_folder}"
 
         @property
         def snapshots(self):
-            return f"{self.root_directory}/{self.snapshots_filename}"
+            return f"{self.root_directory}/{self.snapshots_folder}"
 
         @property
         def definitions(self):
-            return f"{self.root_directory}/{self.definitions_filename}"
+            return f"{self.root_directory}/{self.definitions_folder}"
 
         @property
         def filters(self):
