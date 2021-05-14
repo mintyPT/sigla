@@ -19,25 +19,6 @@ class NodeTemplate(PublicNodeABC, Node):
 
         return self.render(tpl)
 
-    @staticmethod
-    def error_message(node, str_tpl):
-        return dedent(
-            f"""\
-            ------------------------------
-            ERROR WHILE RENDERING TEMPLATE
-            ------------------------------
-
-            TEMPLATE:
-            {str_tpl}
-
-            NODE:
-            {node}
-
-            ---
-
-            """
-        )
-
     def finish(self):
         raise NotImplementedError
 
