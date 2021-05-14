@@ -7,7 +7,7 @@ from sigla import config
 from sigla.templates.loaders import FileTemplateLoader
 
 
-class TagToNode:
+class NodeFactory:
     default = NodeTemplate
     reference = {
         "root": NodeRoot,

@@ -1,10 +1,10 @@
-from sigla.nodes.TagToNode import TagToNode
+from sigla.nodes.NodeFactory import NodeFactory
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
 
 
-class TestingNodeFromTag(TagToNode):
+class TestingNodeFromTag(NodeFactory):
     default = AutoNodeTemplate
 
     def __init__(self):

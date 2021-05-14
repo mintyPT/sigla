@@ -1,5 +1,5 @@
 from sigla.data.Data import Data
-from sigla.nodes.TagToNode import TagToNode
+from sigla.nodes.NodeFactory import NodeFactory
 from sigla.nodes.NodeABC import NodeABC
 from sigla.data.loaders import data_from_xml_string
 
@@ -7,7 +7,7 @@ from sigla.data.loaders import data_from_xml_string
 def node_from_data(data: Data, *, factory=None) -> NodeABC:
     """Takes Data classes and converts them to Node"""
     if not factory:
-        factory = TagToNode()
+        factory = NodeFactory()
 
     ret = factory(data.tag, data.attributes)
 
