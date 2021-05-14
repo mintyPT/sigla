@@ -2,23 +2,6 @@ from abc import ABC, abstractmethod
 from sigla.data.Data import Data
 
 
-class NodeABC(ABC):
-    data: Data = None
-
-    @abstractmethod
-    def process(self):
-        pass
-
-    def __call__(self, *args, **kwargs):
-        return self.process()
-
-
-class PublicNodeABC(ABC):
-    @abstractmethod
-    def finish(self):
-        pass
-
-
 class TemplateEngineABC(ABC):
     @abstractmethod
     def render(self, template: str, filters: dict, **kwargs: any) -> str:
@@ -28,4 +11,26 @@ class TemplateEngineABC(ABC):
 class TemplateLoaderABC(ABC):
     @abstractmethod
     def load(self, tag, bundle=None) -> str:
+        pass
+
+
+class NodeABC(ABC):
+    data: Data = None
+
+    @abstractmethod
+    def process(self):
+        pass
+
+    @abstractmethod
+    def __init__(self, tag: str, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None,
+                 children=None, parent_attributes=None):
+        pass
+
+    def __call__(self, *args, **kwargs):
+        return self.process()
+
+
+class PublicNodeABC(ABC):
+    @abstractmethod
+    def finish(self):
         pass
