@@ -1,7 +1,7 @@
 from textwrap import dedent
 from sigla.FrontMatter import FrontMatter
 from sigla.nodes.Node import Node
-from sigla.nodes.NodeABC import PublicNodeABC
+from sigla.ABC import PublicNodeABC
 from sigla.nodes.NodeList import NodeList
 
 

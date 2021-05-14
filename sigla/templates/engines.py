@@ -1,11 +1,6 @@
-from abc import ABC, abstractmethod
 from jinja2 import Environment, BaseLoader
 
-
-class TemplateEngineABC(ABC):
-    @abstractmethod
-    def render(self, template: str, filters: dict, **kwargs: any) -> str:
-        pass
+from sigla.ABC import TemplateEngineABC
 
 
 class JinjaEngine(TemplateEngineABC):

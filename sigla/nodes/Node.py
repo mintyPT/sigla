@@ -4,10 +4,8 @@ from textwrap import dedent
 
 from sigla import config
 from sigla.data.Data import Data
-from sigla.nodes.NodeABC import NodeABC
+from sigla.ABC import NodeABC, TemplateEngineABC, TemplateLoaderABC
 from sigla.nodes.NodeList import NodeList
-from sigla.templates.engines import TemplateEngineABC
-from sigla.templates.loaders import TemplateLoaderABC
 from sigla.utils.helpers import load_module, load_filters_from
 
 

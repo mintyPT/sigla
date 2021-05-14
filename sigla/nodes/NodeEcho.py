@@ -1,5 +1,5 @@
 from sigla.nodes.Node import Node
-from sigla.nodes.NodeABC import PublicNodeABC
+from sigla.ABC import PublicNodeABC
 
 
 class NodeEcho(PublicNodeABC, Node):

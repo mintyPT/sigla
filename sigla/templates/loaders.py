@@ -1,11 +1,5 @@
-from abc import abstractmethod, ABC
 from pathlib import Path
-
-
-class TemplateLoaderABC(ABC):
-    @abstractmethod
-    def load(self, tag, bundle=None) -> str:
-        pass
+from sigla.ABC import TemplateLoaderABC
 
 
 class FileTemplateLoader(TemplateLoaderABC):
