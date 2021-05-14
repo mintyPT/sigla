@@ -2,13 +2,13 @@ from abc import ABC, abstractmethod
 from jinja2 import Environment, BaseLoader
 
 
-class TemplateEngineAbc(ABC):
+class TemplateEngineABC(ABC):
     @abstractmethod
     def render(self, template: str, filters: dict, **kwargs: any) -> str:
         pass
 
 
-class JinjaEngine(TemplateEngineAbc):
+class JinjaEngine(TemplateEngineABC):
     def render(self, template: str, filters: dict, **kwargs: any) -> str:
         env = Environment(loader=BaseLoader())
         env.filters.update(filters)

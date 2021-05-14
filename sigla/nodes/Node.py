@@ -6,8 +6,8 @@ from sigla import config
 from sigla.data.Data import Data
 from sigla.nodes.NodeABC import NodeABC
 from sigla.nodes.NodeList import NodeList
-from sigla.templates.engines import TemplateEngineAbc
-from sigla.templates.loaders import TemplateLoaderAbc
+from sigla.templates.engines import TemplateEngineABC
+from sigla.templates.loaders import TemplateLoaderABC
 from sigla.utils.helpers import load_module, load_filters_from
 
 
@@ -15,7 +15,7 @@ class Node(NodeABC):
     scripts_base_path = config.path.scripts
 
     def __init__(
-            self, tag, engine: TemplateEngineAbc, template_loader: TemplateLoaderAbc, *, attributes=None, children=None,
+            self, tag, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None, children=None,
             parent_attributes=None
     ):
         if parent_attributes is None:

@@ -2,13 +2,13 @@ from abc import abstractmethod, ABC
 from pathlib import Path
 
 
-class TemplateLoaderAbc(ABC):
+class TemplateLoaderABC(ABC):
     @abstractmethod
     def load(self, tag, bundle=None) -> str:
         pass
 
 
-class FileTemplateLoader(TemplateLoaderAbc):
+class FileTemplateLoader(TemplateLoaderABC):
     def __init__(self, base_path, ext="jinja2"):
         self.base_path = base_path
         self.ext = ext
