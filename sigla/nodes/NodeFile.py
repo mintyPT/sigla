@@ -7,7 +7,7 @@ from sigla.utils.helpers import ensure_dirs
 
 class NodeFile(PublicNodeABC, Node):
     def __init__(self, tag, attributes=None):
-        super().__init__(tag, attributes)
+        super().__init__(tag, attributes=attributes)
         self.content = None
 
     @property

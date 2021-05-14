@@ -10,8 +10,8 @@ class TestConvertToInternalClasses(unittest.TestCase):
         source = "<a name='a'><b name='b'></b></a>"
         got = load_node("xml_string", source, factory=node_factory_for_testing)
 
-        expected = NodeTemplate("a", {"name": "a"}).append(
-            NodeTemplate("b", {"name": "b"})
+        expected = NodeTemplate("a", attributes={"name": "a"}).append(
+            NodeTemplate("b", attributes={"name": "b"})
         )
 
         self.assertEqual(got, expected)

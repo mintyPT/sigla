@@ -3,8 +3,6 @@ from sigla.nodes.TagToNode import TagToNode
 from sigla.nodes.NodeABC import NodeABC
 from sigla.data.loaders import data_from_xml_string
 
-node_factory = TagToNode()
-
 
 def node_from_data(data: Data, *, factory=None) -> NodeABC:
     """Takes Data classes and converts them to Node"""

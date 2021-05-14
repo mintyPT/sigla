@@ -2,6 +2,13 @@
 
 # Sigla
 
+## Tasks 
+
+- pass prop as array of x. ex names-array-string="[...]"
+- ```<data></data>```
+- ```<data-proxy></data-proxy>```
+- ```<Partial>``` to inject into existing files
+
 ## Introduction
 
 Sigla is a code generator.  Some important points about it: 

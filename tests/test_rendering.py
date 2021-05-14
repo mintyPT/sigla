@@ -79,7 +79,7 @@ definition = """
 
 class TestRendering(unittest.TestCase):
     def test_simple(self):
-        node = AutoNodeTemplate("b", {"name": "minty", "age": "33"})
+        node = AutoNodeTemplate("b", attributes={"name": "minty", "age": "33"})
         got = node.process()
         self.assertEqual(got, "minty-33")
 
@@ -112,8 +112,8 @@ class TestRendering(unittest.TestCase):
         self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
-        node = AutoNodeTemplate("a", {})
-        node.append(AutoNodeTemplate("b", {"name": "minty", "age": "33"}))
+        node = AutoNodeTemplate("a", attributes={})
+        node.append(AutoNodeTemplate("b", attributes={"name": "minty", "age": "33"}))
         got = node.process()
         self.assertEqual(got, "-a-minty-33-a-")
 

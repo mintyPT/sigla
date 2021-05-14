@@ -18,7 +18,7 @@ class Node(NodeABC):
     scripts_base_path = config.path.scripts
 
     def __init__(
-        self, tag, attributes=None, children=None, parent_attributes=None
+        self, tag, *, attributes=None, children=None, parent_attributes=None
     ):
         if parent_attributes is None:
             parent_attributes = {}
