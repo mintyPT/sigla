@@ -1,6 +1,7 @@
 import unittest
 
 from sigla import load_node
+from sigla.templates.engines import JinjaEngine
 from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
 from .helpers.node_factory_for_testing import node_factory_for_testing
 
@@ -78,8 +79,13 @@ definition = """
 
 
 class TestRendering(unittest.TestCase):
+
+    def setUp(self) -> None:
+        super().setUp()
+        self.engine = JinjaEngine()
+
     def test_simple(self):
-        node = AutoNodeTemplate("b", attributes={"name": "minty", "age": "33"})
+        node = AutoNodeTemplate("b", self.engine, attributes={"name": "minty", "age": "33"})
         got = node.process()
         self.assertEqual(got, "minty-33")
 
@@ -112,8 +118,8 @@ class TestRendering(unittest.TestCase):
         self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
-        node = AutoNodeTemplate("a", attributes={})
-        node.append(AutoNodeTemplate("b", attributes={"name": "minty", "age": "33"}))
+        node = AutoNodeTemplate("a", self.engine, attributes={})
+        node.append(AutoNodeTemplate("b", self.engine, attributes={"name": "minty", "age": "33"}))
         got = node.process()
         self.assertEqual(got, "-a-minty-33-a-")
 

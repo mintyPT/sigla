@@ -2,6 +2,7 @@ import unittest
 
 from sigla.nodes.NodeTemplate import NodeTemplate
 from sigla import load_node
+from sigla.templates.engines import JinjaEngine
 from .helpers.node_factory_for_testing import node_factory_for_testing
 
 
@@ -10,8 +11,9 @@ class TestConvertToInternalClasses(unittest.TestCase):
         source = "<a name='a'><b name='b'></b></a>"
         got = load_node("xml_string", source, factory=node_factory_for_testing)
 
-        expected = NodeTemplate("a", attributes={"name": "a"}).append(
-            NodeTemplate("b", attributes={"name": "b"})
+        engine = JinjaEngine()
+        expected = NodeTemplate("a", engine, attributes={"name": "a"}).append(
+            NodeTemplate("b", engine, attributes={"name": "b"})
         )
 
         self.assertEqual(got, expected)

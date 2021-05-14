@@ -2,12 +2,13 @@ import unittest
 
 from sigla.nodes.NodeList import NodeList
 from sigla.nodes.NodeRoot import NodeRoot
+from sigla.templates.engines import JinjaEngine
 
 
 class TestNodeList(unittest.TestCase):
     def test_filter(self):
         node_list = NodeList(
-            [NodeRoot(s) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
+            [NodeRoot(s, JinjaEngine()) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
         )
 
         filtered = node_list.filter(tag="cenas")

@@ -1,14 +1,12 @@
 from os import path
 from textwrap import dedent
 from typing import Any
-
 from jinja2 import UndefinedError
-
 from sigla import config
 from sigla.data.Data import Data
 from sigla.nodes.NodeABC import NodeABC
 from sigla.nodes.NodeList import NodeList
-from sigla.templates.engines import JinjaEngine
+from sigla.templates.engines import TemplateEngine
 from sigla.templates.loaders import FileTemplateLoader
 from sigla.utils.helpers import load_module, load_filters_from
 
@@ -18,7 +16,7 @@ class Node(NodeABC):
     scripts_base_path = config.path.scripts
 
     def __init__(
-        self, tag, *, attributes=None, children=None, parent_attributes=None
+            self, tag, engine: TemplateEngine, *, attributes=None, children=None, parent_attributes=None
     ):
         if parent_attributes is None:
             parent_attributes = {}
@@ -36,7 +34,7 @@ class Node(NodeABC):
         )
 
         self.loader = FileTemplateLoader(self.base_path, "jinja2")
-        self.engine = JinjaEngine()
+        self.engine = engine
 
         self.handle_script_prop(attributes)
 
