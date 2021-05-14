@@ -12,8 +12,16 @@ from sigla.utils.helpers import load_module, load_filters_from
 class Node(NodeABC):
     scripts_base_path = config.path.scripts
 
-    def __init__(self, tag, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None,
-                 children=None, parent_attributes=None):
+    def __init__(
+        self,
+        tag,
+        engine: TemplateEngineABC,
+        template_loader: TemplateLoaderABC,
+        *,
+        attributes=None,
+        children=None,
+        parent_attributes=None,
+    ):
         if parent_attributes is None:
             parent_attributes = {}
         if children is None:

@@ -24,6 +24,10 @@ class NodeFactory:
         default_creator = self.default
 
         if node_creator:
-            return node_creator(tag, self.engine, self.loader, attributes=attributes)
+            return node_creator(
+                tag, self.engine, self.loader, attributes=attributes
+            )
         else:
-            return default_creator(tag, self.engine, self.loader, attributes=attributes)
+            return default_creator(
+                tag, self.engine, self.loader, attributes=attributes
+            )

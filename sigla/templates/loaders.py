@@ -7,7 +7,7 @@ class FileTemplateLoader(TemplateLoaderABC):
         self.base_path = base_path
         self.ext = ext
 
-    def load(self, tag, bundle=None) -> str:
+    def load(self, tag, *, bundle=None) -> str:
         path = Path(self.base_path)
         if bundle:
             path = path.joinpath(bundle)

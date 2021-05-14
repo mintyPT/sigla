@@ -12,7 +12,10 @@ class TestNodeList(unittest.TestCase):
         engine = JinjaEngine()
         loader = FileTemplateLoader(config.path.templates, "jinja2")
         node_list = NodeList(
-            [NodeRoot(s, engine, loader) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
+            [
+                NodeRoot(s, engine, loader)
+                for s in ["cenas", "cenas", "cenas2", "cenas3"]
+            ]
         )
 
         filtered = node_list.filter(tag="cenas")

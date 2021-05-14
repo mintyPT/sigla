@@ -14,9 +14,9 @@ class TestConvertToInternalClasses(unittest.TestCase):
 
         loader = FileTemplateLoader(config.path.templates, "jinja2")
         engine = JinjaEngine()
-        expected = NodeTemplate("a", engine, loader, attributes={"name": "a"}).append(
-            NodeTemplate("b", engine, loader, attributes={"name": "b"})
-        )
+        expected = NodeTemplate(
+            "a", engine, loader, attributes={"name": "a"}
+        ).append(NodeTemplate("b", engine, loader, attributes={"name": "b"}))
 
         self.assertEqual(got, expected)
 

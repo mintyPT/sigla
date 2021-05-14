@@ -10,7 +10,7 @@ class TemplateEngineABC(ABC):
 
 class TemplateLoaderABC(ABC):
     @abstractmethod
-    def load(self, tag, bundle=None) -> str:
+    def load(self, tag, *, bundle=None) -> str:
         pass
 
 
@@ -22,8 +22,16 @@ class NodeABC(ABC):
         pass
 
     @abstractmethod
-    def __init__(self, tag: str, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None,
-                 children=None, parent_attributes=None):
+    def __init__(
+        self,
+        tag: str,
+        engine: TemplateEngineABC,
+        template_loader: TemplateLoaderABC,
+        *,
+        attributes=None,
+        children=None,
+        parent_attributes=None
+    ):
         pass
 
     def __call__(self, *args, **kwargs):
