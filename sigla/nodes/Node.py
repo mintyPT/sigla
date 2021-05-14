@@ -7,16 +7,16 @@ from sigla.data.Data import Data
 from sigla.nodes.NodeABC import NodeABC
 from sigla.nodes.NodeList import NodeList
 from sigla.templates.engines import TemplateEngine
-from sigla.templates.loaders import FileTemplateLoader
+from sigla.templates.loaders import TemplateLoader
 from sigla.utils.helpers import load_module, load_filters_from
 
 
 class Node(NodeABC):
-    base_path = config.path.templates
     scripts_base_path = config.path.scripts
 
     def __init__(
-            self, tag, engine: TemplateEngine, *, attributes=None, children=None, parent_attributes=None
+            self, tag, engine: TemplateEngine, template_loader: TemplateLoader, *, attributes=None, children=None,
+            parent_attributes=None
     ):
         if parent_attributes is None:
             parent_attributes = {}
@@ -33,7 +33,7 @@ class Node(NodeABC):
             parent_attributes=parent_attributes,
         )
 
-        self.loader = FileTemplateLoader(self.base_path, "jinja2")
+        self.loader = template_loader
         self.engine = engine
 
         self.handle_script_prop(attributes)

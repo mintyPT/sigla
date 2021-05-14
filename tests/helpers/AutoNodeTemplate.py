@@ -1,11 +1,13 @@
 from pathlib import Path
-
 from sigla.utils.errors import TemplateDoesNotExistError
 from sigla.nodes.NodeTemplate import NodeTemplate
 
 
 class AutoNodeTemplate(NodeTemplate):
     base_path = "tests/templates/"
+
+    def finish(self):
+        pass
 
     def load_test_template(self, name):
         return Path(self.get_template_path(name)).read_text()
