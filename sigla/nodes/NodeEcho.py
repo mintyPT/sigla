@@ -1,10 +1,10 @@
 from sigla.nodes.Node import Node
-from sigla.nodes.NodeABC import PublicNodeABC
+from sigla.nodes import PublicNodeABC
 
 
 class NodeEcho(PublicNodeABC, Node):
-    def __init__(self, tag, attributes=None):
-        super().__init__(tag, attributes=attributes)
+    def __init__(self, tag, *args, **kwargs):
+        super().__init__(tag, *args, **kwargs)
         self.content = None
 
     def process(self):

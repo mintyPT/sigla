@@ -1,5 +1,5 @@
 from sigla.nodes.Node import Node
-from sigla.nodes.NodeABC import PublicNodeABC
+from sigla.nodes import PublicNodeABC
 
 
 class NodeRoot(PublicNodeABC, Node):

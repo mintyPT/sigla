@@ -1,11 +1,14 @@
 from textwrap import dedent
 from sigla.FrontMatter import FrontMatter
 from sigla.nodes.Node import Node
-from sigla.nodes.NodeABC import PublicNodeABC
+from sigla.nodes import PublicNodeABC
 from sigla.nodes.NodeList import NodeList
+from sigla.utils.errors import TemplateDoesNotExistError
 
 
 class NodeTemplate(PublicNodeABC, Node):
+    create_template = True
+
     def process(self):
         super().process()
 
@@ -18,25 +21,6 @@ class NodeTemplate(PublicNodeABC, Node):
         tpl = content.strip()
 
         return self.render(tpl)
-
-    @staticmethod
-    def error_message(node, str_tpl):
-        return dedent(
-            f"""\
-            ------------------------------
-            ERROR WHILE RENDERING TEMPLATE
-            ------------------------------
-
-            TEMPLATE:
-            {str_tpl}
-
-            NODE:
-            {node}
-
-            ---
-
-            """
-        )
 
     def finish(self):
         raise NotImplementedError
@@ -62,17 +46,17 @@ class NodeTemplate(PublicNodeABC, Node):
         return metadata
 
     def get_template_path(self, tag):
-        bundle = self.attributes.get("bundle")
-
-        path = self.loader.load(tag, bundle)
-        return path
+        return self.loader.load(tag, bundle=(self.attributes.get("bundle")))
 
     def load_template(self, tag) -> str:
         path = self.get_template_path(tag)
 
         if path.exists() is False:
-            content = self.create_default_template()
-            path.write_text(content)
+            if self.create_template:
+                content = self.create_default_template()
+                path.write_text(content)
+            else:
+                raise TemplateDoesNotExistError(tag, self)
 
         return path.read_text()
 

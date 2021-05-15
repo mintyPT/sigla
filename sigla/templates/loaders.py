@@ -1,12 +1,13 @@
 from pathlib import Path
+from sigla.templates import TemplateLoaderABC
 
 
-class FileTemplateLoader:
+class FileTemplateLoader(TemplateLoaderABC):
     def __init__(self, base_path, ext="jinja2"):
         self.base_path = base_path
         self.ext = ext
 
-    def load(self, tag, bundle=None):
+    def load(self, tag, *, bundle=None) -> str:
         path = Path(self.base_path)
         if bundle:
             path = path.joinpath(bundle)
