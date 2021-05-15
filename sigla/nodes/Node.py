@@ -23,10 +23,21 @@ class Node(NodeABC):
         children=None,
         parent_attributes=None,
     ):
+        super().__init__(
+            tag,
+            engine,
+            template_loader,
+            attributes=attributes,
+            children=children,
+            parent_attributes=parent_attributes,
+        )
+
         if parent_attributes is None:
             parent_attributes = {}
+
         if children is None:
             children = []
+
         if attributes is None:
             attributes = {}
 
