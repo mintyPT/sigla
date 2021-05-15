@@ -1,5 +1,3 @@
-from pathlib import Path
-from sigla.utils.errors import TemplateDoesNotExistError
 from sigla.nodes.NodeTemplate import NodeTemplate
 
 

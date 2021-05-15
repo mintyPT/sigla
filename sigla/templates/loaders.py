@@ -1,5 +1,5 @@
 from pathlib import Path
-from sigla.ABC import TemplateLoaderABC
+from sigla.templates import TemplateLoaderABC
 
 
 class FileTemplateLoader(TemplateLoaderABC):

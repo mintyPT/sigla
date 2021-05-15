@@ -1,6 +1,6 @@
 from jinja2 import Environment, BaseLoader
 
-from sigla.ABC import TemplateEngineABC
+from sigla.templates import TemplateEngineABC
 
 
 class JinjaEngine(TemplateEngineABC):
