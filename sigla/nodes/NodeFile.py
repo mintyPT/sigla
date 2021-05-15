@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from sigla.nodes.Node import Node
-from sigla.ABC import PublicNodeABC
+from sigla.nodes import PublicNodeABC
 from sigla.utils.helpers import ensure_dirs
 
 

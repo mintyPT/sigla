@@ -1,6 +1,6 @@
 from sigla.data.Data import Data
 from sigla.nodes.NodeFactory import NodeFactory
-from sigla.ABC import NodeABC
+from sigla.nodes import NodeABC
 from sigla.data.loaders import data_from_xml_string
 
 
