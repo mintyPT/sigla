@@ -123,7 +123,9 @@ class TestRendering(unittest.TestCase):
         self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
-        node = TestableNodeTemplate("a", self.engine, self.loader, attributes={})
+        node = TestableNodeTemplate(
+            "a", self.engine, self.loader, attributes={}
+        )
         node.append(
             TestableNodeTemplate(
                 "b",

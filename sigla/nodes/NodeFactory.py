@@ -18,7 +18,11 @@ class NodeFactory:
         "echo": NodeEcho,
     }
 
-    def __init__(self, engine: TemplateEngineABC = None, loader: TemplateLoaderABC = None):
+    def __init__(
+        self,
+        engine: TemplateEngineABC = None,
+        loader: TemplateLoaderABC = None,
+    ):
         if engine is None:
             engine = JinjaEngine()
 
