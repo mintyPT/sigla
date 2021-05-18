@@ -1,11 +1,13 @@
+from sigla import config
+
 from sigla.nodes.NodeEcho import NodeEcho
 from sigla.nodes.NodeFile import NodeFile
 from sigla.nodes.NodeRoot import NodeRoot
 from sigla.nodes.NodeTemplate import NodeTemplate
-from sigla.templates import TemplateEngineABC, TemplateLoaderABC
+
 from sigla.templates.engines import JinjaEngine
-from sigla import config
 from sigla.templates.loaders import FileTemplateLoader
+from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 
 
 class NodeFactory:
