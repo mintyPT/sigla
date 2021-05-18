@@ -1,10 +1,10 @@
 from sigla.nodes.NodeFactory import NodeFactory
 from sigla.templates.loaders import FileTemplateLoader
-from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
+from tests.helpers.TestableNodeTemplate import TestableNodeTemplate
 
 
 class TestingNodeFromTag(NodeFactory):
-    default = AutoNodeTemplate
+    default = TestableNodeTemplate
 
     def __init__(self):
         super().__init__()
