@@ -3,7 +3,7 @@ from sigla.templates.loaders import FileTemplateLoader
 from tests.helpers.TestableNodeTemplate import TestableNodeTemplate
 
 
-class TestingNodeFromTag(NodeFactory):
+class TestableNodeFactory(NodeFactory):
     default = TestableNodeTemplate
 
     def __init__(self):
@@ -11,4 +11,4 @@ class TestingNodeFromTag(NodeFactory):
         self.loader = FileTemplateLoader("tests/templates/", "jinja2")
 
 
-node_factory_for_testing = TestingNodeFromTag()
+node_factory_for_testing = TestableNodeFactory()
