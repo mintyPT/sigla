@@ -2,7 +2,7 @@ import unittest
 from sigla import load_node
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
-from tests.helpers.AutoNodeTemplate import AutoNodeTemplate
+from tests.helpers.TestableNodeTemplate import TestableNodeTemplate
 from .helpers.node_factory_for_testing import node_factory_for_testing
 
 expected = """
@@ -85,7 +85,7 @@ class TestRendering(unittest.TestCase):
         self.loader = FileTemplateLoader("tests/templates/", "jinja2")
 
     def test_simple(self):
-        node = AutoNodeTemplate(
+        node = TestableNodeTemplate(
             "b",
             self.engine,
             self.loader,
@@ -123,9 +123,9 @@ class TestRendering(unittest.TestCase):
         self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
-        node = AutoNodeTemplate("a", self.engine, self.loader, attributes={})
+        node = TestableNodeTemplate("a", self.engine, self.loader, attributes={})
         node.append(
-            AutoNodeTemplate(
+            TestableNodeTemplate(
                 "b",
                 self.engine,
                 self.loader,

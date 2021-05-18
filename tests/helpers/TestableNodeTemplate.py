@@ -1,7 +1,7 @@
 from sigla.nodes.NodeTemplate import NodeTemplate
 
 
-class AutoNodeTemplate(NodeTemplate):
+class TestableNodeTemplate(NodeTemplate):
     create_template = False
 
     def finish(self):
