@@ -1,52 +1,35 @@
 import typer
-from sigla import config
 from typing import List
-from sigla import __version__
-from sigla.cli.actions import NewDefinitionFile, NewFiltersFile, RunCommand
-from sigla.utils.helpers import ensure_dirs
+from sigla.cli.commands.InitCommand import InitCommand
+from sigla.cli.commands.RunCommand import RunCommand
+from sigla.cli.commands.VersionCommand import VersionCommand
+from sigla.cli.commands.NewCommand import NewCommand
 
 app = typer.Typer()
 
 
 @app.command()
 def init():
-    """ Creates the .init folder to keep stuff """
-    print(":: sigla init")
-    print(f":: - checking/creating folder {config.path.templates}")
-    print(f":: - checking/creating folder {config.path.snapshots}")
-    print(f":: - checking/creating folder {config.path.definitions}")
-    print(f":: - checking/creating folder {config.path.scripts}")
-    ensure_dirs(
-        config.path.templates,
-        config.path.snapshots,
-        config.path.definitions,
-        config.path.scripts,
-    )
-    print(f":: - checking/creating file {config.path.filters}")
-    cmd = NewFiltersFile(
-        config.path.root_directory, config.path.filters_filename
-    )
+    cmd = InitCommand()
     cmd.run()
 
 
 @app.command()
 def new(name: str):
-    """ Generate a new definition for a generator. """
-    cmd = NewDefinitionFile(config.path.definitions, name)
+    cmd = NewCommand(name)
     cmd.run()
 
 
 @app.command()
 def run(references: List[str]):
-    """ run a generator """
-    run_command = RunCommand(references)
-    run_command()
+    cmd = RunCommand(references)
+    cmd.run()
 
 
 @app.command()
 def version():
-    """ Print the version """
-    print(f"Version: {__version__}")
+    cmd = VersionCommand()
+    cmd.run()
 
 
 if __name__ == "__main__":

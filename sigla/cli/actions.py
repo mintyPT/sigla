@@ -3,17 +3,18 @@ import typer
 import textwrap
 from pathlib import Path
 
-from sigla import config, load_node
-from sigla.utils.errors import TemplateDoesNotExistError
-
 
 class Action(ABC):
     @abstractmethod
     def run(self):
         pass
 
+    @staticmethod
+    def log(msg):
+        print(f"|> {msg}")
 
-class FileAction(ABC):
+
+class NewFileAction(ABC):
     def __init__(self, path, name):
         self.path = path
         self.name = name
@@ -33,7 +34,7 @@ class FileAction(ABC):
         self.filepath.write_text(self.content)
 
 
-class NewDefinitionFile(FileAction):
+class NewDefinitionFile(NewFileAction):
     extension = "xml"
 
     def __init__(self, path, name):
@@ -55,7 +56,7 @@ class NewDefinitionFile(FileAction):
         )
 
 
-class NewFiltersFile(FileAction):
+class NewFiltersFile(NewFileAction):
     @property
     def content(self):
         return textwrap.dedent(
@@ -72,42 +73,3 @@ class NewFiltersFile(FileAction):
 
             """
         )
-
-
-class RunCommand:
-    def __init__(self, references):
-        self.references = references
-        self.globs = [
-            Path(config.path.definitions).glob(f"{reference}.xml")
-            for reference in references
-        ]
-        self.matches = [match for glob in self.globs for match in glob]
-
-    @staticmethod
-    def handle_definition_file_match(match):
-        if not match.exists():
-            raise typer.Exit(f"✋ The definition(s) do not exists {match}")
-
-        is_dir = match.is_dir()
-
-        if is_dir:
-            return
-
-        print(f":: Reading {match}")
-
-        str_xml = match.read_text()
-        nodes = load_node("xml_string", str_xml, factory=None)
-        nodes.process()
-        nodes.finish()
-
-    def __call__(self, *args, **kwargs):
-
-        if len(self.matches) == 0:
-            try:
-                print(f"✋ No definition(s) found for {self.references}")
-            except TemplateDoesNotExistError as e:
-                print(e)
-                raise typer.Exit(e)
-
-        for match in self.matches:
-            self.handle_definition_file_match(match)
