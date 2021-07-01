@@ -2,9 +2,15 @@ from pathlib import Path
 
 import typer
 
-from sigla import config, load_node
-from sigla.cli.actions import Action
+from sigla import __version__, config, load_node
+from sigla.cli.actions import Action, NewDefinitionFile, NewFiltersFile
 from sigla.utils.errors import TemplateDoesNotExistError
+from sigla.utils.helpers import ensure_dirs
+
+
+class VersionCommand(Action):
+    def run(self):
+        self.log(f"Version: {__version__}")
 
 
 class RunCommand(Action):
@@ -44,3 +50,34 @@ class RunCommand(Action):
 
         for match in self.matches:
             self.handle_definition_file_match(match)
+
+
+class NewCommand(Action):
+    def __init__(self, name) -> None:
+        super().__init__()
+        self.name = name
+
+    def run(self):
+        cmd = NewDefinitionFile(config.path.definitions, self.name)
+        cmd.run()
+
+
+class InitCommand(Action):
+    def run(self):
+        self.log("sigla init")
+        self.create_folder(config.path.templates)
+        self.create_folder(config.path.snapshots)
+        self.create_folder(config.path.definitions)
+        self.create_folder(config.path.scripts)
+        self.create_filters()
+
+    def create_filters(self):
+        self.log(f"- checking/creating file {config.path.filters}")
+        cmd = NewFiltersFile(
+            config.path.root_directory, config.path.filters_filename
+        )
+        cmd.run()
+
+    def create_folder(self, path):
+        self.log(f"- creating folder {path}")
+        ensure_dirs(path)

@@ -1,4 +1,4 @@
-from sigla.nodes.node_factory import NodeFactory
+from sigla.node_factory import NodeFactory
 from sigla.templates.loaders import FileTemplateLoader
 from tests.helpers.TestableNodeTemplate import TestableNodeTemplate
 
