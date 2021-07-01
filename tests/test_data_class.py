@@ -1,5 +1,5 @@
 import unittest
-from sigla.data.Data import Data
+from sigla.data.data import Data
 from sigla.data.loaders import data_from_xml_string
 
 

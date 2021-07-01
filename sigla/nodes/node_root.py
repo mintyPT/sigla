@@ -1,4 +1,4 @@
-from sigla.nodes.Node import Node
+from sigla.nodes.node import Node
 from sigla.nodes import PublicNodeABC
 
 

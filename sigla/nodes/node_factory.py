@@ -1,9 +1,9 @@
 from sigla import config
 
-from sigla.nodes.NodeEcho import NodeEcho
-from sigla.nodes.NodeFile import NodeFile
-from sigla.nodes.NodeRoot import NodeRoot
-from sigla.nodes.NodeTemplate import NodeTemplate
+from sigla.nodes.node_echo import NodeEcho
+from sigla.nodes.node_file import NodeFile
+from sigla.nodes.node_root import NodeRoot
+from sigla.nodes.node_template import NodeTemplate
 
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader

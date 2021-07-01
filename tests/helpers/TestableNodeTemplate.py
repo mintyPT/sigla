@@ -1,4 +1,4 @@
-from sigla.nodes.NodeTemplate import NodeTemplate
+from sigla.nodes.node_template import NodeTemplate
 
 
 class TestableNodeTemplate(NodeTemplate):

@@ -1,7 +1,7 @@
 import unittest
 
 from sigla import config
-from sigla.nodes.NodeFile import NodeFile
+from sigla.nodes.node_file import NodeFile
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 

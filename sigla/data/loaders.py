@@ -1,6 +1,6 @@
 from xml.etree import ElementTree
 from sigla.utils.type_casters import cast_property
-from sigla.data.Data import Data
+from sigla.data.data import Data
 
 
 def data_from_element_tree(element):

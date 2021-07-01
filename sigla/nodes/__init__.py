@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from sigla.data.Data import Data
+from sigla.data.data import Data
 from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 
 

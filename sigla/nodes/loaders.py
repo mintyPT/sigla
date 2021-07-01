@@ -1,5 +1,5 @@
-from sigla.data.Data import Data
-from sigla.nodes.NodeFactory import NodeFactory
+from sigla.data.data import Data
+from sigla.nodes.node_factory import NodeFactory
 from sigla.nodes import NodeABC
 from sigla.data.loaders import data_from_xml_string
 

@@ -1,8 +1,8 @@
 import unittest
 
 from sigla import config
-from sigla.nodes.NodeList import NodeList
-from sigla.nodes.NodeRoot import NodeRoot
+from sigla.nodes.node_list import NodeList
+from sigla.nodes.node_root import NodeRoot
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 

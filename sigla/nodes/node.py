@@ -3,10 +3,10 @@ from typing import Any
 from textwrap import dedent
 
 from sigla import config
-from sigla.data.Data import Data
+from sigla.data.data import Data
 from sigla.nodes import NodeABC
 from sigla.templates import TemplateEngineABC, TemplateLoaderABC
-from sigla.nodes.NodeList import NodeList
+from sigla.nodes.node_list import NodeList
 from sigla.utils.helpers import load_module, load_filters_from
 
 
