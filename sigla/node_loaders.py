@@ -1,7 +1,4 @@
 from abc import abstractmethod, ABC
-
-from sigla.data.data import Data
-from sigla.node_factory import NodeFactory
 from sigla.nodes.abstract_node import AbstractNode
 from sigla.data.loaders import XMLStringDataLoader
 

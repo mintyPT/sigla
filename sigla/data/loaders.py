@@ -22,11 +22,7 @@ class ElementTreeDataLoader(DataLoader):
         attributes = cast_dict(raw_attributes)
         children = [ElementTreeDataLoader(child).load() for child in children]
 
-        return Data(
-            tag=element.tag,
-            attributes=attributes,
-            children=children
-        )
+        return Data(tag=element.tag, attributes=attributes, children=children)
 
 
 class XMLStringDataLoader(DataLoader):

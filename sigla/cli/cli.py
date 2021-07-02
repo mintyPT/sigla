@@ -1,6 +1,11 @@
 import typer
 from typing import List
-from sigla.cli.commands import VersionCommand, RunCommand, NewCommand, InitCommand
+from sigla.cli.commands import (
+    VersionCommand,
+    RunCommand,
+    NewCommand,
+    InitCommand,
+)
 
 app = typer.Typer()
 
