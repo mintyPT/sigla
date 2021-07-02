@@ -11,19 +11,6 @@ class NodeABC(ABC):
     def process(self):
         pass
 
-    @abstractmethod
-    def __init__(
-        self,
-        tag: str,
-        engine: TemplateEngineABC,
-        template_loader: TemplateLoaderABC,
-        *,
-        attributes=None,
-        children=None,
-        parent_attributes=None
-    ):
-        pass
-
     def __call__(self, *args, **kwargs):
         return self.process()
 
