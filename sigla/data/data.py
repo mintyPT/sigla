@@ -33,11 +33,3 @@ class Data:
     parent_attributes: dict = field(default_factory=dict)
 
     children: list = field(default_factory=list)
-
-    @property
-    def all_attributes(self):
-        return Attributes(
-            self.frontmatter_attributes,
-            self.attributes,
-            self.parent_attributes,
-        )

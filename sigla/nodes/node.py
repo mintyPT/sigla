@@ -3,7 +3,7 @@ from typing import Any
 from textwrap import dedent
 
 from sigla import config
-from sigla.data.data import Data
+from sigla.data.data import Data, Attributes
 from sigla.nodes import NodeABC
 from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 from sigla.nodes.node_list import NodeList
@@ -72,7 +72,11 @@ class Node(NodeABC):
 
     @property
     def attributes(self):
-        return self.data.all_attributes
+        return Attributes(
+            self.data.frontmatter_attributes,
+            self.data.attributes,
+            self.data.parent_attributes,
+        )
 
     @property
     def children(self):
@@ -96,7 +100,7 @@ class Node(NodeABC):
             )
 
         except Exception as e:
-            err_message = self.error_message(self, str_tpl)
+            err_message = _generator_error_message(self, str_tpl)
             print(err_message)
             raise e
 
@@ -134,21 +138,21 @@ class Node(NodeABC):
         filters = load_filters_from(config.path.filters)
         return filters
 
-    @staticmethod
-    def error_message(node, str_tpl):
-        return dedent(
-            f"""\
-            ------------------------------
-            ERROR WHILE RENDERING TEMPLATE
-            ------------------------------
 
-            TEMPLATE:
-            {str_tpl}
+def _generator_error_message(node, str_tpl):
+    return dedent(
+        f"""\
+        ------------------------------
+        ERROR WHILE RENDERING TEMPLATE
+        ------------------------------
 
-            NODE:
-            {node}
+        TEMPLATE:
+        {str_tpl}
 
-            ---
+        NODE:
+        {node}
 
-            """
-        )
+        ---
+
+        """
+    )
