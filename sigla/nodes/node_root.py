@@ -1,8 +1,8 @@
 from sigla.nodes.node import Node
-from sigla.nodes import PublicNodeABC
+from sigla.nodes.abstract_public_node import AbstractPublicNode
 
 
-class NodeRoot(PublicNodeABC, Node):
+class NodeRoot(AbstractPublicNode, Node):
     def process(self):
         super().process()
         for child in self.children:

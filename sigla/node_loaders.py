@@ -2,7 +2,7 @@ from abc import abstractmethod, ABC
 
 from sigla.data.data import Data
 from sigla.node_factory import NodeFactory
-from sigla.nodes import NodeABC
+from sigla.nodes.abstract_node import AbstractNode
 from sigla.data.loaders import XMLStringDataLoader
 
 
@@ -34,7 +34,7 @@ class XMLToNodeLoader(DataToNodeLoader):
         super().__init__(data, factory)
 
 
-def load_node(kind, content, *, factory=None) -> NodeABC:
+def load_node(kind, content, *, factory=None) -> AbstractNode:
     if kind == "data":
         loader = DataToNodeLoader(content, factory)
     elif kind == "xml_string":

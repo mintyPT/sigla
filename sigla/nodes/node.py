@@ -4,13 +4,13 @@ from textwrap import dedent
 
 from sigla import config
 from sigla.data.data import Data, Attributes
-from sigla.nodes import NodeABC
+from sigla.nodes.abstract_node import AbstractNode
 from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 from sigla.nodes.node_list import NodeList
 from sigla.utils.helpers import load_module, load_filters_from
 
 
-class Node(NodeABC):
+class Node(AbstractNode):
     scripts_base_path = config.path.scripts
 
     def __init__(
@@ -76,7 +76,7 @@ class Node(NodeABC):
     def flatten(self):
         return [self, *self.children.flatten()]
 
-    def append(self, node: NodeABC):
+    def append(self, node: AbstractNode):
         self.data.children.append(node)
         return self
 
