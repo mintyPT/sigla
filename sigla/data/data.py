@@ -53,5 +53,5 @@ class Data(object):
 
             if not self._comp(self_value, other_value):
                 return False
-            
+
         return True
