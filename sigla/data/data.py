@@ -55,3 +55,6 @@ class Data(object):
                 return False
 
         return True
+
+    def attributes(self):
+        return Attributes(self.frontmatter, self.attributes, self.parent_attributes)

@@ -3,7 +3,7 @@ from typing import Any
 from textwrap import dedent
 
 from sigla import config
-from sigla.data.data import Data, Attributes
+from sigla.data.data import Data
 from sigla.nodes.abstract_node import AbstractNode
 from sigla.templates.engines import TemplateEngineABC
 from sigla.nodes.node_list import NodeList
@@ -71,8 +71,7 @@ class Node(AbstractNode):
 
     @property
     def attributes(self):
-        return Attributes(self.data.attributes,
-                          self.data.parent_attributes)
+        return self.data.attributes()
 
     def flatten(self):
         return [self, *self.children.flatten()]
