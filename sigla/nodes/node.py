@@ -110,13 +110,16 @@ class Node(AbstractNode):
     def process(self):
         self._process()
 
+    def update_parent_attributes(self, **kwargs):
+        self.data.parent_attributes.update(**kwargs)
+
     def _process(self):
         #
         self._render_string_attributes()
         #
         context = self._get_attributes_copy()
         for child in self.data.children:
-            child.data.parent_attributes.update(**context)
+            child.update_parent_attributes(**context)
         #
         for child in self.data.children:
             child.process()
