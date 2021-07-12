@@ -1,5 +1,11 @@
+from abc import ABC, abstractmethod
 from pathlib import Path
-from sigla.templates import TemplateLoaderABC
+
+
+class TemplateLoaderABC(ABC):
+    @abstractmethod
+    def get_path(self, tag, *, bundle=None) -> str:
+        pass
 
 
 class FileTemplateLoader(TemplateLoaderABC):
@@ -7,7 +13,7 @@ class FileTemplateLoader(TemplateLoaderABC):
         self.base_path = base_path
         self.ext = ext
 
-    def load(self, tag, *, bundle=None) -> str:
+    def get_path(self, tag, *, bundle=None) -> str:
         path = Path(self.base_path)
         if bundle:
             path = path.joinpath(bundle)

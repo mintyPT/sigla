@@ -5,7 +5,8 @@ from textwrap import dedent
 from sigla import config
 from sigla.data.data import Data, Attributes
 from sigla.nodes.abstract_node import AbstractNode
-from sigla.templates import TemplateEngineABC, TemplateLoaderABC
+from sigla.templates.engines import TemplateEngineABC
+from sigla.templates.loaders import TemplateLoaderABC
 from sigla.nodes.node_list import NodeList
 from sigla.utils.helpers import load_module, load_filters_from
 
@@ -17,7 +18,6 @@ class Node(AbstractNode):
             self,
             tag,
             engine: TemplateEngineABC,
-            template_loader: TemplateLoaderABC,
             *,
             attributes=None,
             children=None,
@@ -38,7 +38,6 @@ class Node(AbstractNode):
             parent_attributes=parent_attributes,
         )
 
-        self.loader = template_loader
         self.engine = engine
 
         self._handle_script_property()
@@ -55,7 +54,7 @@ class Node(AbstractNode):
 
         module_path = path.join(self.scripts_path, script)
 
-        new_attrs = _run_module_main_function(module_path, self)
+        new_attrs = _load_and_run_module_main_function(module_path, self)
 
         # handle returned value
         if new_attrs is None or type(new_attrs) != dict:
@@ -80,7 +79,7 @@ class Node(AbstractNode):
         self.children.append(node)
         return self
 
-    def render(self, template, **kwargs):
+    def render(self, template, **kwargs) -> str:
 
         node = self
         filters = self.get_filters()
@@ -90,7 +89,7 @@ class Node(AbstractNode):
                 template, filters=filters, **kwargs, node=node
             )
         except Exception as e:
-            err_message = _generator_error_message(
+            err_message = _generate_error_message_for_rendering_exception(
                 node=self, template=template
             )
             print(err_message)
@@ -133,7 +132,6 @@ class Node(AbstractNode):
         filters = load_filters_from(config.path.filters)
         return filters
 
-    #
     def __getattr__(self, name: str) -> Any:
         if name in self.attributes:
             return self.attributes[name]
@@ -149,14 +147,13 @@ class Node(AbstractNode):
         return self.data == other.data
 
 
-def _run_module_main_function(module_path, *args):
+def _load_and_run_module_main_function(module_path, *args, name="s"):
     # load module and execute it's `main` function
-    module = load_module("s", module_path)
-    new_attrs = module.main(*args)
-    return new_attrs
+    module = load_module(name, module_path)
+    return module.main(*args)
 
 
-def _generator_error_message(node=None, template=None):
+def _generate_error_message_for_rendering_exception(node=None, template=None):
     return dedent(
         f"""\
         ------------------------------

@@ -2,11 +2,19 @@ from textwrap import dedent
 from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
+from sigla.templates.engines import TemplateEngineABC
+from sigla.templates.loaders import TemplateLoaderABC
 from sigla.utils.errors import TemplateDoesNotExistError
 
 
 class NodeTemplate(Node):
     create_template = True
+
+    def __init__(self, tag, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None,
+                 children=None, parent_attributes=None, context=None):
+        super().__init__(tag, engine, attributes=attributes, children=children,
+                         parent_attributes=parent_attributes, context=context)
+        self.loader = template_loader
 
     def finish(self):
         raise NotImplementedError
@@ -19,8 +27,9 @@ class NodeTemplate(Node):
     def _render(self):
         # load template for tag
         raw_template = self._load_template(self.data.tag)
+        template = FrontMatter().get_content(raw_template)
         # handle frontmatter
-        return self.render(FrontMatter().get_content(raw_template))
+        return self.render(template)
 
     def _get_metadata(self):
         template = self._load_template(self.data.tag)
@@ -37,15 +46,12 @@ class NodeTemplate(Node):
 
         return metadata
 
-    def _get_template_path(self, tag):
-        return self.loader.load(tag, bundle=self.attributes.get("bundle"))
-
     def _load_template(self, tag) -> str:
-        path = self._get_template_path(tag)
-        default_template = self._create_default_template()
+        path = self.loader.get_path(tag, bundle=self.attributes.get("bundle"))
 
         if path.exists() is False:
             if self.create_template:
+                default_template = self._create_default_template()
                 path.write_text(default_template)
             else:
                 raise TemplateDoesNotExistError(tag, self)

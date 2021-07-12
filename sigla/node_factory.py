@@ -5,9 +5,8 @@ from sigla.nodes.node_echo import NodeEcho
 from sigla.nodes.node_file import NodeFile
 from sigla.nodes.node_template import NodeTemplate
 
-from sigla.templates.engines import JinjaEngine
-from sigla.templates.loaders import FileTemplateLoader
-from sigla.templates import TemplateEngineABC, TemplateLoaderABC
+from sigla.templates.engines import JinjaEngine, TemplateEngineABC
+from sigla.templates.loaders import FileTemplateLoader, TemplateLoaderABC
 
 
 class NodeFactory:
@@ -37,7 +36,7 @@ class NodeFactory:
 
         if node_creator:
             return node_creator(
-                tag, self.engine, self.loader, attributes=attributes
+                tag, self.engine, attributes=attributes
             )
         else:
             return self.default(

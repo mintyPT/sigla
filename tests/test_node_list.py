@@ -10,10 +10,9 @@ from sigla.templates.loaders import FileTemplateLoader
 class TestNodeList(unittest.TestCase):
     def test_filter(self):
         engine = JinjaEngine()
-        loader = FileTemplateLoader(config.path.templates, "jinja2")
         node_list = NodeList(
             [
-                Node(s, engine, loader)
+                Node(s, engine)
                 for s in ["cenas", "cenas", "cenas2", "cenas3"]
             ]
         )

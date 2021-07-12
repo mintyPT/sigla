@@ -10,7 +10,7 @@ class TestFileNode(unittest.TestCase):
     def test_empty_attributes(self):
         engine = JinjaEngine()
         loader = FileTemplateLoader(config.path.templates, "jinja2")
-        node = NodeFile("any", engine, loader)
+        node = NodeFile("any", engine)
 
         with self.assertRaises(AttributeError):
             node.process()

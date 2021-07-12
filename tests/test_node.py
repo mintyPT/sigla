@@ -19,12 +19,12 @@ class TestNode(unittest.TestCase):
         self.loader = FileTemplateLoader(config.path.templates, "jinja2")
 
     def test_empty_attributes(self):
-        node = Node("any", self.engine, self.loader)
+        node = Node("any", self.engine)
         self.assertEqual(node.attributes, {})
 
     def test_script(self):
         node = BaseNode(
-            "any", self.engine, self.loader, attributes={"script": "hello.py"}
+            "any", self.engine, attributes={"script": "hello.py"}
         )
         self.assertEqual(node.attributes.get("name"), "mauro")
 
@@ -32,7 +32,6 @@ class TestNode(unittest.TestCase):
         node = Node(
             "any",
             self.engine,
-            self.loader,
             attributes={"name": "mg", "age": 33},
         )
 
@@ -47,7 +46,6 @@ class TestNode(unittest.TestCase):
         node = Node(
             "any",
             self.engine,
-            self.loader,
             attributes={"name": "mg", "path": "{{name}}-"},
         )
         node.process()
@@ -55,12 +53,11 @@ class TestNode(unittest.TestCase):
 
     def test_replacement_in_props_of_children(self):
         node_child = Node(
-            "child", self.engine, self.loader, attributes={"path": "{{name}}-"}
+            "child", self.engine, attributes={"path": "{{name}}-"}
         )
         node = Node(
             "root",
             self.engine,
-            self.loader,
             attributes={"name": "mg"},
             children=NodeList([node_child]),
         )
