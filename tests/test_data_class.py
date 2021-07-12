@@ -15,7 +15,7 @@ class TestDataClass(unittest.TestCase):
         expected = Data(
             tag="a",
             attributes={"name": "a"},
-            children=[(Data("b", {"name": "b"}))],
+            children=[(Data(tag="b", attributes={"name": "b"}))],
         )
         self.assertEqual(
             XMLStringDataLoader("<a name='a'><b name='b'></b></a>").load(),

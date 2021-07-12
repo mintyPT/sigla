@@ -1,4 +1,3 @@
-from dataclasses import dataclass, field
 from collections import ChainMap
 from copy import deepcopy
 
@@ -24,14 +23,30 @@ class Attributes(ChainMap):
         return kwargs
 
 
-@dataclass
-class Data:
-    """This data class is meant to hold the data for each node"""
+class Data(object):
+    _keys = [
+        "children",
+        "tag",
+        "attributes",
+        "frontmatter",
+        "parent_attributes",
+    ]
+    
+    def __init__(self, *,
+                 children=None, tag=None, attributes=None,
+                 frontmatter=None, parent_attributes=None):
+        self.tag = tag if tag else {}
+        self.attributes = attributes if attributes else {}
+        self.frontmatter = frontmatter if frontmatter else {}
+        self.parent_attributes = parent_attributes if parent_attributes else {}
+        self.children = children if children else NodeList()
 
-    tag: str
+    @staticmethod
+    def _comp(a, b):
+        return (not a and not b) or a == b
 
-    attributes: dict = field(default_factory=dict)
-    frontmatter: dict = field(default_factory=dict)
-    parent_attributes: dict = field(default_factory=dict)
-
-    children: list = field(default_factory=NodeList)
+    def __eq__(self, other):
+        for key in self._keys:
+            if not self._comp(getattr(self, key), getattr(other, key)):
+                return False
+        return True
