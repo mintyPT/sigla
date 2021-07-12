@@ -5,6 +5,11 @@ from yaml.parser import ParserError
 
 
 class FrontMatter:
+
+    @classmethod
+    def parse_with_handler(cls, handler, raw_frontmatter, *, metadata=None):
+        return cls(handler=handler).parse(raw_frontmatter, metadata=metadata)
+
     def __init__(self, handler=None):
         self.handler = handler
 
@@ -49,3 +54,7 @@ class FrontMatter:
             metadata.update(raw_frontmatter)
 
         return metadata
+
+    def get_content(self, template):
+        frontmatter, content, handler = self.split(template)
+        return content.strip()

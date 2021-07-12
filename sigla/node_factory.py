@@ -1,8 +1,8 @@
 from sigla import config
+from sigla.nodes.node import Node
 
 from sigla.nodes.node_echo import NodeEcho
 from sigla.nodes.node_file import NodeFile
-from sigla.nodes.node_root import NodeRoot
 from sigla.nodes.node_template import NodeTemplate
 
 from sigla.templates.engines import JinjaEngine
@@ -13,15 +13,15 @@ from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 class NodeFactory:
     default = NodeTemplate
     reference = {
-        "root": NodeRoot,
+        "root": Node,
         "file": NodeFile,
         "echo": NodeEcho,
     }
 
     def __init__(
-        self,
-        engine: TemplateEngineABC = None,
-        loader: TemplateLoaderABC = None,
+            self,
+            engine: TemplateEngineABC = None,
+            loader: TemplateLoaderABC = None,
     ):
         if engine is None:
             engine = JinjaEngine()

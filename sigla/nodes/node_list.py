@@ -53,14 +53,6 @@ class NodeList(list):
     def join(self, sep=""):
         return sep.join(self)
 
-    def _process(self):
-        for item in self:
-            item._process()
-
-    def process(self):
-        for item in self:
-            item.process()
-
     @classmethod
     def get_node_list_methods(cls):
         methods_children = []

@@ -17,7 +17,7 @@ version:
 	poetry run sigla version
 
 flake8:
-	poetry run flake8 .
+	poetry run flake8 . --max-cognitive-complexity=7
 
 black:
 	poetry run black . -l 79

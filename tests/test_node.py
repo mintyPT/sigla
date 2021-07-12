@@ -4,7 +4,6 @@ import unittest
 from sigla import config
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
-from sigla.nodes.node_root import NodeRoot
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 
@@ -20,7 +19,7 @@ class TestNode(unittest.TestCase):
         self.loader = FileTemplateLoader(config.path.templates, "jinja2")
 
     def test_empty_attributes(self):
-        node = NodeRoot("any", self.engine, self.loader)
+        node = Node("any", self.engine, self.loader)
         self.assertEqual(node.attributes, {})
 
     def test_script(self):
@@ -30,7 +29,7 @@ class TestNode(unittest.TestCase):
         self.assertEqual(node.attributes.get("name"), "mauro")
 
     def test_basic_attr(self):
-        node = NodeRoot(
+        node = Node(
             "any",
             self.engine,
             self.loader,
@@ -45,7 +44,7 @@ class TestNode(unittest.TestCase):
         self.assertEqual(len(node.children(sep=None)), 0)
 
     def test_replacement_in_props(self):
-        node = NodeRoot(
+        node = Node(
             "any",
             self.engine,
             self.loader,
@@ -55,10 +54,10 @@ class TestNode(unittest.TestCase):
         self.assertEqual(node.attributes["path"], "mg-")
 
     def test_replacement_in_props_of_children(self):
-        node_child = NodeRoot(
+        node_child = Node(
             "child", self.engine, self.loader, attributes={"path": "{{name}}-"}
         )
-        node = NodeRoot(
+        node = Node(
             "root",
             self.engine,
             self.loader,

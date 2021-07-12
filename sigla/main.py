@@ -1,5 +1,5 @@
 from sigla.node_loaders import DataToNodeLoader, XMLToNodeLoader
-from sigla.nodes.node import AbstractNode
+from sigla.nodes.abstract_node import AbstractNode
 
 
 def process(kind, content, *, factory=None):

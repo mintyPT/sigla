@@ -14,12 +14,9 @@ class NodeFile(Node):
         return self.data.attributes["to"]
 
     def process(self):
-        self._process()
-
+        super().process()
         self.content = self.children()
-
         self.validate_to_attribute()
-
         return self
 
     def validate_to_attribute(self):

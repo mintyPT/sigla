@@ -2,7 +2,6 @@ from textwrap import dedent
 from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
-from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 from sigla.utils.errors import TemplateDoesNotExistError
 
 
@@ -14,50 +13,49 @@ class NodeTemplate(Node):
 
     def process(self):
         self._process()
-        return self._potato()
+        return self._render()
 
     def _process(self):
         self.data.frontmatter_attributes = self._get_metadata()
         super()._process()
 
-    def _potato(self):
+    def _render(self):
         # load template for tag
-        raw_template = self.load_template(self.data.tag)
+        raw_template = self._load_template(self.data.tag)
         # handle frontmatter
-        return self.render(_get_template_without_frontmatter(raw_template))
+        return self.render(FrontMatter().get_content(raw_template))
 
     def _get_metadata(self):
-        template = self.load_template(self.data.tag)
+        template = self._load_template(self.data.tag)
 
-        fm = FrontMatter()
-        fm_raw, template_content, handler = fm.split(template)
+        frontmatter = FrontMatter()
+        frontmatter_raw, template, handler = frontmatter.split(template)
 
-        if fm_raw and handler:
-            frontmatter = self.render(fm_raw)
-            fm1 = FrontMatter(handler)
-            metadata = fm1.parse(frontmatter, metadata=None)
-        else:
-            metadata = {}
+        metadata = {}
+        if frontmatter_raw and handler:
+            content = self.render(frontmatter_raw)
+            metadata = FrontMatter.parse_with_handler(handler,
+                                                      content,
+                                                      metadata=None)
 
         return metadata
 
-    def get_template_path(self, tag):
-        return self.loader.load(tag, bundle=(self.attributes.get("bundle")))
+    def _get_template_path(self, tag):
+        return self.loader.load(tag, bundle=self.attributes.get("bundle"))
 
-    def load_template(self, tag) -> str:
-        path = self.get_template_path(tag)
-        create_template = self.create_template
-        default_template = self.create_default_template()
+    def _load_template(self, tag) -> str:
+        path = self._get_template_path(tag)
+        default_template = self._create_default_template()
 
         if path.exists() is False:
-            if create_template:
+            if self.create_template:
                 path.write_text(default_template)
             else:
                 raise TemplateDoesNotExistError(tag, self)
 
         return path.read_text()
 
-    def create_default_template(self):
+    def _create_default_template(self):
 
         default_template_content = dedent(
             """\
@@ -98,10 +96,3 @@ class NodeTemplate(Node):
             methods=list(methods),
         )
         return content
-
-
-def _get_template_without_frontmatter(template):
-    fm = FrontMatter()
-    frontmatter, content, handler = fm.split(template)
-    tpl = content.strip()
-    return tpl

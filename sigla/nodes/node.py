@@ -1,33 +1,13 @@
-from abc import ABC, abstractmethod
 from os import path
 from typing import Any
 from textwrap import dedent
 
 from sigla import config
 from sigla.data.data import Data, Attributes
+from sigla.nodes.abstract_node import AbstractNode
 from sigla.templates import TemplateEngineABC, TemplateLoaderABC
 from sigla.nodes.node_list import NodeList
 from sigla.utils.helpers import load_module, load_filters_from
-
-
-class AbstractNode(ABC):
-    data: Data = None
-
-    # Steps are
-    # 1. Load X into Node/Data/Attributes
-    # 2. Process
-    # 3. Finish
-
-    def __call__(self, *args, **kwargs):
-        return self.process()
-
-    @abstractmethod
-    def process(self):
-        pass
-
-    @abstractmethod
-    def finish(self):
-        pass
 
 
 class Node(AbstractNode):
@@ -125,7 +105,7 @@ class Node(AbstractNode):
             raise e
 
     def finish(self):
-        pass
+        return [child.finish() for child in self.children]
 
     def process(self):
         self._process()
@@ -138,7 +118,8 @@ class Node(AbstractNode):
         for child in self.data.children:
             child.data.parent_attributes.update(**context)
         #
-        self.data.children._process()
+        for child in self.data.children:
+            child.process()
 
     def _render_string_attributes(self):
         # update attributes
