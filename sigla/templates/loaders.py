@@ -4,7 +4,7 @@ from pathlib import Path
 
 class TemplateLoaderABC(ABC):
     @abstractmethod
-    def get_path(self, tag, *, bundle=None) -> str:
+    def get_path(self, tag, *, bundle=None) -> Path:
         pass
 
 

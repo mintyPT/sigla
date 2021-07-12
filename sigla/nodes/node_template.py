@@ -21,7 +21,7 @@ class NodeTemplate(Node):
         raise NotImplementedError
 
     def process(self):
-        self.data.frontmatter_attributes = self._get_metadata()
+        self.data.frontmatter = self._get_frontmatter_from_template()
         super().process()
         return self._render()
 
@@ -32,18 +32,19 @@ class NodeTemplate(Node):
         # handle frontmatter
         return self.render(template)
 
-    def _get_metadata(self):
-        template = self._load_template(self.data.tag)
+    def _get_frontmatter_from_template(self):
+        raw_template = self._load_template(self.data.tag)
 
         frontmatter = FrontMatter()
-        frontmatter_raw, template, handler = frontmatter.split(template)
+        frontmatter_raw, template, handler = frontmatter.split(raw_template)
 
         metadata = {}
         if frontmatter_raw and handler:
             content = self.render(frontmatter_raw)
-            metadata = FrontMatter.parse_with_handler(handler,
-                                                      content,
-                                                      metadata=None)
+            metadata = FrontMatter.parse_with_handler(
+                handler,
+                content,
+                metadata=None)
 
         return metadata
 

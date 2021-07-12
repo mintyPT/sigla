@@ -31,7 +31,7 @@ class Data:
     tag: str
 
     attributes: dict = field(default_factory=dict)
-    frontmatter_attributes: dict = field(default_factory=dict)
+    frontmatter: dict = field(default_factory=dict)
     parent_attributes: dict = field(default_factory=dict)
 
     children: list = field(default_factory=NodeList)

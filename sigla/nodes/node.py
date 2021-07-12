@@ -71,7 +71,7 @@ class Node(AbstractNode):
     @property
     def attributes(self):
         return Attributes(
-            self.data.frontmatter_attributes,
+            self.data.frontmatter,
             self.data.attributes,
             self.data.parent_attributes,
         )
