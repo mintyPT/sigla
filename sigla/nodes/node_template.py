@@ -3,18 +3,18 @@ from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
 from sigla.templates.engines import TemplateEngineABC
-from sigla.templates.loaders import TemplateLoaderABC
+from sigla.templates.loaders import TemplateLoaderABC, FileTemplateLoader
 from sigla.utils.errors import TemplateDoesNotExistError
 
 
 class NodeTemplate(Node):
     create_template = True
 
-    def __init__(self, tag, engine: TemplateEngineABC,
-                 template_loader: TemplateLoaderABC, *, attributes=None,
-                 children=None, parent_attributes=None, context=None):
-        super().__init__(tag, engine, attributes=attributes, children=children,
-                         parent_attributes=parent_attributes, context=context)
+    def __init__(self,
+                 tag, engine: TemplateEngineABC,
+                 template_loader: TemplateLoaderABC, **kwargs):
+        super().__init__(tag, engine, **kwargs)
+
         self.loader = template_loader
 
     def finish(self):
