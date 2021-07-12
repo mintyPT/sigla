@@ -5,7 +5,6 @@ from yaml.parser import ParserError
 
 
 class FrontMatter:
-
     @classmethod
     def parse_with_handler(cls, handler, raw_frontmatter, *, metadata=None):
         return cls(handler=handler).parse(raw_frontmatter, metadata=metadata)

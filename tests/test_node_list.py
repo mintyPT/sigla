@@ -8,10 +8,7 @@ class TestNodeList(unittest.TestCase):
     def test_filter(self):
         engine = JinjaEngine()
         node_list = NodeList(
-            [
-                Node(s, engine)
-                for s in ["cenas", "cenas", "cenas2", "cenas3"]
-            ]
+            [Node(s, engine) for s in ["cenas", "cenas", "cenas2", "cenas3"]]
         )
 
         filtered = node_list.filter(tag="cenas")

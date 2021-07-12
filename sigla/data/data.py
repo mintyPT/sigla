@@ -32,9 +32,15 @@ class Data(object):
         {"name": "frontmatter"},
     ]
 
-    def __init__(self, *,
-                 children=None, tag=None, attributes=None,
-                 parent_attributes=None, frontmatter=None):
+    def __init__(
+        self,
+        *,
+        children=None,
+        tag=None,
+        attributes=None,
+        parent_attributes=None,
+        frontmatter=None,
+    ):
         self.tag = tag if tag else {}
         self.children = children if children else NodeList()
 
@@ -57,4 +63,6 @@ class Data(object):
         return True
 
     def attributes(self):
-        return Attributes(self.frontmatter, self.attributes, self.parent_attributes)
+        return Attributes(
+            self.frontmatter, self.attributes, self.parent_attributes
+        )

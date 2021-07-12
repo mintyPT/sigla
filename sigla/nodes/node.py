@@ -14,26 +14,24 @@ class Node(AbstractNode):
     scripts_path = config.path.scripts
 
     def __init__(
-            self,
-            tag,
-            engine: TemplateEngineABC,
-            *,
-            attributes=None,
-            children=None,
-            parent_attributes=None,
-            context=None,
+        self,
+        tag,
+        engine: TemplateEngineABC,
+        *,
+        attributes=None,
+        children=None,
+        parent_attributes=None,
+        context=None,
     ):
 
         self.children = children if children is not None else NodeList()
         self.context = context if context is not None else {}
 
-        attributes = attributes \
-            if attributes is not None \
-            else {}
+        attributes = attributes if attributes is not None else {}
 
-        parent_attributes = parent_attributes \
-            if parent_attributes is not None \
-            else {}
+        parent_attributes = (
+            parent_attributes if parent_attributes is not None else {}
+        )
 
         self.data = Data(
             tag=tag,
@@ -63,9 +61,7 @@ class Node(AbstractNode):
 
         # handle returned value
         if new_attrs is None or type(new_attrs) != dict:
-            raise ValueError(
-                "Expected to receive a dictionary of new args"
-            )
+            raise ValueError("Expected to receive a dictionary of new args")
 
         self.data.attributes.update(**new_attrs)
 

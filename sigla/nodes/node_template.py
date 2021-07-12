@@ -10,9 +10,13 @@ from sigla.utils.errors import TemplateDoesNotExistError
 class NodeTemplate(Node):
     create_template = True
 
-    def __init__(self,
-                 tag, engine: TemplateEngineABC,
-                 template_loader: TemplateLoaderABC, **kwargs):
+    def __init__(
+        self,
+        tag,
+        engine: TemplateEngineABC,
+        template_loader: TemplateLoaderABC,
+        **kwargs
+    ):
         super().__init__(tag, engine, **kwargs)
 
         self.loader = template_loader
@@ -26,10 +30,9 @@ class NodeTemplate(Node):
 
         # load template for tag
         template = self._get_template_without_frontmatter()
+
         # handle frontmatter
         return self.render(template)
-
-
 
     #
     #

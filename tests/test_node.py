@@ -23,9 +23,7 @@ class TestNode(unittest.TestCase):
         self.assertEqual(node.attributes, {})
 
     def test_script(self):
-        node = BaseNode(
-            "any", self.engine, attributes={"script": "hello.py"}
-        )
+        node = BaseNode("any", self.engine, attributes={"script": "hello.py"})
         self.assertEqual(node.attributes.get("name"), "mauro")
 
     def test_basic_attr(self):

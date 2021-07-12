@@ -18,9 +18,9 @@ class NodeFactory:
     }
 
     def __init__(
-            self,
-            engine: TemplateEngineABC = None,
-            loader: TemplateLoaderABC = None,
+        self,
+        engine: TemplateEngineABC = None,
+        loader: TemplateLoaderABC = None,
     ):
         if engine is None:
             engine = JinjaEngine()
@@ -35,9 +35,7 @@ class NodeFactory:
         node_creator = self.reference.get(tag)
 
         if node_creator:
-            return node_creator(
-                tag, self.engine, attributes=attributes
-            )
+            return node_creator(tag, self.engine, attributes=attributes)
         else:
             return self.default(
                 tag, self.engine, self.loader, attributes=attributes
