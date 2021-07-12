@@ -1,10 +1,7 @@
 import unittest
-
-from sigla import config
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
 from sigla.templates.engines import JinjaEngine
-from sigla.templates.loaders import FileTemplateLoader
 
 
 class TestNodeList(unittest.TestCase):

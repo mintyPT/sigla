@@ -6,7 +6,6 @@ from sigla import config
 from sigla.data.data import Data, Attributes
 from sigla.nodes.abstract_node import AbstractNode
 from sigla.templates.engines import TemplateEngineABC
-from sigla.templates.loaders import TemplateLoaderABC
 from sigla.nodes.node_list import NodeList
 from sigla.utils.helpers import load_module, load_filters_from
 
@@ -28,8 +27,13 @@ class Node(AbstractNode):
         self.children = children if children is not None else NodeList()
         self.context = context if context is not None else {}
 
-        attributes = attributes if attributes is not None else {}
-        parent_attributes = parent_attributes if parent_attributes is not None else {}
+        attributes = attributes \
+            if attributes is not None \
+            else {}
+
+        parent_attributes = parent_attributes \
+            if parent_attributes is not None \
+            else {}
 
         self.data = Data(
             tag=tag,

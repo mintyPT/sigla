@@ -10,7 +10,8 @@ from sigla.utils.errors import TemplateDoesNotExistError
 class NodeTemplate(Node):
     create_template = True
 
-    def __init__(self, tag, engine: TemplateEngineABC, template_loader: TemplateLoaderABC, *, attributes=None,
+    def __init__(self, tag, engine: TemplateEngineABC,
+                 template_loader: TemplateLoaderABC, *, attributes=None,
                  children=None, parent_attributes=None, context=None):
         super().__init__(tag, engine, attributes=attributes, children=children,
                          parent_attributes=parent_attributes, context=context)
