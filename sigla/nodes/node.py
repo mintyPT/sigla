@@ -31,7 +31,7 @@ class AbstractNode(ABC):
 
 
 class Node(AbstractNode):
-    scripts_base_path = config.path.scripts
+    scripts_path = config.path.scripts
 
     def __init__(
             self,
@@ -48,7 +48,7 @@ class Node(AbstractNode):
             parent_attributes = {}
 
         if children is None:
-            children = []
+            children = NodeList()
 
         if attributes is None:
             attributes = {}
@@ -77,7 +77,7 @@ class Node(AbstractNode):
 
         script = self.data.attributes["script"]
 
-        module_path = path.join(self.scripts_base_path, script)
+        module_path = path.join(self.scripts_path, script)
 
         new_attrs = _run_module_main_function(module_path, self)
 
@@ -128,20 +128,17 @@ class Node(AbstractNode):
         pass
 
     def process(self):
-        self.update_context()
+        self._process()
 
-    def update_context(self):
-        self._update_children_context_with_current_context()
+    def _process(self):
+        #
         self._render_string_attributes()
-
-    def update_parent_attributes(self, ctx):
-        self.data.parent_attributes.update(**ctx)
-
-    def _update_children_context_with_current_context(self):
+        #
+        context = self._get_attributes_copy()
         for child in self.data.children:
-            ctx = self._get_attributes_copy()
-            child.update_parent_attributes(ctx)
-            child.update_context()
+            child.data.parent_attributes.update(**context)
+        #
+        self.data.children._process()
 
     def _render_string_attributes(self):
         # update attributes
@@ -154,10 +151,10 @@ class Node(AbstractNode):
         attributes = self.attributes
         context = self.context
 
-        ctx = context.copy()
-        ctx.update(dict(attributes))
+        context = context.copy()
+        context.update(dict(attributes))
 
-        return ctx
+        return context
 
     @staticmethod
     def get_filters():

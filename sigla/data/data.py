@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from collections import ChainMap
 from copy import deepcopy
 
+from sigla.nodes.node_list import NodeList
+
 
 class Attributes(ChainMap):
     def without(self, *args):
@@ -32,4 +34,4 @@ class Data:
     frontmatter_attributes: dict = field(default_factory=dict)
     parent_attributes: dict = field(default_factory=dict)
 
-    children: list = field(default_factory=list)
+    children: list = field(default_factory=NodeList)

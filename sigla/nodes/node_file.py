@@ -14,7 +14,7 @@ class NodeFile(Node):
         return self.data.attributes["to"]
 
     def process(self):
-        super().process()
+        self._process()
 
         self.content = self.children()
 

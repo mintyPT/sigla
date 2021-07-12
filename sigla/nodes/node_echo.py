@@ -7,7 +7,7 @@ class NodeEcho(Node):
         self.content = None
 
     def process(self):
-        super().process()
+        self._process()
         self.content = self.children()
         return self
 

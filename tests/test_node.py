@@ -3,13 +3,14 @@ import unittest
 
 from sigla import config
 from sigla.nodes.node import Node
+from sigla.nodes.node_list import NodeList
 from sigla.nodes.node_root import NodeRoot
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 
 
 class BaseNode(Node):
-    scripts_base_path = pathlib.Path(__file__).parent.joinpath("scripts")
+    scripts_path = pathlib.Path(__file__).parent.joinpath("scripts")
 
 
 class TestNode(unittest.TestCase):
@@ -62,7 +63,7 @@ class TestNode(unittest.TestCase):
             self.engine,
             self.loader,
             attributes={"name": "mg"},
-            children=[node_child],
+            children=NodeList([node_child]),
         )
 
         node.process()

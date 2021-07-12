@@ -3,7 +3,7 @@ from sigla.nodes.node import Node
 
 class NodeRoot(Node):
     def process(self):
-        super().process()
+        self._process()
         for child in self.children:
             child.process()
 
