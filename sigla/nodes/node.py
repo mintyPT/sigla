@@ -48,9 +48,10 @@ class Node(AbstractNode):
 
     def _handle_script_property(self):
         """
-            It's possible to pass a script prop to a tag and that script is
-            expected to have a "main" function to be run.
-            """
+        It's possible to pass a script prop to a tag and that script is
+        expected to have a "main" function to be run.
+        """
+        # TODO document this
         if "script" not in self.data.attributes:
             return
 

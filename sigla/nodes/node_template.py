@@ -3,7 +3,7 @@ from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
 from sigla.templates.engines import TemplateEngineABC
-from sigla.templates.loaders import TemplateLoaderABC, FileTemplateLoader
+from sigla.templates.loaders import TemplateLoaderABC
 from sigla.utils.errors import TemplateDoesNotExistError
 
 
@@ -23,42 +23,44 @@ class NodeTemplate(Node):
     def process(self):
         self.data.frontmatter = self._get_frontmatter_from_template()
         super().process()
-        return self._render()
 
-    def _render(self):
         # load template for tag
-        raw_template = self._load_template(self.data.tag)
-        template = FrontMatter().get_content(raw_template)
+        template = self._get_template_without_frontmatter()
         # handle frontmatter
         return self.render(template)
 
+    #
+    #
+    #
+
     def _get_frontmatter_from_template(self):
-        raw_template = self._load_template(self.data.tag)
+        raw_template = self._get_raw_template()
 
         frontmatter = FrontMatter()
         frontmatter_raw, template, handler = frontmatter.split(raw_template)
 
-        metadata = {}
-        if frontmatter_raw and handler:
-            content = self.render(frontmatter_raw)
-            metadata = FrontMatter.parse_with_handler(
-                handler,
-                content,
-                metadata=None)
+        if not frontmatter or not handler:
+            return {}
 
-        return metadata
+        content = self.render(frontmatter_raw)
+        return FrontMatter.parse_with_handler(handler, content)
 
-    def _load_template(self, tag) -> str:
-        path = self.loader.get_path(tag, bundle=self.attributes.get("bundle"))
-
-        if path.exists() is False:
+    def _get_raw_template(self):
+        bundle = self.attributes.get("bundle")
+        exists = self.loader.exists(self.data.tag, bundle=bundle)
+        if not exists:
             if self.create_template:
                 default_template = self._create_default_template()
+                path = self.loader.get_path(self.data.tag, bundle=bundle)
                 path.write_text(default_template)
             else:
-                raise TemplateDoesNotExistError(tag, self)
+                raise TemplateDoesNotExistError(self.data.tag, self)
+        return self.loader.read(self.data.tag, bundle=bundle)
 
-        return path.read_text()
+    def _get_template_without_frontmatter(self):
+        raw_template = self._get_raw_template()
+        template = FrontMatter().get_content(raw_template)
+        return template
 
     def _create_default_template(self):
 
@@ -94,7 +96,9 @@ class NodeTemplate(Node):
         )
 
         variables = self.attributes
+        # TODO look into this and document it
         methods = NodeList.get_node_list_methods()
+
         content = self.render(
             default_template_content,
             variables=variables,
