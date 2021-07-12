@@ -15,14 +15,16 @@ class ElementTreeDataLoader(DataLoader):
         self.element = element
 
     def load(self) -> Data:
-        element = self.element
-        children = element
-        raw_attributes = element.attrib.copy()
+        raw_attributes = self.element.attrib.copy()
 
         attributes = cast_dict(raw_attributes)
-        children = [ElementTreeDataLoader(child).load() for child in children]
+        children = [
+            ElementTreeDataLoader(child).load() for child in self.element
+        ]
 
-        return Data(tag=element.tag, attributes=attributes, children=children)
+        return Data(
+            tag=self.element.tag, attributes=attributes, children=children
+        )
 
 
 class XMLStringDataLoader(DataLoader):

@@ -98,9 +98,7 @@ class TestRendering(unittest.TestCase):
         provided = """
         <person name="minty" age="33" />
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )()
+        got = load_node("xml", provided, factory=node_factory_for_testing)()
 
         self.assertEqual(got, "minty-sigla-33")
 
@@ -110,16 +108,12 @@ class TestRendering(unittest.TestCase):
             <person />
         </echo>
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )
+        got = load_node("xml", provided, factory=node_factory_for_testing)
         self.assertEqual(got.process().content, "minty-sigla-33")
 
     def test_filters(self):
         provided = "<var value='a'/>"
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )
+        got = load_node("xml", provided, factory=node_factory_for_testing)
         self.assertEqual(got.process(), "[a]")
 
     def test_render_child(self):
@@ -149,9 +143,7 @@ class TestRendering(unittest.TestCase):
             </tb>
         </ta>
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )()
+        got = load_node("xml", provided, factory=node_factory_for_testing)()
         self.assertEqual(got, "one/two/three")
 
     def test_fm_child(self):
@@ -163,15 +155,13 @@ class TestRendering(unittest.TestCase):
             </second_level>
         </first_level>
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )
+        got = load_node("xml", provided, factory=node_factory_for_testing)
         self.assertEqual(got.process(), "__one/two/three__")
 
     def test_big_one(self):
         self.maxDiff = None
         got = load_node(
-            "xml_string", definition, factory=node_factory_for_testing
+            "xml", definition, factory=node_factory_for_testing
         ).process()
 
         self.assertEqual(
@@ -183,7 +173,5 @@ class TestRendering(unittest.TestCase):
         provided = """
         <persona bundle="nurse" name="Jeanne"/>
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )
+        got = load_node("xml", provided, factory=node_factory_for_testing)
         self.assertEqual(got.process(), "This nurse's name is Jeanne")

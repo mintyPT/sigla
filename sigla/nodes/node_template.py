@@ -1,12 +1,11 @@
 from textwrap import dedent
 from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
-from sigla.nodes.abstract_public_node import AbstractPublicNode
 from sigla.nodes.node_list import NodeList
 from sigla.utils.errors import TemplateDoesNotExistError
 
 
-class NodeTemplate(AbstractPublicNode, Node):
+class NodeTemplate(Node):
     create_template = True
 
     def process(self):

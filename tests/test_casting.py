@@ -17,10 +17,7 @@ class TestCastingProps(unittest.TestCase):
             # json
             [
                 ("data-json", '{"name": "mauro"}'),
-                (
-                    "data",
-                    {"name": "mauro"},
-                ),
+                ("data", {"name": "mauro"}),
             ],
         ]
 

@@ -1,8 +1,7 @@
 from sigla.nodes.node import Node
-from sigla.nodes.abstract_public_node import AbstractPublicNode
 
 
-class NodeEcho(AbstractPublicNode, Node):
+class NodeEcho(Node):
     def __init__(self, tag, *args, **kwargs):
         super().__init__(tag, *args, **kwargs)
         self.content = None

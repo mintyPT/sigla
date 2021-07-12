@@ -34,13 +34,12 @@ class NodeFactory:
 
     def __call__(self, tag: str, attributes: object):
         node_creator = self.reference.get(tag)
-        default_creator = self.default
 
         if node_creator:
             return node_creator(
                 tag, self.engine, self.loader, attributes=attributes
             )
         else:
-            return default_creator(
+            return self.default(
                 tag, self.engine, self.loader, attributes=attributes
             )

@@ -1,5 +1,4 @@
 from abc import abstractmethod, ABC
-from sigla.nodes.abstract_node import AbstractNode
 from sigla.data.loaders import XMLStringDataLoader
 
 
@@ -29,14 +28,3 @@ class XMLToNodeLoader(DataToNodeLoader):
     def __init__(self, data, factory):
         data = XMLStringDataLoader(data).load()
         super().__init__(data, factory)
-
-
-def load_node(kind, content, *, factory=None) -> AbstractNode:
-    if kind == "data":
-        loader = DataToNodeLoader(content, factory)
-    elif kind == "xml_string":
-        loader = XMLToNodeLoader(content, factory)
-    else:
-        raise NotImplementedError(f"No loader implemented for {kind}")
-
-    return loader.load()

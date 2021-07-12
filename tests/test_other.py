@@ -9,9 +9,7 @@ class TestOther(unittest.TestCase):
     def test_assert_template_does_not_exist(self):
         with self.assertRaises(TemplateDoesNotExistError) as context:
             provided = """<most-random-tpl name="core"></most-random-tpl>"""
-            base = load_node(
-                "xml_string", provided, factory=node_factory_for_testing
-            )
+            base = load_node("xml", provided, factory=node_factory_for_testing)
             base.process()
 
         self.assertTrue(

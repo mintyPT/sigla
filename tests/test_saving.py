@@ -16,9 +16,7 @@ class TestOutputs(unittest.TestCase):
                 </echo>
             </root>
         """
-        got = load_node(
-            "xml_string", provided, factory=node_factory_for_testing
-        )
+        got = load_node("xml", provided, factory=node_factory_for_testing)
         got.process()
 
         self.assertEqual(got.children[0].to, "result.txt")

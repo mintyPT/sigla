@@ -2,8 +2,9 @@ from pathlib import Path
 
 import typer
 
-from sigla import __version__, config, load_node
+from sigla import __version__, config
 from sigla.cli.actions import Action, NewDefinitionFile, NewFiltersFile
+from sigla.main import process
 from sigla.utils.errors import TemplateDoesNotExistError
 from sigla.utils.helpers import ensure_dirs
 
@@ -35,9 +36,7 @@ class RunCommand(Action):
         print(f":: Reading {match}")
 
         str_xml = match.read_text()
-        nodes = load_node("xml_string", str_xml, factory=None)
-        nodes.process()
-        nodes.finish()
+        process("xml", str_xml, factory=None)
 
     def run(self):
 
@@ -65,10 +64,12 @@ class NewCommand(Action):
 class InitCommand(Action):
     def run(self):
         self.log("sigla init")
-        self.create_folder(config.path.templates)
-        self.create_folder(config.path.snapshots)
-        self.create_folder(config.path.definitions)
-        self.create_folder(config.path.scripts)
+        self.create_folder(
+            config.path.templates,
+            config.path.snapshots,
+            config.path.definitions,
+            config.path.scripts,
+        )
         self.create_filters()
 
     def create_filters(self):
@@ -78,6 +79,7 @@ class InitCommand(Action):
         )
         cmd.run()
 
-    def create_folder(self, path):
-        self.log(f"- creating folder {path}")
-        ensure_dirs(path)
+    def create_folder(self, *args):
+        for path in args:
+            self.log(f"- creating folder {path}")
+            ensure_dirs(path)

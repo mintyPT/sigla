@@ -1,11 +1,10 @@
 from pathlib import Path
 
 from sigla.nodes.node import Node
-from sigla.nodes.abstract_public_node import AbstractPublicNode
 from sigla.utils.helpers import ensure_dirs
 
 
-class NodeFile(AbstractPublicNode, Node):
+class NodeFile(Node):
     def __init__(self, tag, *args, **kwargs):
         super().__init__(tag, *args, **kwargs)
         self.content = None

@@ -10,7 +10,7 @@ from .helpers.node_factory_for_testing import node_factory_for_testing
 class TestConvertToInternalClasses(unittest.TestCase):
     def test_simple(self):
         source = "<a name='a'><b name='b'></b></a>"
-        got = load_node("xml_string", source, factory=node_factory_for_testing)
+        got = load_node("xml", source, factory=node_factory_for_testing)
 
         loader = FileTemplateLoader(config.path.templates, "jinja2")
         engine = JinjaEngine()
@@ -22,7 +22,7 @@ class TestConvertToInternalClasses(unittest.TestCase):
 
     def test_conversion(self):
         source = "<a name='a' age-int='33' price-float='1.2' data-json='{\"v1\": 1}' b-bool='True' c-bool='1' d-bool='true' e-bool='ads'></a>"  # noqa: E501
-        got = load_node("xml_string", source, factory=node_factory_for_testing)
+        got = load_node("xml", source, factory=node_factory_for_testing)
 
         expected = {
             "name": "a",
