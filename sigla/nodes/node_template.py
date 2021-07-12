@@ -12,12 +12,9 @@ class NodeTemplate(Node):
         raise NotImplementedError
 
     def process(self):
-        self._process()
-        return self._render()
-
-    def _process(self):
         self.data.frontmatter_attributes = self._get_metadata()
-        super()._process()
+        super().process()
+        return self._render()
 
     def _render(self):
         # load template for tag

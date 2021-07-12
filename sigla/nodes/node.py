@@ -109,9 +109,6 @@ class Node(AbstractNode):
 
     def process(self):
         self._render_string_attributes()
-        self._process()
-
-    def _process(self):
         #
         context = self._get_attributes_copy()
         for child in self.data.children:
