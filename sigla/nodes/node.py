@@ -28,11 +28,8 @@ class Node(AbstractNode):
         self.children = children if children is not None else NodeList()
         self.context = context if context is not None else {}
 
-        if parent_attributes is None:
-            parent_attributes = {}
-
-        if attributes is None:
-            attributes = {}
+        attributes = attributes if attributes is not None else {}
+        parent_attributes = parent_attributes if parent_attributes is not None else {}
 
         self.data = Data(
             tag=tag,
