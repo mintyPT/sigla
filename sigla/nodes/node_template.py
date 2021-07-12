@@ -1,4 +1,6 @@
 from textwrap import dedent
+
+from sigla.data.data import Attributes
 from sigla.front_matter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
@@ -28,6 +30,12 @@ class NodeTemplate(Node):
         template = self._get_template_without_frontmatter()
         # handle frontmatter
         return self.render(template)
+
+    @property
+    def attributes(self):
+        return Attributes(self.data.frontmatter,
+                          self.data.attributes,
+                          self.data.parent_attributes)
 
     #
     #

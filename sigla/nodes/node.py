@@ -71,11 +71,8 @@ class Node(AbstractNode):
 
     @property
     def attributes(self):
-        args = [self.data.frontmatter,
-                self.data.attributes,
-                self.data.parent_attributes, ]
-        args = [arg for arg in args if arg]
-        return Attributes(*args)
+        return Attributes(self.data.attributes,
+                          self.data.parent_attributes)
 
     def flatten(self):
         return [self, *self.children.flatten()]
