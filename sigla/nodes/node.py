@@ -22,23 +22,22 @@ class Node(AbstractNode):
             attributes=None,
             children=None,
             parent_attributes=None,
+            context=None,
     ):
+
+        self.children = children if children is not None else NodeList()
+        self.context = context if context is not None else {}
 
         if parent_attributes is None:
             parent_attributes = {}
 
-        if children is None:
-            children = NodeList()
-
         if attributes is None:
             attributes = {}
-
-        self.context = {}
 
         self.data = Data(
             tag=tag,
             attributes=attributes,
-            children=children,
+            children=self.children,
             parent_attributes=parent_attributes,
         )
 
@@ -77,15 +76,11 @@ class Node(AbstractNode):
             self.data.parent_attributes,
         )
 
-    @property
-    def children(self):
-        return NodeList(self.data.children)
-
     def flatten(self):
         return [self, *self.children.flatten()]
 
     def append(self, node: AbstractNode):
-        self.data.children.append(node)
+        self.children.append(node)
         return self
 
     def render(self, template, **kwargs):
@@ -111,10 +106,10 @@ class Node(AbstractNode):
         self._render_string_attributes()
         #
         context = self._get_attributes_copy()
-        for child in self.data.children:
+        for child in self.children:
             child.update_parent_attributes(**context)
         #
-        for child in self.data.children:
+        for child in self.children:
             child.process()
 
     def update_parent_attributes(self, **kwargs):
