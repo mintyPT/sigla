@@ -20,8 +20,6 @@ class NodeList(list):
     def flatten(self):
         ret = []
         for child in self:
-            if not child:
-                continue
             if hasattr(child, "flatten"):
                 ret += child.flatten()
             elif isinstance(child, list):

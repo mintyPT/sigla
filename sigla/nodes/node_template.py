@@ -1,5 +1,5 @@
 from textwrap import dedent
-from sigla.front_matter import FrontMatter
+from sigla.frontmatter.frontmatter import FrontMatter
 from sigla.nodes.node import Node
 from sigla.nodes.node_list import NodeList
 from sigla.templates.engines import TemplateEngineABC
@@ -11,18 +11,22 @@ class NodeTemplate(Node):
     create_template = True
 
     def __init__(
-            self,
-            tag,
-            engine: TemplateEngineABC,
-            template_loader: TemplateLoaderABC,
-            **kwargs
+        self,
+        tag,
+        engine: TemplateEngineABC,
+        template_loader: TemplateLoaderABC,
+        **kwargs
     ):
         super().__init__(tag, engine, **kwargs)
 
         self.loader = template_loader
 
     def finish(self):
-        raise NotImplementedError('This is a template node. It should probably not be the first one to be called')
+        msg = (
+            "This is a template node. It should probably not be the first "
+            "one to be called"
+        )
+        raise NotImplementedError(msg)
 
     def process(self):
         self.data.frontmatter = self._get_frontmatter_from_template()
@@ -42,12 +46,12 @@ class NodeTemplate(Node):
         raw_template = self._get_raw_template()
 
         frontmatter = FrontMatter()
-        frontmatter_raw, template, handler = frontmatter.split(raw_template)
+        frontmatter_str, template, handler = frontmatter.split(raw_template)
 
         if not frontmatter or not handler:
             return {}
 
-        content = self.render(frontmatter_raw)
+        content = self.render(frontmatter_str)
         return FrontMatter.parse_with_handler(handler, content)
 
     def _get_raw_template(self):

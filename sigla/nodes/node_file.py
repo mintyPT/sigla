@@ -10,10 +10,12 @@ from sigla.utils.helpers import ensure_dirs
 #   </model>
 # </models>
 # <forms>
-#   <user_form model="User" /or/ model-query="models model[name='User']" /or/ $model="User">
+#   <user_form model="User"
+#       /or/ model-query="models model[name='User']" /or/ $model="User">
 #     ...
 #   </user_form>
 # </forms>
+
 
 class NodeFile(Node):
     def __init__(self, tag, *args, **kwargs):
