@@ -11,18 +11,18 @@ class NodeTemplate(Node):
     create_template = True
 
     def __init__(
-        self,
-        tag,
-        engine: TemplateEngineABC,
-        template_loader: TemplateLoaderABC,
-        **kwargs
+            self,
+            tag,
+            engine: TemplateEngineABC,
+            template_loader: TemplateLoaderABC,
+            **kwargs
     ):
         super().__init__(tag, engine, **kwargs)
 
         self.loader = template_loader
 
     def finish(self):
-        raise NotImplementedError
+        raise NotImplementedError('This is a template node. It should probably not be the first one to be called')
 
     def process(self):
         self.data.frontmatter = self._get_frontmatter_from_template()
