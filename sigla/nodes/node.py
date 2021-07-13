@@ -67,7 +67,7 @@ class Node(AbstractNode):
 
     @property
     def attributes(self):
-        return self.data.attributes()
+        return self.data.get_attributes()
 
     def flatten(self):
         return [self, *self.children.flatten()]
