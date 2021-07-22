@@ -1,6 +1,7 @@
 import environ
 
 
+# TODO remove this
 @environ.config(prefix="")
 class Config:
     @environ.config

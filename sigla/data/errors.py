@@ -1,0 +1,2 @@
+class DataKeyError(KeyError):
+    pass

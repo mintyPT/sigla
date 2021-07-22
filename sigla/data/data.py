@@ -1,68 +1,100 @@
 from collections import ChainMap
-from copy import deepcopy
+from typing import Any
 
-from sigla.nodes.node_list import NodeList
-
-
-class Attributes(ChainMap):
-    def without(self, *args):
-        data = deepcopy(dict(self))
-        for name in args:
-            del data[name]
-        return Attributes(data)
-
-    def as_kwargs(self, sep=","):
-        kwargs = []
-        for k, v in self.items():
-            if type(v) == int:
-                kwargs.append(f"{k}={v}")
-            else:
-                kwargs.append(f'{k}="{v}"')
-        if sep:
-            return ", ".join(kwargs)
-        return kwargs
+from sigla.data.errors import DataKeyError
 
 
 class Data(object):
-    _meta = [
-        {"name": "children"},
-        {"name": "tag"},
-        {"name": "attributes"},
-        {"name": "parent_attributes"},
-        {"name": "frontmatter"},
-    ]
+    def __init__(self, tag, children=None, parent=None, **kwargs):
+        if children is None:
+            children = []
+        self.tag = tag
+        self.own_attributes = kwargs
+        self.parent: Data = parent
+        self.children = children
+        for child in self.children:
+            child.parent = self
 
-    def __init__(
-        self,
-        *,
-        children=None,
-        tag=None,
-        attributes=None,
-        parent_attributes=None,
-        frontmatter=None,
-    ):
-        self.tag = tag if tag else {}
-        self.children = children if children else NodeList()
+    @property
+    def attributes(self):
+        return ChainMap(
+            self.own_attributes,
+            self.parent.attributes if self.parent else {},  # parent_attributes
+        )
 
-        self.attributes = attributes if attributes else {}
-        self.parent_attributes = parent_attributes if parent_attributes else {}
-        self.frontmatter = frontmatter if frontmatter else {}
+    def get(self, key, default=None):
+        if key in self.attributes:
+            return self.attributes[key]
+        return default
 
-    @staticmethod
-    def _comp(a, b):
-        return (not a and not b) or a == b
+    def __iter__(self):
+        for child in self.children:
+            yield child
 
-    def __eq__(self, other):
-        for key in self._meta:
-            self_value = getattr(self, key["name"])
-            other_value = getattr(other, key["name"])
+    def __getattr__(self, name: str) -> Any:
+        if name in self.attributes.keys():
+            return self.attributes[name]
+        if name == "children":
+            return self.children
+        raise DataKeyError(f"No data found for {name}")
 
-            if not self._comp(self_value, other_value):
+    def same_own_attributes(self, other):
+
+        if self.own_attributes.keys() != other.own_attributes.keys():
+            return False
+
+        for own_key, own_value in self.own_attributes.items():
+            if own_value != other.own_attributes[own_key]:
                 return False
 
         return True
 
-    def get_attributes(self):
-        return Attributes(
-            self.frontmatter, self.attributes, self.parent_attributes
-        )
+    def __eq__(self, other):
+
+        if (
+            type(self) != type(other)
+            or self.tag != other.tag
+            or not self.same_own_attributes(other)
+        ):
+            return False
+
+        if not (
+            (not self.children and not other.children)
+            or (self.children == other.children)
+        ):
+            return False
+
+        return True
+
+    def find_by_id(self, raw_id: str):
+
+        if self.own_attributes.get("id") == raw_id:
+            return self
+
+        for child in self:
+            found = child.find_by_id(raw_id)
+            if found:
+                return found
+
+    def render(self, *, indent=0):
+        spacer = " " * indent
+
+        children = [child.render(indent=indent + 4) for child in self]
+        flat = len(children) == 0
+
+        if len(self.attributes.keys()) == 0:
+            open_tag = f"<{self.tag}>"
+            open_close_tag = f"<{self.tag}/>"
+        else:
+            attributes = " ".join(
+                f'{k}="{v}"' for k, v in self.attributes.items()
+            )
+            open_tag = f"<{self.tag} {attributes}>"
+            open_close_tag = f"<{self.tag} {attributes}/>"
+
+        if flat:
+            return f"{spacer}{open_close_tag}"
+
+        ret = [f"{spacer}{open_tag}", *children, f"{spacer}</{self.tag}>"]
+
+        return "\n".join(ret)

@@ -9,6 +9,44 @@
 - ```<data-proxy></data-proxy>```
 - ```<Partial>``` to inject into existing files
 
+
+### V2
+
+- [ ] mark nodes on definition file as data only so skip them when rendering
+- [ ] Add actions
+    - [ ] add (new file) action
+    - [ ] modify a file action
+    - [ ] Append to file action
+    - [ ] Custom actions
+- [ ] Wrap "glue code" into function
+- [ ] create default templates
+- [ ] remove buffer?
+- [ ] script support / testing
+- [ ] readme
+
+
+#### Document filters
+
+```python
+import json
+from sigla.cli.filters import filters
+
+
+@filters.register('dump')
+def dump(var):
+    return json.dumps(var, indent=4)
+
+```
+
+
+## List of actions
+
+- `buffer`
+- `add`
+- `modify`
+- `append`
+- `custom` ?
+
 ## Introduction
 
 Sigla is a code generator.  Some important points about it: 
@@ -182,7 +220,7 @@ It was mentioned earlier that besides some special tags, you could use any tag i
 
 ### Multiple outputs
 
-Since you know about `<file/>` and `<root/>` it is a good time to mention that a valide xml file should have a single root node. That is why `<root/>` exists. If you want to generate more than one file from a single definition, simply wrapp all the `<file/>` with `<root/>`, like so:
+Since you know about `<file/>` and `<root/>` it is a good time to mention that a valid xml file should have a single root node. That is why `<root/>` exists. If you want to generate more than one file from a single definition, simply wrap all the `<file/>` with `<root/>`, like so:
 
 ```xml
 <root>

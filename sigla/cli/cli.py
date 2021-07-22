@@ -1,142 +1,93 @@
+from pathlib import Path
+
 import typer
-from typing import List
-from sigla.cli.commands import (
-    VersionCommand,
-    RunCommand,
-    NewCommand,
-    InitCommand,
-)
+
+from sigla import __version__, config
+from sigla.cli.definition_file import DefinitionFile
+from sigla.cli.helpers import (get_definition_file_content,
+                               get_filters_file_content, load_filters_from,
+                               log)
+from sigla.helpers import ensure_dirs
+from sigla.template_loaders.file_template_loader import FileTemplateLoader
 
 app = typer.Typer()
+
+DEFAULT_DEFINITION_FILE = "./sigla.xml"
+DEFAULT_FILTERS_FILE = "./.sigla/filters.py"
+DEFAULT_TEMPLATE_DIRECTORY = "./.sigla/templates"
 
 
 @app.command()
 def init():
-    cmd = InitCommand()
-    cmd.run()
+    """
+    Creates all the files and folders needed to work with sigla
+    """
+
+    log("Initializing sigla folder")
+
+    log(f"Create folder: {config.path.templates}")
+    ensure_dirs(config.path.templates)
+
+    log(f"Create folder: {config.path.snapshots}")
+    ensure_dirs(config.path.snapshots)
+
+    log(f"Create folder: {config.path.scripts}")
+    ensure_dirs(config.path.scripts)
+
+    log(f"Check/create file: {config.path.filters}")
+    filepath = Path(config.path.root_directory).joinpath(
+        config.path.filters_filename
+    )
+    if filepath.exists():
+        log(f"File {filepath} already exists", kind="error")
+        raise typer.Exit(code=1)
+    filepath.write_text(get_filters_file_content())
 
 
 @app.command()
-def new(name: str):
-    cmd = NewCommand(name)
-    cmd.run()
+def new_definition(name: str = DEFAULT_DEFINITION_FILE):
+    """
+    Will create a new definition file. Default location: ./sigla.yml
+    """
+
+    df = DefinitionFile(name)
+
+    if not df.exists():
+        log(f"File {df.filepath} already exists", kind="error")
+        raise typer.Exit(code=1)
+
+    log(f"Create definition file: {df.filepath}")
+    content = get_definition_file_content(name)
+    df.write(content)
 
 
 @app.command()
-def run(references: List[str]):
-    cmd = RunCommand(references)
-    cmd.run()
+def run(
+    name: str = DEFAULT_DEFINITION_FILE,
+    template_directory: str = DEFAULT_TEMPLATE_DIRECTORY,
+    filters_file: str = DEFAULT_FILTERS_FILE,
+):
+    """
+    Will run the code generation defined in a config file
+    """
+    df = DefinitionFile(name)
+    if not df.exists():
+        log(f"No definition(s) found for {df.filepath}", kind="error")
+        raise typer.Exit(code=1)
+
+    loader = FileTemplateLoader(template_directory)
+    filters = load_filters_from(filters_file)
+
+    df.generate(loader, filters=filters)
 
 
 @app.command()
 def version():
-    cmd = VersionCommand()
-    cmd.run()
+    """
+    Print the version
+    """
+    log(f"Version: {__version__}")
 
 
 if __name__ == "__main__":
     app()
-
-# class SnapshotCommand(AbstractDefinitionBasedCommand):
-#     pass
-#
-#
-# @app.command()
-# def snapshot(references: List[str]):
-#     """
-#     Make snapshots
-#     """
-#     snapshot_command = SnapshotCommand(references)
-#     snapshot_command()
-#
-#
-# @cli.command()
-# @click.argument("files", nargs=-1, type=click.Path(exists=True))
-# def snapshot(files):
-#     """
-#     Makes snapshots
-#     """
-#     for file in files:
-#         cli_make_snapshots(cli_read_snapshot_definition(file))
-#
-#
-# @cli.command()
-# @click.argument("files", nargs=-1, type=click.Path(exists=True))
-# def verify(files):
-#     """
-#     Verify snapshots
-#     """
-#     for file in files:
-#         cli_verify_snapshots(cli_read_snapshot_definition(file))
-#
-#
-# <ut kgdir="kg">
-#   <test cmd="ruby -I../lp rpcgen.rb examples/Test.java">
-#     <out>examples/TestHandler.java</out>
-#     <out>examples/TestStubs.java</out>
-#   </test>
-# </ut>
-#
-#
-#
-# def cli_read_snapshot_definition(file):
-#     print(f":: Loading {file}")
-#     doc = load_xml_from_file(file)
-#     print(f":: Ensure {SNAPSHOTS_DIRECTORY} exists")
-#     ensure_dirs(SNAPSHOTS_DIRECTORY)
-#     print(":: Reading tests")
-#     tests = []
-#     for test_node in doc.iter("test"):
-#         files = [test_node.attrib["out"]]
-#
-#         for out_node in test_node.iter("out"):
-#             out = out_node.text.strip()
-#             files.append(out)
-#
-#         tests.append(
-#             {"command": test_node.attrib["cmd"], "output_files": files}
-#         )
-#     print(f"    ‣ Loaded {len(tests)} commands")
-#     return tests
-#
-#
-# def cli_make_snapshots(tests):
-#     print(":: Making snapshots")
-#     for test in tests:
-#         print(f'    ‣ Command {test["command"]}')
-#         os.system(test["command"])
-#
-#         for file in test["output_files"]:
-#             gn = SNAPSHOTS_DIRECTORY + "/" + file
-#
-#             #
-#             # MAKING
-#             #
-#             ensure_parent_dir(gn)
-#             print(f"        ‣ Saving snapshot {file} to {gn}")
-#             copyfile(file, gn)
-#
-#
-# def cli_verify_snapshots(tests):
-#     print(":: Checking snapshots")
-#     failures = []
-#     for test in tests:
-#         print(f'    ‣ Command {test["command"]}')
-#         os.system(test["command"])
-#
-#         for file in test["output_files"]:
-#             gn = SNAPSHOTS_DIRECTORY + "/" + file
-#
-#             with open(file, "r") as h:
-#                 current_result = h.read()
-#
-#             #
-#             # TESTING
-#             #
-#             print(f"        ‣ Checking snapshot {file} against {gn}")
-#             with open(gn, "r") as h:
-#                 good_result = h.read()
-#
-#             if good_result != current_result:
-#                 print("        🚩 Snapshot comparison failed")
-#                 failures.append(test["command"])

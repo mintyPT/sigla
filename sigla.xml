@@ -1,0 +1,10 @@
+<buffer>
+    <add path="./output/sigla.txt">
+        <sigla4 name="santos" age="12">
+        </sigla4>
+    </add>
+    <append path="./output/sigla-append.txt">
+        <sigla4 name="santos" age="12">
+        </sigla4>
+    </append>
+</buffer>

@@ -1,5 +1,2 @@
-from sigla.nodes import node
-
-
-def main(node: node):
+def main(node):
     return {"name": "mauro"}

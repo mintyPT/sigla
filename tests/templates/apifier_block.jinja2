@@ -1,7 +1,0 @@
----
-name:  "sigla"
----
-"{{ node.name }}": { {% for child in node.children %}
-    {{ child() | indent(8) }},
-{%- endfor %}
-}

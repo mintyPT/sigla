@@ -17,6 +17,7 @@ shellingham = "^1.4.0"
 environ-config = "^20.1.0"
 inquirer = "^2.7.0"
 flake8-cognitive-complexity = "^0.1.0"
+isort = "^5.9.2"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^20.8b1", allow-prereleases = true}
