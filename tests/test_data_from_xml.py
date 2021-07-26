@@ -1,7 +1,7 @@
 import unittest
 
 from sigla.data.data import Data
-from sigla.data.loaders import convert_xml_string_to_data
+from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 
 
 class TestData(unittest.TestCase):
@@ -42,16 +42,17 @@ class TestData(unittest.TestCase):
         provided = """
             <root>
                 <person name="mauro" age="34" id="mauro"></person>
-                <pet name="ariel" age="3" owner-id="mauro" id="ariel"></pet>
+                <pet name="ariel" age="3" owner-id="mauro" id="ariel" bundle="cenas"></pet>
             </root>
         """
 
-        mauro = Data("person", name="mauro", age="34", id="mauro")
+        mauro2 = Data("person", name="mauro", age="34", bundle="cenas")
+
         expected = Data(
             "root",
             children=[
-                mauro,
-                Data("pet", name="ariel", age="3", owner=mauro, id="ariel"),
+                (Data("person", name="mauro", age="34", id="mauro")),
+                Data("pet", name="ariel", age="3", owner=mauro2, id="ariel", bundle="cenas"),
             ],
         )
 

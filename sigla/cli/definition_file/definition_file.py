@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sigla.engines.sigla_engine import SiglaEngine
+from sigla.engines.engines import SiglaEngine
 
 
 class DefinitionFile:
@@ -17,5 +17,3 @@ class DefinitionFile:
     def read(self):
         return self.filepath.read_text()
 
-    def generate(self, *args, **kwargs):
-        SiglaEngine.generate(self.read(), *args, **kwargs)

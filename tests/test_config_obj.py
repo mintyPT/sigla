@@ -1,6 +1,6 @@
 import unittest
 
-from sigla import config
+from sigla.config import config
 
 
 class TestCliConfig(unittest.TestCase):

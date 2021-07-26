@@ -1,9 +1,9 @@
-import importlib
 import textwrap
-import types
 from contextlib import suppress
 
 import typer
+
+from helpers.helpers import load_module
 
 
 def log(msg, kind="default"):
@@ -19,16 +19,9 @@ def log(msg, kind="default"):
         raise ValueError(f"Unknown log type: {kind}")
 
 
-def load_module(module_name, module_path):
-    loader = importlib.machinery.SourceFileLoader(module_name, module_path)
-    module = types.ModuleType(loader.name)
-    loader.exec_module(module)
-    return module
-
-
 def load_filters_from(module_path):
     with suppress(FileNotFoundError):
-        return load_module("filters", module_path).filters.get_filters()
+        return load_module("filters", str(module_path)).filters.get_filters()
 
 
 def get_filters_file_content():

@@ -1,10 +1,11 @@
 from collections import ChainMap
 from typing import Any
 
-from sigla.data.errors import DataKeyError
+from helpers.helpers import join
+from sigla.engines.helpers.helpers import as_kwargs
 
 
-class Data(object):
+class Data:
     def __init__(self, tag, children=None, parent=None, **kwargs):
         if children is None:
             children = []
@@ -14,6 +15,19 @@ class Data(object):
         self.children = children
         for child in self.children:
             child.parent = self
+
+    # def duplicate_without_parent(self):
+    #     return Data(self.tag, **self.own_attributes, children=[c.duplicate() for c in self.children])
+
+    def duplicate(self, **kwargs):
+        data = {
+            "parent": self.parent,
+            "children": [c.duplicate() for c in self.children],
+            **self.own_attributes,
+            **kwargs
+        }
+
+        return Data(self.tag, **data)
 
     @property
     def attributes(self):
@@ -34,9 +48,7 @@ class Data(object):
     def __getattr__(self, name: str) -> Any:
         if name in self.attributes.keys():
             return self.attributes[name]
-        if name == "children":
-            return self.children
-        raise DataKeyError(f"No data found for {name}")
+        raise AttributeError(name)
 
     def same_own_attributes(self, other):
 
@@ -44,7 +56,10 @@ class Data(object):
             return False
 
         for own_key, own_value in self.own_attributes.items():
-            if own_value != other.own_attributes[own_key]:
+            # TODO instead of type(own_value) != Data check if one of them is self?
+            # When we replace by id, we will receive a reference to ourselves
+            # type(own_value) != Data 
+            if own_value != other.own_attributes[own_key] and type(own_value) != Data:
                 return False
 
         return True
@@ -52,15 +67,15 @@ class Data(object):
     def __eq__(self, other):
 
         if (
-            type(self) != type(other)
-            or self.tag != other.tag
-            or not self.same_own_attributes(other)
+                type(self) != type(other)
+                or self.tag != other.tag
+                or not self.same_own_attributes(other)
         ):
             return False
 
         if not (
-            (not self.children and not other.children)
-            or (self.children == other.children)
+                (not self.children and not other.children)
+                or (self.children == other.children)
         ):
             return False
 
@@ -68,33 +83,38 @@ class Data(object):
 
     def find_by_id(self, raw_id: str):
 
-        if self.own_attributes.get("id") == raw_id:
-            return self
+        obj = self
 
-        for child in self:
-            found = child.find_by_id(raw_id)
-            if found:
+        if hasattr(obj, 'id') and obj.get("id") == raw_id:
+            return obj
+
+        for child in obj:
+            if found := child.find_by_id(raw_id):
                 return found
 
     def render(self, *, indent=0):
-        spacer = " " * indent
+        # TODO add test to this
 
-        children = [child.render(indent=indent + 4) for child in self]
-        flat = len(children) == 0
+        tag = self.tag
+        attributes = self.attributes
 
-        if len(self.attributes.keys()) == 0:
-            open_tag = f"<{self.tag}>"
-            open_close_tag = f"<{self.tag}/>"
+        if len(attributes.keys()) > 0:
+            open_tag = f"<{tag}" + " " + as_kwargs(attributes, " ")
         else:
-            attributes = " ".join(
-                f'{k}="{v}"' for k, v in self.attributes.items()
-            )
-            open_tag = f"<{self.tag} {attributes}>"
-            open_close_tag = f"<{self.tag} {attributes}/>"
+            open_tag = f"<{tag}"
 
-        if flat:
+        open_close_tag = open_tag
+        open_tag += f">"
+        open_close_tag += f"/>"
+
+        spacer = " " * indent
+        children = [child.render(indent=indent + 4) for child in self]
+
+        if len(children) == 0:
             return f"{spacer}{open_close_tag}"
 
-        ret = [f"{spacer}{open_tag}", *children, f"{spacer}</{self.tag}>"]
-
-        return "\n".join(ret)
+        return join([
+            f"{spacer}{open_tag}",
+            *children,
+            f"{spacer}</{tag}>"
+        ], "\n")

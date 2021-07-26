@@ -1,2 +1,0 @@
-class DataKeyError(KeyError):
-    pass

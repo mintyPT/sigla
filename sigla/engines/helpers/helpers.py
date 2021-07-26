@@ -1,4 +1,7 @@
+from copy import deepcopy
 from textwrap import dedent
+
+from helpers.helpers import join
 
 
 def get_default_template():
@@ -39,3 +42,39 @@ def get_default_template():
         """  # noqa E501
     )
     return default_template_content
+
+
+def remove_none(value):
+    return [item for item in value if item]
+
+
+def get(obj, key):
+    if type(obj) == list:
+        return [item.get(key) for item in obj if item]
+    else:
+        return obj.get(key)
+
+
+def dict_without_keys(value, *args):
+    data = deepcopy(dict(value))
+    for name in args:
+        if name in data.keys():
+            del data[name]
+    return data
+
+
+def as_kwargs(obj, sep):
+    # TODO replace with json.dumps
+
+    kwargs = []
+
+    for k, v in obj.items():
+        if type(v) in [int, bool]:
+            kwargs.append(f"{k}={v}")
+        else:
+            kwargs.append(f'{k}="{v}"')
+
+    if sep:
+        return join(kwargs, sep)
+    else:
+        return kwargs

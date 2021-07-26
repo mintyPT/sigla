@@ -11,6 +11,7 @@ class TestData(unittest.TestCase):
 
     def test_with_attribute(self):
         data = Data("model", name="User")
+
         self.assertEqual(data.tag, "model")
         self.assertEqual(data.attributes, {"name": "User"})
         self.assertEqual(data.name, "User")

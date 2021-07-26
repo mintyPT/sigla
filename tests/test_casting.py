@@ -1,6 +1,6 @@
 import unittest
 
-from sigla.helpers import cast_property
+from helpers.helpers import cast_property
 
 
 class TestCastingProps(unittest.TestCase):

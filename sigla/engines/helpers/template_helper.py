@@ -1,54 +1,32 @@
-from copy import deepcopy
+from helpers.helpers import uniq, join
+from sigla.engines.helpers.helpers import remove_none, get, dict_without_keys, as_kwargs
+from sigla.engines.helpers.helpers_data import flatten
 
 
 class TemplateHelper:
     def __init__(self, value):
         self.value = value
 
+    def uniq(self):
+        return TemplateHelper(uniq(self.value))
+
     def flatten(self):
-        def flatten(items):
-            ret = []
-            for item in items:
-                ret.append(item)
-                for child in item:
-                    ret += flatten(child)
-            return ret
+        return TemplateHelper(flatten(self.value))
 
-        self.value = flatten(self.value)
-        return self
-
-    def get(self, key):
-        self.value = [getattr(item, key) for item in self.value if item]
-        return self
+    def get(self, *args):
+        return TemplateHelper(get(self.value, *args))
 
     def nonone(self):
-        self.value = [item for item in self.value if item]
-        return self
+        return TemplateHelper(remove_none(self.value))
 
     def join(self, sep):
-        self.value = sep.join(self.value)
-        return self
+        return TemplateHelper(join(self.value, separator=sep))
+
+    def without(self, *args):
+        return TemplateHelper(dict_without_keys(self.value, *args))
+
+    def as_kwargs(self, sep=","):
+        return TemplateHelper(as_kwargs(self.value, sep))
 
     def val(self):
         return self.value
-
-    def without(self, *args):
-        data = deepcopy(dict(self.value))
-        for name in args:
-            del data[name]
-        self.value = data
-        return self
-
-    def as_kwargs(self, sep=","):
-        kwargs = []
-        # TODO replace with json.dumps
-        for k, v in self.value.items():
-            if type(v) == int:
-                kwargs.append(f"{k}={v}")
-            else:
-                kwargs.append(f'{k}="{v}"')
-        if sep:
-            self.value = ", ".join(kwargs)
-            return self
-        self.value = kwargs
-        return self

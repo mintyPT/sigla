@@ -1,8 +1,9 @@
 import unittest
 
-from sigla.actions import AddAction
+from sigla.actions.actions import AddAction
 from sigla.data.data import Data
-from sigla.data.validation import RequiredValidation, required, validate_data
+from sigla.validation.validator import Validator
+from sigla.validation.validation_required import RequiredValidation, required
 
 
 class TestAction(unittest.TestCase):
@@ -28,4 +29,5 @@ class TestAction(unittest.TestCase):
         data = Data("person")
 
         with self.assertRaises(RequiredValidation):
-            validate_data(data, validations)
+            validator = Validator(validations)
+            validator.validate(data)

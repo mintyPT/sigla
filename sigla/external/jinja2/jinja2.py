@@ -7,7 +7,7 @@ def render_template(
     template: str, filters: Optional[dict] = None, **kwargs
 ) -> str:
     env = Environment(loader=BaseLoader(), keep_trailing_newline=True)
-    if filters is not None:
+    if filters:
         env.filters.update(filters)
 
     jinja_template = env.from_string(

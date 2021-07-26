@@ -3,7 +3,8 @@ from pathlib import Path
 from textwrap import dedent
 
 from sigla.data.data import Data
-from sigla.data.validation import required, validate_data
+from sigla.validation.validator import Validator
+from sigla.validation.validation_required import required
 
 
 class Action(ABC):
@@ -17,7 +18,9 @@ class Action(ABC):
     def __init__(self, data: Data, result: str):
         self.data: Data = data
         self.result = result
-        self.params = validate_data(self.data, self.validations)
+        validator = Validator(self.validations)
+        # TODO how to say that this is valid?
+        self.params = validator.validate(self.data)
 
     @abstractmethod
     def execute(self):
@@ -54,7 +57,9 @@ class AddAction(Action):
     validations = {"path": [required()], "skipIfExists": []}  # default: false
 
     def execute(self):
-        Path(self.params["path"]).write_text(self.result)
+        path = Path(self.params["path"])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(self.result)
 
 
 class ModifyAction(Action):

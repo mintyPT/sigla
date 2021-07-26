@@ -1,7 +1,7 @@
 import unittest
 from textwrap import dedent
 
-from sigla.engines.sigla_engine import SiglaEngine
+from sigla.engines.engines import SiglaEngine
 from tests.helpers.memory_template_loader import MemoryTemplateLoader
 
 template_loader = MemoryTemplateLoader()

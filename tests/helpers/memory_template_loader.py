@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from sigla.template_loaders.template_loader import TemplateLoader
+from sigla.template_loaders.template_loaders import TemplateLoader
 
 
 def _(template):
@@ -8,40 +8,36 @@ def _(template):
 
 
 class MemoryTemplateLoader(TemplateLoader):
-    def write(self, content, tag, *, bundle=None):
+    def write(self, content, path):
         pass
 
     @property
     def templates(self):
         templates = {
-            "person_v2": "My name is {{name}} and I'm {{age}} years old",
-            "var": "{{ node.value | wrap }}",
-            "ta": "{{ render(children) }}",
-            "tb": "{{ render(children) }}",
-            "tc": "{{ node.ra }}{{ node.rb }}{{ node.name }}",
-            "nurse/persona": "This nurse's name is {{ node.name }}",
-            "person_v4": self.person_v4(),
-            "persons": self.persons(),
-            "first_level": self.first_level(),
-            "second_level": self.second_level(),
-            "third_level": self.third_level(),
-            "new_person": self.new_person(),
-            "apifier_call": self.apifier_call(),
-            "apifier_crud": self.apifier_crud(),
-            "apifier_root": self.apifier_root(),
-            "apifier_block": self.apifier_block(),
+            "person_v2.jinja2": "My name is {{name}} and I'm {{age}} years old",
+            "var.jinja2": "{{ node.value | wrap }}",
+            "ta.jinja2": "{{ render(children) }}",
+            "tb.jinja2": "{{ render(children) }}",
+            "tc.jinja2": "{{ node.ra }}{{ node.rb }}{{ node.name }}",
+            "nurse/persona.jinja2": "This nurse's name is {{ node.name }}",
+            "person_v4.jinja2": self.person_v4(),
+            "persons.jinja2": self.persons(),
+            "first_level.jinja2": self.first_level(),
+            "second_level.jinja2": self.second_level(),
+            "third_level.jinja2": self.third_level(),
+            "new_person.jinja2": self.new_person(),
+            "apifier_call.jinja2": self.apifier_call(),
+            "apifier_crud.jinja2": self.apifier_crud(),
+            "apifier_root.jinja2": self.apifier_root(),
+            "apifier_block.jinja2": self.apifier_block(),
         }
         return {k: _(v).lstrip() for k, v in templates.items()}
 
-    def load(self, tag, *, bundle=None):
+    def load(self, path):
+        if path in self.templates:
+            return _(self.templates[path])
 
-        if bundle:
-            tag = f"{bundle}/{tag}"
-
-        if tag in self.templates:
-            return _(self.templates[tag])
-
-        raise Exception(f"Template `{tag}` not found")
+        raise Exception(f"Template `{path}` not found")
 
     @staticmethod
     def apifier_block():
