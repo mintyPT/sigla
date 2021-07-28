@@ -2,7 +2,7 @@ from copy import deepcopy
 from xml.etree.ElementTree import XML, Element
 
 from helpers.helpers import (cast_dict, key_matching_filter, pipe,
-                             rename_key, str_endswith_id)
+                             rename_key)
 from sigla.data.data import Data
 
 
@@ -37,8 +37,11 @@ def _replace_ids_with_data(data: Data, root: Data = None) -> Data:
     if root is None:
         root = data
 
+    def endswith_id(string: str) -> bool:
+        return string.endswith("-id")
+
     _attributes_temp = deepcopy(data.own_attributes)
-    for key, value in key_matching_filter(_attributes_temp, str_endswith_id):
+    for key, value in key_matching_filter(_attributes_temp, endswith_id):
         new_key = key.replace("-id", "")
         new_data = root.find_by_id(value).duplicate(parent=data)
         rename_key(

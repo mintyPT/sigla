@@ -74,8 +74,7 @@ def pipe(first, *args):
     return first
 
 
-def str_endswith_id(string_: str) -> bool:
-    return string_.endswith("-id")
+
 
 
 def rename_key(dict_, key_old, key, value=None):
