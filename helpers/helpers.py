@@ -3,11 +3,11 @@ import json
 import types
 from pathlib import Path
 from typing import (Any, Callable, Dict, Generator, Iterable, Iterator, List,
-                    Tuple)
+                    Tuple, TypeVar)
 
 
 def key_matching_filter(
-    dic: Dict[str, Any], validate_function: Callable
+        dic: Dict[str, Any], validate_function: Callable[[Any], bool]
 ) -> Generator:
     """
     Takes a dict and iterates over it as long as the key, value pair passes
@@ -62,7 +62,7 @@ def join(lst_of_strings: Iterator[str], separator: str = "\n") -> str:
 
 
 def map_and_join(
-    map_function: Callable, the_list: Iterable[Any], *, sep=""
+        map_function: Callable, the_list: Iterable[Any], *, sep=""
 ) -> str:
     return join(
         map(
@@ -73,14 +73,18 @@ def map_and_join(
     )
 
 
-def pipe(first: Any, *args: Callable) -> Any:
+T = TypeVar('T')
+U = TypeVar('U')
+
+
+def pipe(first: T, *args: Callable[[Any], Any]) -> U:
     for fn in args:
         first = fn(first)
     return first
 
 
 def rename_key(
-    dict_: Dict[str, any], key_old: str, key: str, value: Any = None
+        dict_: Dict[str, Any], key_old: str, key: str, value: Any = None
 ) -> Dict[str, Any]:
     # assign old value if no value is provided
     value = value if value else dict_[key_old]
