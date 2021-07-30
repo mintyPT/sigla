@@ -1,9 +1,9 @@
 from collections import ChainMap
 from typing import Any, Generator, List, MutableMapping, Optional, Union
 
-from helpers.helpers import join
 from sigla.data.data_finder import DataFinder
 from sigla.engines.helpers.helpers import as_kwargs
+from sigla.helpers.helpers import join
 
 
 class Data:
@@ -62,7 +62,8 @@ class Data:
             return False
 
         for own_key, own_value in self.own_attributes.items():
-            # TODO instead of type(own_value) != Data check if one of them is self?
+            # TODO instead of type(own_value) != Data check if one of them is
+            #      self?
             # When we replace by id, we will receive a reference to ourselves
             # type(own_value) != Data
             if (

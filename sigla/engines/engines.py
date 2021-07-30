@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from textwrap import dedent
 from typing import Any, Callable, Dict, Iterable, List
 
-from helpers.helpers import map_and_join
 from sigla.actions.actions import Action, actions
 from sigla.data.data import Data
 from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
@@ -12,6 +11,7 @@ from sigla.engines.helpers.template_helper import TemplateHelper
 from sigla.external.frontmatter.frontmatter import (get_content,
                                                     parse_with_transformation)
 from sigla.external.jinja2.jinja2 import render_template
+from sigla.helpers.helpers import map_and_join
 from sigla.template_loaders.exceptions import TemplateDoesNotExistError
 from sigla.template_loaders.template_loaders import TemplateLoader
 

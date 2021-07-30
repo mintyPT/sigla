@@ -2,8 +2,9 @@ from copy import deepcopy
 from typing import Optional
 from xml.etree.ElementTree import XML, Element
 
-from helpers.helpers import cast_dict, key_matching_filter, pipe, rename_key
 from sigla.data.data import Data
+from sigla.helpers.helpers import (cast_dict, key_matching_filter, pipe,
+                                   rename_key)
 
 
 def convert_xml_string_to_data(xml: str) -> Data:

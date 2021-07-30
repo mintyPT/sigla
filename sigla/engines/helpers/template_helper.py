@@ -1,8 +1,9 @@
 from typing import Any
-from helpers.helpers import join, uniq
+
 from sigla.engines.helpers.flatten import Flatten
 from sigla.engines.helpers.helpers import (as_kwargs, dict_without_keys, get,
                                            remove_none)
+from sigla.helpers.helpers import join, uniq
 
 
 class TemplateHelper:

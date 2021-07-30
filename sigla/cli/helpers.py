@@ -4,7 +4,7 @@ from typing import Any, Dict
 
 import typer
 
-from helpers.helpers import load_module
+from sigla.helpers.helpers import load_module
 
 
 def log(msg: str, kind: str = "default") -> None:
