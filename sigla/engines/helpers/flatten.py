@@ -4,10 +4,10 @@ from sigla.data.data import Data
 
 
 class Flatten:
-    def __init__(self):
+    def __init__(self) -> None:
         self.ret = []
 
-    def _add(self, *elements):
+    def _add(self, *elements: Any) -> None:
         for element in elements:
             self.ret.append(element)
 

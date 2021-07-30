@@ -15,7 +15,7 @@ class Action(ABC):
     def name(self) -> str:
         pass
 
-    def __init__(self, data: Data, result: str):
+    def __init__(self, data: Data, result: str) -> None:
         self.data: Data = data
         self.result = result
         validator = Validator(self.validations)
