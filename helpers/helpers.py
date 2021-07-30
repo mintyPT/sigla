@@ -2,8 +2,16 @@ import importlib
 import json
 import types
 from pathlib import Path
-from typing import (Any, Callable, Dict, Generator, Iterable, Iterator, List,
-                    Tuple)
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generator,
+    Iterable,
+    Iterator,
+    List,
+    Tuple,
+)
 
 
 def key_matching_filter(

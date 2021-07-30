@@ -30,7 +30,7 @@ class FileTemplateLoader(TemplateLoader):
         path = self.path.joinpath(path)
         if not path.exists():
             raise TemplateDoesNotExistError(path)
-        return path.read_text()
+        return str(path.read_text())
 
     def write(self, content: str, path: str) -> None:
         if path in ["buffer.jinja2"]:

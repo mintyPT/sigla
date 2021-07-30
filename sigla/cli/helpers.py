@@ -1,5 +1,6 @@
 import textwrap
 from contextlib import suppress
+from typing import Any, Dict
 
 import typer
 
@@ -19,7 +20,7 @@ def log(msg: str, kind: str = "default") -> None:
         raise ValueError(f"Unknown log type: {kind}")
 
 
-def load_filters_from(module_path: str) -> dict:
+def load_filters_from(module_path: str) -> Dict[str, Any]:
     with suppress(FileNotFoundError):
         return load_module("filters", str(module_path)).filters.get_filters()
     return {}

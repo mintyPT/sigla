@@ -1,8 +1,12 @@
 from typing import Any
 
 from helpers.helpers import join, uniq
-from sigla.engines.helpers.helpers import (as_kwargs, dict_without_keys, get,
-                                           remove_none)
+from sigla.engines.helpers.helpers import (
+    as_kwargs,
+    dict_without_keys,
+    get,
+    remove_none,
+)
 from sigla.engines.helpers.helpers_data import flatten
 
 
