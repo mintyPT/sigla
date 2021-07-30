@@ -45,14 +45,18 @@ def _replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
     return data
 
 
-def rename_all_keys_ending_with_id(data: Data, root: Optional[Data] = None) -> None:
+def rename_all_keys_ending_with_id(
+    data: Data, root: Optional[Data] = None
+) -> None:
     def endswith_id(string: str) -> bool:
         return string.endswith("-id")
 
     _attributes_temp = deepcopy(data.own_attributes)
     for key, value in key_matching_filter(_attributes_temp, endswith_id):
         found_element = root.find_by_id(value) if root else None
-        value_ = found_element.duplicate(parent=data) if found_element else None
+        value_ = (
+            found_element.duplicate(parent=data) if found_element else None
+        )
         rename_key(
             data.own_attributes,
             key_old=key,

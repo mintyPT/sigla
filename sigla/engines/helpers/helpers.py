@@ -1,6 +1,6 @@
 from copy import deepcopy
 from textwrap import dedent
-from typing import Any, Dict, Iterable, List, Union, Mapping
+from typing import Any, Dict, Iterable, List, Mapping, Union
 
 from helpers.helpers import join
 
