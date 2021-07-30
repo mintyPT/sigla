@@ -1,9 +1,9 @@
 from typing import Any
 
 from helpers.helpers import join, uniq
+from sigla.engines.helpers.flatten import Flatten
 from sigla.engines.helpers.helpers import (as_kwargs, dict_without_keys, get,
                                            remove_none)
-from sigla.engines.helpers.helpers_data import flatten
 
 
 class TemplateHelper:
@@ -14,7 +14,7 @@ class TemplateHelper:
         return TemplateHelper(uniq(self.value))
 
     def flatten(self) -> "TemplateHelper":
-        return TemplateHelper(flatten(self.value))
+        return TemplateHelper(Flatten()(self.value))
 
     def get(self, *args: Any) -> "TemplateHelper":
         return TemplateHelper(get(self.value, *args))
