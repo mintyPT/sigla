@@ -1,5 +1,5 @@
 from collections import ChainMap
-from typing import Any
+from typing import Any, MutableMapping
 from typing import ChainMap as TChainMap
 from typing import Generator, List, Optional, Union
 from helpers.helpers import join
@@ -37,7 +37,7 @@ class Data:
         return Data(self.tag, **data)
 
     @property
-    def attributes(self) -> TChainMap:
+    def attributes(self) -> MutableMapping:
         return ChainMap(
             self.own_attributes,
             self.parent.attributes if self.parent else {},  # parent_attributes

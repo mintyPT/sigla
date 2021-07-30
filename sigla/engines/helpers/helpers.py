@@ -1,6 +1,6 @@
 from copy import deepcopy
 from textwrap import dedent
-from typing import Any, Dict, Iterable, List, Union
+from typing import Any, Dict, Iterable, List, Union, Mapping
 
 from helpers.helpers import join
 
@@ -65,7 +65,7 @@ def dict_without_keys(value: dict, *args: str) -> Dict:
     return data
 
 
-def as_kwargs(obj: Dict[str, Any], sep: str) -> Union[str, List[str]]:
+def as_kwargs(obj: Mapping[str, Any], sep: str) -> Union[str, List[str]]:
     # TODO replace with json.dumps
 
     kwargs = []
