@@ -2,7 +2,6 @@ from collections import ChainMap
 from typing import Any
 from typing import ChainMap as TChainMap
 from typing import Generator, List, Optional, Union
-
 from helpers.helpers import join
 from sigla.data.data_finder import DataFinder
 from sigla.engines.helpers.helpers import as_kwargs
