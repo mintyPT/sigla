@@ -9,10 +9,8 @@ from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 from sigla.engines.helpers.helpers import get_default_template
 from sigla.engines.helpers.helpers_data import get_template_path
 from sigla.engines.helpers.template_helper import TemplateHelper
-from sigla.external.frontmatter.frontmatter import (
-    get_content,
-    parse_with_transformation,
-)
+from sigla.external.frontmatter.frontmatter import (get_content,
+                                                    parse_with_transformation)
 from sigla.external.jinja2.jinja2 import render_template
 from sigla.template_loaders.exceptions import TemplateDoesNotExistError
 from sigla.template_loaders.template_loaders import TemplateLoader

@@ -7,12 +7,9 @@ from rich.traceback import install
 from helpers.helpers import ensure_dirs
 from sigla import __version__
 from sigla.cli.definition_file.definition_file import DefinitionFile
-from sigla.cli.helpers import (
-    get_definition_file_content,
-    get_filters_file_content,
-    load_filters_from,
-    log,
-)
+from sigla.cli.helpers import (get_definition_file_content,
+                               get_filters_file_content, load_filters_from,
+                               log)
 from sigla.config import config
 from sigla.engines.engines import SiglaEngine
 from sigla.template_loaders.template_loaders import FileTemplateLoader
