@@ -1,4 +1,5 @@
 from copy import deepcopy
+from typing import Optional
 from xml.etree.ElementTree import XML, Element
 
 from helpers.helpers import cast_dict, key_matching_filter, pipe, rename_key
@@ -32,25 +33,27 @@ def _cast_data_attributes(data: Data) -> Data:
     return data
 
 
-def _replace_ids_with_data(data: Data, root: Data = None) -> Data:
+def _replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
     if root is None:
         root = data
 
-    def endswith_id(string: str) -> bool:
-        return string.endswith("-id")
-
-    _attributes_temp = deepcopy(data.own_attributes)
-    for key, value in key_matching_filter(_attributes_temp, endswith_id):
-        new_key = key.replace("-id", "")
-        new_data = root.find_by_id(value).duplicate(parent=data)
-        rename_key(
-            data.own_attributes,
-            key_old=key,
-            key=new_key,
-            value=new_data,
-        )
+    rename_all_keys_ending_with_id(data, root)
 
     for child in data:
         _replace_ids_with_data(child, root=root)
 
     return data
+
+
+def rename_all_keys_ending_with_id(data: Data, root: Optional[Data] = None):
+    def endswith_id(string: str) -> bool:
+        return string.endswith("-id")
+
+    _attributes_temp = deepcopy(data.own_attributes)
+    for key, value in key_matching_filter(_attributes_temp, endswith_id):
+        rename_key(
+            data.own_attributes,
+            key_old=key,
+            key=(key.replace("-id", "")),
+            value=root.find_by_id(value).duplicate(parent=data),
+        )

@@ -27,9 +27,9 @@ class FileTemplateLoader(TemplateLoader):
         self.path = Path(path)
 
     def load(self, path: str) -> str:
-        path = self.path.joinpath(path)
+        path: Path = self.path.joinpath(path)
         if not path.exists():
-            raise TemplateDoesNotExistError(path)
+            raise TemplateDoesNotExistError(str(path))
         return str(path.read_text())
 
     def write(self, content: str, path: str) -> None:
