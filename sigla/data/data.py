@@ -11,11 +11,11 @@ class Data:
     parent: Optional["Data"]
 
     def __init__(
-        self,
-        tag: str,
-        children: Optional[List["Data"]] = None,
-        parent: Optional["Data"] = None,
-        **kwargs,
+            self,
+            tag: str,
+            children: Optional[List["Data"]] = None,
+            parent: Optional["Data"] = None,
+            **kwargs,
     ) -> None:
         if children is None:
             children = []
@@ -67,8 +67,8 @@ class Data:
             # When we replace by id, we will receive a reference to ourselves
             # type(own_value) != Data
             if (
-                own_value != other.own_attributes[own_key]
-                and type(own_value) != Data
+                    own_value != other.own_attributes[own_key]
+                    and type(own_value) != Data
             ):
                 return False
 
@@ -77,15 +77,15 @@ class Data:
     def __eq__(self, other: Any) -> bool:
 
         if (
-            type(self) != type(other)
-            or self.tag != other.tag
-            or not self.same_own_attributes(other)
+                type(self) != type(other)
+                or self.tag != other.tag
+                or not self.same_own_attributes(other)
         ):
             return False
 
         if not (
-            (not self.children and not other.children)
-            or (self.children == other.children)
+                (not self.children and not other.children)
+                or (self.children == other.children)
         ):
             return False
 
@@ -93,16 +93,22 @@ class Data:
 
     def find_by_id(self, raw_id: str) -> Union[None, Any]:
 
-        obj = self
+        class DataFinder:
+            def __init__(self, obj):
+                self.obj = obj
 
-        if hasattr(obj, "id") and obj.get("id") == raw_id:
-            return obj
+            def find_by_id(self, raw_id: int):
+                if hasattr(self.obj, "id") and self.obj.get("id") == raw_id:
+                    return self.obj
 
-        for child in obj:
-            if found := child.find_by_id(raw_id):
-                return found
+                for child in self.obj:
+                    if found := child.find_by_id(raw_id):
+                        return found
 
-        return None
+                return None
+
+        finder = DataFinder(self)
+        return finder.find_by_id(raw_id)
 
     def render(self, *, indent: int = 0) -> str:
         # TODO add test to this
