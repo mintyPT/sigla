@@ -1,8 +1,7 @@
 from copy import deepcopy
 from xml.etree.ElementTree import XML, Element
 
-from helpers.helpers import (cast_dict, key_matching_filter, pipe,
-                             rename_key)
+from helpers.helpers import cast_dict, key_matching_filter, pipe, rename_key
 from sigla.data.data import Data
 
 

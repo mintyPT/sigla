@@ -2,10 +2,13 @@ import importlib
 import json
 import types
 from pathlib import Path
-from typing import Callable
+from typing import (Any, Callable, Dict, Generator, Iterable, Iterator, List,
+                    Tuple)
 
 
-def key_matching_filter(dic: dict, validate_function: Callable):
+def key_matching_filter(
+    dic: Dict[str, Any], validate_function: Callable
+) -> Generator:
     """
     Takes a dict and iterates over it as long as the key, value pair passes
     the test
@@ -23,14 +26,14 @@ value_casters = {
 }
 
 
-def cast_property(name: str, value):
+def cast_property(name: str, value: str) -> Tuple[str, Any]:
     kind = name.split("-")[-1]
     if caster := value_casters.get(kind):
         return name.replace(f"-{kind}", ""), caster(value)
     return name, value
 
 
-def cast_dict(attributes: dict) -> dict:
+def cast_dict(attributes: Dict[str, str]) -> Dict[str, Any]:
     """
     Takes a dict of props and casts them if necessary
     """
@@ -41,24 +44,26 @@ def cast_dict(attributes: dict) -> dict:
     return dict(key_values)
 
 
-def ensure_dirs(*paths: str):
+def ensure_dirs(*paths: str) -> None:
     """Ensure the paths exist"""
     for path_ in paths:
         Path(path_).mkdir(parents=True, exist_ok=True)
 
 
-def load_module(module_name, module_path):
+def load_module(module_name: str, module_path: str) -> Dict[str, Any]:
     loader = importlib.machinery.SourceFileLoader(module_name, module_path)
     module = types.ModuleType(loader.name)
     loader.exec_module(module)
     return module
 
 
-def join(lst_of_strings, separator="\n"):
+def join(lst_of_strings: Iterator[str], separator: str = "\n") -> str:
     return separator.join(lst_of_strings)
 
 
-def map_and_join(map_function, the_list, *, sep=""):
+def map_and_join(
+    map_function: Callable, the_list: Iterable[Any], *, sep=""
+) -> str:
     return join(
         map(
             map_function,
@@ -68,16 +73,15 @@ def map_and_join(map_function, the_list, *, sep=""):
     )
 
 
-def pipe(first, *args):
+def pipe(first: Any, *args: Callable) -> Any:
     for fn in args:
         first = fn(first)
     return first
 
 
-
-
-
-def rename_key(dict_, key_old, key, value=None):
+def rename_key(
+    dict_: Dict[str, any], key_old: str, key: str, value: Any = None
+) -> Dict[str, Any]:
     # assign old value if no value is provided
     value = value if value else dict_[key_old]
 
@@ -87,7 +91,7 @@ def rename_key(dict_, key_old, key, value=None):
     return dict_
 
 
-def uniq(lst):
+def uniq(lst: List[Any]) -> List[Any]:
     """
     Given a list returns only the list of unique values
     """

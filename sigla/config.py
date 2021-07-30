@@ -15,23 +15,23 @@ class Config:
         filters_filename = environ.var("filters.py")
 
         @property
-        def templates(self):
+        def templates(self) -> str:
             return f"{self.root_directory}/{self.templates_folder}"
 
         @property
-        def scripts(self):
+        def scripts(self) -> str:
             return f"{self.root_directory}/{self.scripts_folder}"
 
         @property
-        def snapshots(self):
+        def snapshots(self) -> str:
             return f"{self.root_directory}/{self.snapshots_folder}"
 
         @property
-        def definitions(self):
+        def definitions(self) -> str:
             return f"{self.root_directory}/{self.definitions_folder}"
 
         @property
-        def filters(self):
+        def filters(self) -> str:
             return f"{self.root_directory}/{self.filters_filename}"
 
     @environ.config

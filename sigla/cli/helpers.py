@@ -6,7 +6,7 @@ import typer
 from helpers.helpers import load_module
 
 
-def log(msg, kind="default"):
+def log(msg: str, kind: str = "default") -> None:
     """
     Log message
     """
@@ -19,12 +19,13 @@ def log(msg, kind="default"):
         raise ValueError(f"Unknown log type: {kind}")
 
 
-def load_filters_from(module_path):
+def load_filters_from(module_path: str) -> dict:
     with suppress(FileNotFoundError):
         return load_module("filters", str(module_path)).filters.get_filters()
+    return {}
 
 
-def get_filters_file_content():
+def get_filters_file_content() -> str:
     return textwrap.dedent(
         """
         \"\"\"
@@ -41,7 +42,7 @@ def get_filters_file_content():
     )
 
 
-def get_definition_file_content(name):
+def get_definition_file_content(name: str) -> str:
     return textwrap.dedent(
         f"""\
             <buffer>

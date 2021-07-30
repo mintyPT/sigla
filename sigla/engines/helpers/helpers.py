@@ -1,10 +1,11 @@
 from copy import deepcopy
 from textwrap import dedent
+from typing import Any, Dict, Iterable, List, Union
 
 from helpers.helpers import join
 
 
-def get_default_template():
+def get_default_template() -> str:
     default_template_content = dedent(
         """\
         ---
@@ -44,18 +45,19 @@ def get_default_template():
     return default_template_content
 
 
-def remove_none(value):
+def remove_none(value: Iterable[Any]) -> Iterable[Any]:
     return [item for item in value if item]
 
 
-def get(obj, key):
+# TODO improve all any types
+def get(obj: dict, key: str) -> Any:
     if type(obj) == list:
         return [item.get(key) for item in obj if item]
     else:
         return obj.get(key)
 
 
-def dict_without_keys(value, *args):
+def dict_without_keys(value: dict, *args: str) -> dict:
     data = deepcopy(dict(value))
     for name in args:
         if name in data.keys():
@@ -63,7 +65,7 @@ def dict_without_keys(value, *args):
     return data
 
 
-def as_kwargs(obj, sep):
+def as_kwargs(obj: Dict[str, Any], sep: str) -> Union[str, List[str]]:
     # TODO replace with json.dumps
 
     kwargs = []

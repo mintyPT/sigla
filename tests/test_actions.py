@@ -2,8 +2,8 @@ import unittest
 
 from sigla.actions.actions import AddAction
 from sigla.data.data import Data
-from sigla.validation.validator import Validator
 from sigla.validation.validation_required import RequiredValidation, required
+from sigla.validation.validator import Validator
 
 
 class TestAction(unittest.TestCase):

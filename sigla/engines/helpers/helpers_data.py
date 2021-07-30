@@ -1,7 +1,9 @@
+from typing import Any, List
+
 from sigla.data.data import Data
 
 
-def flatten(lst):
+def flatten(lst: Any) -> List:
     """
     Recursively flattens a list
     """
@@ -18,7 +20,7 @@ def flatten(lst):
     return ret
 
 
-def get_template_path(data: Data, extension="jinja2") -> str:
+def get_template_path(data: Data, extension: str = "jinja2") -> str:
     if bundle := data.get("bundle"):
         result = f"{bundle}/{data.tag}.{extension}"
     else:

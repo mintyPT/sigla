@@ -18,7 +18,7 @@ class TestData(unittest.TestCase):
                 <person name="mauro" age="34"></person>
                 <person name="santos" age="33"></person>
             </persons>
-        """
+        """  # noqa: E501
 
         expected = Data(
             "persons",
@@ -52,7 +52,14 @@ class TestData(unittest.TestCase):
             "root",
             children=[
                 (Data("person", name="mauro", age="34", id="mauro")),
-                Data("pet", name="ariel", age="3", owner=mauro2, id="ariel", bundle="cenas"),
+                Data(
+                    "pet",
+                    name="ariel",
+                    age="3",
+                    owner=mauro2,
+                    id="ariel",
+                    bundle="cenas",
+                ),
             ],
         )
 

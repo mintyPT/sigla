@@ -3,8 +3,8 @@ from pathlib import Path
 from textwrap import dedent
 
 from sigla.data.data import Data
-from sigla.validation.validator import Validator
 from sigla.validation.validation_required import required
+from sigla.validation.validator import Validator
 
 
 class Action(ABC):
@@ -12,7 +12,7 @@ class Action(ABC):
 
     @property
     @abstractmethod
-    def name(self):
+    def name(self) -> str:
         pass
 
     def __init__(self, data: Data, result: str):
@@ -23,14 +23,14 @@ class Action(ABC):
         self.params = validator.validate(self.data)
 
     @abstractmethod
-    def execute(self):
+    def execute(self) -> None:
         pass
 
 
 class BufferAction(Action):
     name = "buffer"
 
-    def execute(self):
+    def execute(self) -> None:
         separator = "=" * 40
         print(
             dedent(
@@ -56,7 +56,7 @@ class AddAction(Action):
     name = "add"
     validations = {"path": [required()], "skipIfExists": []}  # default: false
 
-    def execute(self):
+    def execute(self) -> None:
         path = Path(self.params["path"])
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(self.result)
@@ -70,7 +70,7 @@ class ModifyAction(Action):
         "pattern": [required()],
     }
 
-    def execute(self):
+    def execute(self) -> None:
         # TODO finish this
         raise NotImplementedError
 
@@ -84,7 +84,7 @@ class AppendAction(Action):
         # "pattern": [required()],
     }
 
-    def execute(self):
+    def execute(self) -> None:
         with Path(self.params["path"]).open("a") as f:
             f.write(self.result)
 

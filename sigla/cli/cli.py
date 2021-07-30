@@ -1,16 +1,16 @@
 import os
 from pathlib import Path
-from rich.traceback import install
 
 import typer
+from rich.traceback import install
 
 from helpers.helpers import ensure_dirs
 from sigla import __version__
-from sigla.config import config
 from sigla.cli.definition_file.definition_file import DefinitionFile
 from sigla.cli.helpers import (get_definition_file_content,
                                get_filters_file_content, load_filters_from,
                                log)
+from sigla.config import config
 from sigla.engines.engines import SiglaEngine
 from sigla.template_loaders.template_loaders import FileTemplateLoader
 
@@ -26,7 +26,7 @@ install()
 
 
 @app.command()
-def init():
+def init() -> None:
     """
     Creates all the files and folders needed to work with sigla
     """
@@ -53,7 +53,7 @@ def init():
 
 
 @app.command()
-def new_definition(name: str = DEFAULT_DEFINITION_FILE):
+def new_definition(name: str = DEFAULT_DEFINITION_FILE) -> None:
     """
     Will create a new definition file. Default location: ./sigla.yml
     """
@@ -72,10 +72,10 @@ def new_definition(name: str = DEFAULT_DEFINITION_FILE):
 
 @app.command()
 def run(
-        name: str = DEFAULT_DEFINITION_FILE,
-        template_loader_directory: str = DEFAULT_TEMPLATE_DIRECTORY,
-        filters_file: str = DEFAULT_FILTERS_FILE,
-):
+    name: str = DEFAULT_DEFINITION_FILE,
+    template_loader_directory: str = DEFAULT_TEMPLATE_DIRECTORY,
+    filters_file: str = DEFAULT_FILTERS_FILE,
+) -> None:
     """
     Will run the code generation defined in a config file
     """
@@ -96,7 +96,7 @@ def run(
 
 
 @app.command()
-def version():
+def version() -> None:
     """
     Print the version
     """
