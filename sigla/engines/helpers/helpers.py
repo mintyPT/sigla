@@ -57,7 +57,7 @@ def get(obj: dict, key: str) -> Any:
         return obj.get(key)
 
 
-def dict_without_keys(value: dict, *args: str) -> dict:
+def dict_without_keys(value: dict, *args: str) -> Dict:
     data = deepcopy(dict(value))
     for name in args:
         if name in data.keys():
