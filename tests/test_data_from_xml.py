@@ -44,7 +44,7 @@ class TestData(unittest.TestCase):
                 <person name="mauro" age="34" id="mauro"></person>
                 <pet name="ariel" age="3" owner-id="mauro" id="ariel" bundle="cenas"></pet>
             </root>
-        """
+        """  # noqa: E501
 
         mauro2 = Data("person", name="mauro", age="34", bundle="cenas")
 
