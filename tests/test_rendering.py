@@ -1,6 +1,7 @@
 import unittest
 from textwrap import dedent
 
+from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 from sigla.engines.engines import SiglaEngine
 from tests.helpers.memory_template_loader import MemoryTemplateLoader
 
@@ -89,7 +90,8 @@ class TestRendering(unittest.TestCase):
         )
         expected = "My name is mauro and I'm 34 years old"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_double(self):
