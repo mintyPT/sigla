@@ -3,6 +3,7 @@ from typing import Optional
 from xml.etree.ElementTree import XML, Element
 
 from sigla.data.data import Data
+from sigla.data.data_finder import DataFinder
 from sigla.data.data_loaders.helpers import endswith_id
 from sigla.helpers.helpers import (
     cast_dict,
@@ -57,7 +58,7 @@ def rename_all_keys_ending_with_id(
     _attributes_temp = deepcopy(data.own_attributes)
 
     for key, value in key_matching_filter(_attributes_temp, endswith_id):
-        found_element = root.find_by_id(value) if root else None
+        found_element = DataFinder(root).find_by_id(value) if root else None
         value_ = (
             found_element.duplicate(parent=data) if found_element else None
         )

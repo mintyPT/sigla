@@ -1,23 +1,27 @@
 from collections import ChainMap
-from typing import Any, Generator, List, MutableMapping, Optional, Union
+from typing import Any, Generator, List, MutableMapping, Optional
 
-from sigla.data.data_finder import DataFinder
 from sigla.engines.helpers.helpers import as_kwargs
 from sigla.helpers.helpers import join
 
 
 def stringify(data: "Data", indent: int = 0) -> str:
+    spacer = " " * indent
+
     tag = data.tag
     attributes = data.attributes
+
     if len(attributes.keys()) > 0:
         open_tag = f"<{tag}" + " " + as_kwargs(attributes, " ")
     else:
         open_tag = f"<{tag}"
+
     open_close_tag = open_tag
     open_tag += ">"
     open_close_tag += "/>"
-    spacer = " " * indent
+
     children = [child.render(indent=indent + 4) for child in data]
+
     if len(children) == 0:
         return f"{spacer}{open_close_tag}"
     return join(
@@ -110,10 +114,5 @@ class Data:
 
         return True
 
-    def find_by_id(self, raw_id: str) -> Union[None, Any]:
-        finder = DataFinder(self)
-        return finder.find_by_id(raw_id)
-
     def render(self, *, indent: int = 0) -> str:
-        # TODO add test to this
         return stringify(self, indent)
