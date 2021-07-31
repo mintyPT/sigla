@@ -21,7 +21,7 @@ def xml_element_to_data(obj: Element) -> Data:
     return Data(
         obj.tag,
         children=[xml_element_to_data(child) for child in obj],
-        **(cast_dict(obj.attrib.copy())),
+        **cast_dict(obj.attrib.copy()),
     )
 
 
@@ -46,11 +46,12 @@ def replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
     return data
 
 
+def endswith_id(string: str) -> bool:
+    return string.endswith("-id")
+
 def rename_all_keys_ending_with_id(
     data: Data, root: Optional[Data] = None
 ) -> None:
-    def endswith_id(string: str) -> bool:
-        return string.endswith("-id")
 
     _attributes_temp = deepcopy(data.own_attributes)
     for key, value in key_matching_filter(_attributes_temp, endswith_id):
