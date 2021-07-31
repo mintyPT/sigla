@@ -41,7 +41,8 @@ class RecursiveRender:
             return self.render_action(data, sep)
 
         else:
-            return self.render_template(data, self.get_template(data))
+            template = self.get_template(data)
+            return self.render_template(data, template)
 
     def render_action(self, data, sep):
         result = map_and_join(lambda c: self.render(c, sep=sep), data, sep=sep)

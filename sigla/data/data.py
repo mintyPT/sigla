@@ -6,15 +6,34 @@ from sigla.engines.helpers.helpers import as_kwargs
 from sigla.helpers.helpers import join
 
 
+def stringify(data: "Data", indent: int = 0) -> str:
+    tag = data.tag
+    attributes = data.attributes
+    if len(attributes.keys()) > 0:
+        open_tag = f"<{tag}" + " " + as_kwargs(attributes, " ")
+    else:
+        open_tag = f"<{tag}"
+    open_close_tag = open_tag
+    open_tag += ">"
+    open_close_tag += "/>"
+    spacer = " " * indent
+    children = [child.render(indent=indent + 4) for child in data]
+    if len(children) == 0:
+        return f"{spacer}{open_close_tag}"
+    return join(
+        [f"{spacer}{open_tag}", *children, f"{spacer}</{tag}>"], "\n"
+    )
+
+
 class Data:
     parent: Optional["Data"]
 
     def __init__(
-        self,
-        tag: str,
-        children: Optional[List["Data"]] = None,
-        parent: Optional["Data"] = None,
-        **kwargs,
+            self,
+            tag: str,
+            children: Optional[List["Data"]] = None,
+            parent: Optional["Data"] = None,
+            **kwargs,
     ) -> None:
         if children is None:
             children = []
@@ -67,8 +86,8 @@ class Data:
             # When we replace by id, we will receive a reference to ourselves
             # type(own_value) != Data
             if (
-                own_value != other.own_attributes[own_key]
-                and type(own_value) != Data
+                    own_value != other.own_attributes[own_key]
+                    and type(own_value) != Data
             ):
                 return False
 
@@ -77,15 +96,15 @@ class Data:
     def __eq__(self, other: Any) -> bool:
 
         if (
-            type(self) != type(other)
-            or self.tag != other.tag
-            or not self.same_own_attributes(other)
+                type(self) != type(other)
+                or self.tag != other.tag
+                or not self.same_own_attributes(other)
         ):
             return False
 
         if not (
-            (not self.children and not other.children)
-            or (self.children == other.children)
+                (not self.children and not other.children)
+                or (self.children == other.children)
         ):
             return False
 
@@ -97,25 +116,4 @@ class Data:
 
     def render(self, *, indent: int = 0) -> str:
         # TODO add test to this
-
-        tag = self.tag
-        attributes = self.attributes
-
-        if len(attributes.keys()) > 0:
-            open_tag = f"<{tag}" + " " + as_kwargs(attributes, " ")
-        else:
-            open_tag = f"<{tag}"
-
-        open_close_tag = open_tag
-        open_tag += ">"
-        open_close_tag += "/>"
-
-        spacer = " " * indent
-        children = [child.render(indent=indent + 4) for child in self]
-
-        if len(children) == 0:
-            return f"{spacer}{open_close_tag}"
-
-        return join(
-            [f"{spacer}{open_tag}", *children, f"{spacer}</{tag}>"], "\n"
-        )
+        return stringify(self, indent)
