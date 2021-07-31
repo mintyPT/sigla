@@ -1,6 +1,5 @@
 from collections import ChainMap
 from typing import Any, Generator, List, MutableMapping, Optional
-
 from sigla.engines.helpers.helpers import as_kwargs
 from sigla.helpers.helpers import join
 

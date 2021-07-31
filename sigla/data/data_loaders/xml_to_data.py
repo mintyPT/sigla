@@ -53,15 +53,13 @@ def replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
 
 
 def rename_all_keys_ending_with_id(
-    data: Data, root: Optional[Data] = None
+        data: Data, root: Optional[Data] = None
 ) -> None:
     _attributes_temp = deepcopy(data.own_attributes)
 
     for key, value in key_matching_filter(_attributes_temp, endswith_id):
         found_element = DataFinder(root).find_by_id(value) if root else None
-        value_ = (
-            found_element.duplicate(parent=data) if found_element else None
-        )
+        value_ = found_element.duplicate(parent=data) if found_element else None
 
         rename_key(
             data.own_attributes,
