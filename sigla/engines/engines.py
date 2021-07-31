@@ -27,7 +27,7 @@ class RecursiveRender:
         self.get_template = get_template
 
     def process_template(self, data: Data) -> str:
-        return self.render_template(data, template=self.get_template(data))
+        return self.render_template(data, self.get_template(data))
 
     def process_list(self, data: Iterable[Any], sep: str) -> str:
         return map_and_join(lambda c: self.render(c, sep=sep), data, sep=sep)
@@ -158,9 +158,10 @@ class SiglaEngine(Engine):
         is_action = data.tag in actions.keys()
 
         if not is_action and tag_is_upper is False:
+            template = self.get_template(data, raw=True)
             data.own_attributes.update(
                 **parse_with_transformation(
-                    self.get_template(data, raw=True),  # template
+                    template,  # template
                     self.render_template,
                     data,
                 )

@@ -4,8 +4,12 @@ from xml.etree.ElementTree import XML, Element
 
 from sigla.data.data import Data
 from sigla.data.data_loaders.helpers import endswith_id
-from sigla.helpers.helpers import (cast_dict, key_matching_filter, pipe,
-                                   rename_key)
+from sigla.helpers.helpers import (
+    cast_dict,
+    key_matching_filter,
+    pipe,
+    rename_key,
+)
 
 
 def convert_xml_string_to_data(xml: str) -> Data:

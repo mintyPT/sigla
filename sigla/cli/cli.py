@@ -6,9 +6,12 @@ from rich.traceback import install
 
 from sigla import __version__
 from sigla.cli.definition_file.definition_file import DefinitionFile
-from sigla.cli.helpers import (get_definition_file_content,
-                               get_filters_file_content, load_filters_from,
-                               log)
+from sigla.cli.helpers import (
+    get_definition_file_content,
+    get_filters_file_content,
+    load_filters_from,
+    log,
+)
 from sigla.config import config
 from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 from sigla.engines.engines import SiglaEngine
