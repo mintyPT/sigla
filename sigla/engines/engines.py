@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, Iterable, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from sigla.actions.actions import Action, actions
 from sigla.data.data import Data
@@ -17,20 +17,14 @@ from sigla.template_loaders.template_loaders import TemplateLoader
 
 class RecursiveRender:
     def __init__(
-        self,
-        render_template: Callable[[Data, str], str],
-        get_template: Callable[[Data], str],
-        append_artifact: Callable[[Any, str], None],
+            self,
+            render_template: Callable[[Data, str], str],
+            get_template: Callable[[Data], str],
+            append_artifact: Callable[[Any, str], None],
     ) -> None:
         self.append_artifact = append_artifact
         self.render_template = render_template
         self.get_template = get_template
-
-    def process_template(self, data: Data) -> str:
-        return self.render_template(data, self.get_template(data))
-
-    def process_list(self, data: Iterable[Any], sep: str) -> str:
-        return map_and_join(lambda c: self.render(c, sep=sep), data, sep=sep)
 
     def render(self, data: Data, *, sep: str = "\n") -> str:
 
@@ -41,23 +35,26 @@ class RecursiveRender:
             return ""
 
         elif type(data) == list:
-            return self.process_list(data, sep)
+            return self.render_list(data, sep)
 
         elif data.tag in actions.keys():
-            result = self.process_list(data, sep)
-            self.append_artifact(data, result)
-            return result
+            return self.render_action(data, sep)
 
         else:
-            return self.process_template(data)
+            return self.render_template(data, self.get_template(data))
 
-    def __call__(self, *args: Any, **kwargs: Any) -> str:
-        return self.render(*args, **kwargs)
+    def render_action(self, data, sep):
+        result = map_and_join(lambda c: self.render(c, sep=sep), data, sep=sep)
+        self.append_artifact(data, result)
+        return result
+
+    def render_list(self, data, sep):
+        return map_and_join(lambda c: self.render(c, sep=sep), data, sep=sep)
 
 
 class Engine(ABC):
     def __init__(
-        self, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
+            self, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
     ) -> None:
         self.data = data
         self.loader = loader
@@ -76,14 +73,14 @@ class Engine(ABC):
 
     @classmethod
     def render_from_data(
-        cls, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
+            cls, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
     ) -> "Engine":
         engine = cls(data, loader, *args, **kwargs)
         engine.render(engine.data)
         return engine
 
     def render(self, data: Data, *, sep: str = "\n") -> str:
-        return self.render_engine(
+        return self.render_engine.render(
             data,
             sep=sep,
         )
@@ -102,12 +99,12 @@ class Engine(ABC):
 
 class SiglaEngine(Engine):
     def __init__(
-        self,
-        data: Data,
-        loader: TemplateLoader,
-        *args: Any,
-        filters: Optional[Dict] = None,
-        **kwargs: Any,
+            self,
+            data: Data,
+            loader: TemplateLoader,
+            *args: Any,
+            filters: Optional[Dict] = None,
+            **kwargs: Any,
     ):
         super().__init__(data, loader, *args, **kwargs)
         if filters is None:
