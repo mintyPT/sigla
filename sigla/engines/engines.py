@@ -62,7 +62,7 @@ class Engine(ABC):
         self.data = data
         self.loader = loader
         self.artifacts: List[Action] = []
-        
+
         self.render_engine = RecursiveRender(
             self.render_template, self.get_template, self.append_artifact
         )

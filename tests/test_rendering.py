@@ -104,7 +104,8 @@ class TestRendering(unittest.TestCase):
 
         expected = "My name is mauro and I'm 34 years old\nMy name is mauro and I'm 34 years old"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
 
         self.assertEqual(expected, engine.artifacts[-1].result)
 
@@ -125,23 +126,26 @@ class TestRendering(unittest.TestCase):
         """
         ).lstrip()
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_attributes_from_parent(self):
         provided = """<buffer name="minty" age="33"><person_v2 /></buffer>"""
         expected = "My name is minty and I'm 33 years old"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_filter_inject(self):
         provided = "<buffer><var value='a'/></buffer>"
         expected = "[a]"
         filters = {"wrap": lambda e: f"[{e}]"}
-        engine = SiglaEngine.render_from_xml(
-            provided, template_loader, filters=filters
-        )
+
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader, filters=filters)
+
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_fm_child(self):
@@ -156,7 +160,8 @@ class TestRendering(unittest.TestCase):
             </buffer>
         """
         expected = "__one/two/three__\n\n"
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     # TODO
@@ -167,7 +172,8 @@ class TestRendering(unittest.TestCase):
         </buffer>
         """
         expected = "minty-sigla-33\n"
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_render_context2(self):
@@ -182,17 +188,20 @@ class TestRendering(unittest.TestCase):
         """
         expected = "one/two/three"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_bundling(self):
         provided = '<buffer><persona bundle="nurse" name="Jeanne"/></buffer>'
         expected = "This nurse's name is Jeanne"
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_big_one(self):
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(
             expected.replace(" ", "").replace("\n", ""),
             engine.artifacts[-1].result.replace(" ", "").replace("\n", ""),
@@ -202,7 +211,8 @@ class TestRendering(unittest.TestCase):
         provided = '<buffer name="minty" age="33"><person_v4 family="santos" /></buffer>'
         expected = "My name is minty santos and I'm 33 years old\n"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         self.assertEqual(expected, engine.artifacts[-1].result)
 
     def test_2(self):
@@ -217,11 +227,11 @@ class TestRendering(unittest.TestCase):
         """
         expected = "My name is minty3 santos and I'm 3 years old\n"
 
-        engine = SiglaEngine.render_from_xml(provided, template_loader)
+        data = convert_xml_string_to_data(provided)
+        engine = SiglaEngine.render_from_data(data, template_loader)
         got = engine.artifacts[-1].result
 
         self.assertEqual(expected, got)
-
 
 # TODO
 # <models>
