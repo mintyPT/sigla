@@ -1,6 +1,7 @@
 from copy import deepcopy
 from textwrap import dedent
-from typing import Any, Dict, Iterable, List, Mapping, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Mapping, Union
+
 from sigla.helpers.helpers import join
 
 if TYPE_CHECKING:

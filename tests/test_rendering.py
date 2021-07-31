@@ -144,7 +144,9 @@ class TestRendering(unittest.TestCase):
         filters = {"wrap": lambda e: f"[{e}]"}
 
         data = convert_xml_string_to_data(provided)
-        engine = SiglaEngine.render_from_data(data, template_loader, filters=filters)
+        engine = SiglaEngine.render_from_data(
+            data, template_loader, filters=filters
+        )
 
         self.assertEqual(expected, engine.artifacts[-1].result)
 
@@ -232,6 +234,7 @@ class TestRendering(unittest.TestCase):
         got = engine.artifacts[-1].result
 
         self.assertEqual(expected, got)
+
 
 # TODO
 # <models>

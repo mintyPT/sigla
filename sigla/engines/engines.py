@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, Iterable, List, Optional
+
 from sigla.actions.actions import Action, actions
 from sigla.data.data import Data
-from sigla.engines.helpers.helpers import get_default_template, dump_data_and_template
+from sigla.engines.helpers.helpers import (dump_data_and_template,
+                                           get_default_template)
 from sigla.engines.helpers.helpers_data import get_template_path
 from sigla.engines.helpers.template_helper import TemplateHelper
 from sigla.external.frontmatter.frontmatter import (get_content,
@@ -15,10 +17,10 @@ from sigla.template_loaders.template_loaders import TemplateLoader
 
 class RecursiveRender:
     def __init__(
-            self,
-            render_template: Callable[[Data, str], str],
-            get_template: Callable[[Data], str],
-            append_artifact: Callable[[Any, str], None],
+        self,
+        render_template: Callable[[Data, str], str],
+        get_template: Callable[[Data], str],
+        append_artifact: Callable[[Any, str], None],
     ) -> None:
         self.append_artifact = append_artifact
         self.render_template = render_template
@@ -55,7 +57,7 @@ class RecursiveRender:
 
 class Engine(ABC):
     def __init__(
-            self, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
+        self, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
     ) -> None:
         self.data = data
         self.loader = loader
@@ -74,7 +76,7 @@ class Engine(ABC):
 
     @classmethod
     def render_from_data(
-            cls, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
+        cls, data: Data, loader: TemplateLoader, *args: Any, **kwargs: Any
     ) -> "Engine":
         engine = cls(data, loader, *args, **kwargs)
         engine.render(engine.data)
@@ -100,12 +102,12 @@ class Engine(ABC):
 
 class SiglaEngine(Engine):
     def __init__(
-            self,
-            data: Data,
-            loader: TemplateLoader,
-            *args: Any,
-            filters: Optional[Dict] = None,
-            **kwargs: Any,
+        self,
+        data: Data,
+        loader: TemplateLoader,
+        *args: Any,
+        filters: Optional[Dict] = None,
+        **kwargs: Any,
     ):
         super().__init__(data, loader, *args, **kwargs)
         if filters is None:
