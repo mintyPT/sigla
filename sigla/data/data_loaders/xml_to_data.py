@@ -12,8 +12,8 @@ def convert_xml_string_to_data(xml: str) -> Data:
         xml,
         XML,
         xml_element_to_data,
-        _cast_data_attributes,
-        _replace_ids_with_data,
+        cast_data_attributes,
+        replace_ids_with_data,
     )
 
 
@@ -25,23 +25,23 @@ def xml_element_to_data(obj: Element) -> Data:
     )
 
 
-def _cast_data_attributes(data: Data) -> Data:
+def cast_data_attributes(data: Data) -> Data:
     data.own_attributes = cast_dict(data.own_attributes)
 
     for child in data:
-        _cast_data_attributes(child)
+        cast_data_attributes(child)
 
     return data
 
 
-def _replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
+def replace_ids_with_data(data: Data, root: Optional[Data] = None) -> Data:
     if root is None:
         root = data
 
     rename_all_keys_ending_with_id(data, root)
 
     for child in data:
-        _replace_ids_with_data(child, root=root)
+        replace_ids_with_data(child, root=root)
 
     return data
 
