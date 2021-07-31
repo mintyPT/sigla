@@ -68,8 +68,9 @@ class Engine(ABC):
         )
 
     @classmethod
-    def generate(cls, *args: Any, **kwargs: Any) -> "Engine":
-        engine = cls.render_from_xml(*args, **kwargs)
+    def generate(cls, xml, *args: Any, **kwargs: Any) -> "Engine":
+        data = convert_xml_string_to_data(xml)
+        engine = cls.render_from_data(data, *args, **kwargs)
         for artifact in engine.artifacts:
             artifact.execute()
         return engine
