@@ -11,16 +11,16 @@ def convert_xml_string_to_data(xml: str) -> Data:
     return pipe(
         xml,
         XML,
-        _xml_element_to_data,
+        xml_element_to_data,
         _cast_data_attributes,
         _replace_ids_with_data,
     )
 
 
-def _xml_element_to_data(obj: Element) -> Data:
+def xml_element_to_data(obj: Element) -> Data:
     return Data(
         obj.tag,
-        children=[_xml_element_to_data(child) for child in obj],
+        children=[xml_element_to_data(child) for child in obj],
         **(cast_dict(obj.attrib.copy())),
     )
 

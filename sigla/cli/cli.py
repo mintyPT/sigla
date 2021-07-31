@@ -10,6 +10,7 @@ from sigla.cli.helpers import (get_definition_file_content,
                                get_filters_file_content, load_filters_from,
                                log)
 from sigla.config import config
+from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 from sigla.engines.engines import SiglaEngine
 from sigla.helpers.helpers import ensure_dirs
 from sigla.template_loaders.template_loaders import FileTemplateLoader
@@ -92,7 +93,9 @@ def run(
     filters_file = CWD.joinpath(filters_file)
     filters = load_filters_from(filters_file)
 
-    SiglaEngine.generate(df.read(), template_loader, filters=filters)
+    xml = df.read()
+    data = convert_xml_string_to_data(xml)
+    SiglaEngine.generate(data, template_loader, filters=filters)
 
 
 @app.command()

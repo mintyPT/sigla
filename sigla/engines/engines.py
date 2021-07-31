@@ -1,9 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, Iterable, List, Optional
-
 from sigla.actions.actions import Action, actions
 from sigla.data.data import Data
-from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
 from sigla.engines.helpers.helpers import get_default_template, dump_data_and_template
 from sigla.engines.helpers.helpers_data import get_template_path
 from sigla.engines.helpers.template_helper import TemplateHelper
@@ -68,17 +66,11 @@ class Engine(ABC):
         )
 
     @classmethod
-    def generate(cls, xml, *args: Any, **kwargs: Any) -> "Engine":
-        data = convert_xml_string_to_data(xml)
+    def generate(cls, data: Data, *args: Any, **kwargs: Any) -> "Engine":
         engine = cls.render_from_data(data, *args, **kwargs)
         for artifact in engine.artifacts:
             artifact.execute()
         return engine
-
-    @classmethod
-    def render_from_xml(cls, xml: str, *args: Any, **kwargs: Any) -> "Engine":
-        data = convert_xml_string_to_data(xml)
-        return cls.render_from_data(data, *args, **kwargs)
 
     @classmethod
     def render_from_data(
@@ -88,9 +80,9 @@ class Engine(ABC):
         engine.render(engine.data)
         return engine
 
-    def render(self, _data: Data, *, sep: str = "\n") -> str:
+    def render(self, data: Data, *, sep: str = "\n") -> str:
         return self.render_engine(
-            _data,
+            data,
             sep=sep,
         )
 
@@ -156,11 +148,8 @@ class SiglaEngine(Engine):
 
     def write_default_template(self, data: Data) -> str:
         content = self.get_new_template_for_data(data)
-        self.write_template(data, content)
-        return content
-
-    def write_template(self, data: Data, content: str) -> None:
         self.loader.write(content, get_template_path(data))
+        return content
 
     def load_frontmatter(self, *, data: Data = None) -> Data:
         tag_is_upper = data.tag[0].isupper()
