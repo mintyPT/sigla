@@ -1,8 +1,10 @@
 from copy import deepcopy
 from textwrap import dedent
-from typing import Any, Dict, Iterable, List, Mapping, Union
-
+from typing import Any, Dict, Iterable, List, Mapping, Union, TYPE_CHECKING
 from sigla.helpers.helpers import join
+
+if TYPE_CHECKING:
+    from sigla.data.data import Data
 
 
 def get_default_template() -> str:
@@ -80,3 +82,28 @@ def as_kwargs(obj: Mapping[str, Any], sep: str) -> Union[str, List[str]]:
         return join(kwargs, sep)
     else:
         return kwargs
+
+
+def dump_data_and_template(data: "Data", template: str) -> None:
+    sep = "#" * 40
+    small_sep = "#" * 10
+    print(
+        dedent(
+            f"""
+            {sep}
+            {sep}
+
+            {small_sep} === TEMPLATE === {small_sep}
+            {template}
+
+            {small_sep} === NODE === {small_sep}
+            {data.render()}
+            ---
+            {data.attributes}
+
+            {sep}
+            {sep}
+
+        """
+        )
+    )

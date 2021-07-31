@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
-from textwrap import dedent
-from typing import Any, Callable, Dict, Iterable, List
+from typing import Any, Callable, Dict, Iterable, List, Optional
 
 from sigla.actions.actions import Action, actions
 from sigla.data.data import Data
 from sigla.data.data_loaders.xml_to_data import convert_xml_string_to_data
-from sigla.engines.helpers.helpers import get_default_template
+from sigla.engines.helpers.helpers import get_default_template, dump_data_and_template
 from sigla.engines.helpers.helpers_data import get_template_path
 from sigla.engines.helpers.template_helper import TemplateHelper
 from sigla.external.frontmatter.frontmatter import (get_content,
@@ -19,7 +18,7 @@ from sigla.template_loaders.template_loaders import TemplateLoader
 class RecursiveRender:
     def __init__(
         self,
-        render_template: Callable[[Data], str],
+        render_template: Callable[[Data, str], str],
         get_template: Callable[[Data], str],
         append_artifact: Callable[[Any, str], None],
     ) -> None:
@@ -63,6 +62,10 @@ class Engine(ABC):
         self.data = data
         self.loader = loader
         self.artifacts: List[Action] = []
+        
+        self.render_engine = RecursiveRender(
+            self.render_template, self.get_template, self.append_artifact
+        )
 
     @classmethod
     def generate(cls, *args: Any, **kwargs: Any) -> "Engine":
@@ -85,11 +88,7 @@ class Engine(ABC):
         return engine
 
     def render(self, _data: Data, *, sep: str = "\n") -> str:
-        render = RecursiveRender(
-            self.render_template, self.get_template, self.append_artifact
-        )
-
-        return render(
+        return self.render_engine(
             _data,
             sep=sep,
         )
@@ -106,38 +105,13 @@ class Engine(ABC):
         pass
 
 
-def dump_data_and_template(data: Data, template: str) -> None:
-    sep = "#" * 40
-    small_sep = "#" * 10
-    print(
-        dedent(
-            f"""
-            {sep}
-            {sep}
-
-            {small_sep} === TEMPLATE === {small_sep}
-            {template}
-
-            {small_sep} === NODE === {small_sep}
-            {data.render()}
-            ---
-            {data.attributes}
-
-            {sep}
-            {sep}
-
-        """
-        )
-    )
-
-
 class SiglaEngine(Engine):
     def __init__(
         self,
         data: Data,
         loader: TemplateLoader,
         *args: Any,
-        filters: Dict = None,
+        filters: Optional[Dict] = None,
         **kwargs: Any,
     ):
         super().__init__(data, loader, *args, **kwargs)
