@@ -1,7 +1,7 @@
 import unittest
 
 from sigla import load_node
-from .helpers.node_factory_for_testing import node_factory_for_testing
+from tests.helpers.node_factory_for_testing import node_factory_for_testing
 
 
 class TestOutputs(unittest.TestCase):

@@ -3,7 +3,7 @@ from sigla import load_node
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
 from tests.helpers.TestableNodeTemplate import TestableNodeTemplate
-from .helpers.node_factory_for_testing import node_factory_for_testing
+from tests.helpers.node_factory_for_testing import node_factory_for_testing
 
 expected = """
 def call_wrapper(url: str, method: str = "GET"):

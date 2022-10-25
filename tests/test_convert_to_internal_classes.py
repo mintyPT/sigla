@@ -4,7 +4,7 @@ from sigla.nodes.node_template import NodeTemplate
 from sigla import load_node, config
 from sigla.templates.engines import JinjaEngine
 from sigla.templates.loaders import FileTemplateLoader
-from .helpers.node_factory_for_testing import node_factory_for_testing
+from tests.helpers.node_factory_for_testing import node_factory_for_testing
 
 
 class TestConvertToInternalClasses(unittest.TestCase):
