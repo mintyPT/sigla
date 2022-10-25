@@ -11,3 +11,5 @@ src/boreas
 temp/
 
 .sigla/
+
+.env

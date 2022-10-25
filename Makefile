@@ -1,8 +1,8 @@
 install:
 	poetry install
 
-upload:
-	poetry publish --username minty
+publish:
+	poetry publish
 
 show:
 	poetry show -v
