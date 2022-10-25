@@ -1,3 +1,5 @@
+from typing import Any
+
 from sigla.nodes.node import Node
 
 
@@ -11,7 +13,7 @@ class NodeEcho(Node):
         self.content = self.children()
         return self
 
-    def __eq__(self, o: any) -> bool:
+    def __eq__(self, o: Any) -> bool:
         if type(self) == self.__class__ and type(o) == self.__class__:
             if self.content == o.content:
                 return True

@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from sigla.nodes.node import Node
 from sigla.utils.helpers import ensure_dirs
@@ -40,7 +41,7 @@ class NodeFile(Node):
                 "the element <file> to save the results to"
             )
 
-    def __eq__(self, other: any) -> bool:
+    def __eq__(self, other: Any) -> bool:
         # TODO apply this logic to other __eq__ methods
         if type(self) == self.__class__ and type(other) == self.__class__:
             if self.content == other.content and self.to == other.to:
