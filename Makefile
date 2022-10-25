@@ -26,3 +26,9 @@ mypy:
 	poetry run mypy -p sigla #--disallow-untyped-calls --disallow-untyped-defs
 
 check: black flake8 mypy
+
+list:
+	poetry show -l
+
+tree:
+	poetry show -t
